@@ -1,0 +1,52 @@
+section {
+	padding: 2rem 15%;
+	background-color: #fafafa;
+}
+
+/*清除浮动*/
+section ul:after {
+	content: "";
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+}
+
+section ul li {
+	float: left;
+	margin-right: 5%; 
+	list-style: none;
+}
+	section div ul li:last-child {
+		margin-right: 0; 
+	}
+
+section a {
+	text-decoration: none;
+}
+
+section h3 {
+	padding: 2em 0 0;
+}
+
+section hr {
+	margin: 2rem 0;
+	height: 0;
+	border: .5px solid rgba(0,0,0,0.1);
+}
+
+/*头部导航*/
+section .header span{
+	color: #29b078;
+}
+	section .header ul li{
+		margin-right: 2rem;
+	}
+	section .header ul li:first-child a {
+		color: #999;
+	}
+
+section .header hr:last-child {
+	margin: 2rem 0 0;
+	border: .5px solid rgba(0,0,0,0.03);
+}

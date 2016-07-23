@@ -1,0 +1,92 @@
+* {
+    font-family: "微软雅黑";
+    font-size: 62.5%;
+}
+
+body {
+    min-width: 480px;
+}
+
+span {
+    text-align: left !important;
+}
+
+/*头部样式*/
+header {
+    padding-top: .5rem;
+}
+
+header nav .tel,
+header nav .log span a {
+    margin-bottom: 0 !important;
+    font-size: 1.5rem;
+    color: #29b078;
+}
+
+header nav .log span:first-child {
+    display: inline-block;
+    width: 4rem;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: #29b078;
+}
+
+.navbar .logo {
+    line-height: 6rem;
+}
+
+.navbar-nav a {
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.navbar-nav li {
+    padding: 1rem 0;
+}
+
+.navbar-nav li:first-child {
+    border-bottom: 4px solid rgba(255,255,255,1);
+}
+
+.navbar-nav li:hover {
+    border-bottom: 4px solid rgba(255,255,255,1)
+}
+
+.navbar .navbar-header button {
+    margin: 2rem 2.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-nav a {
+        width: 7rem;
+    }
+}
+
+/*底部样式*/
+footer {
+    color: white;
+    background-color: #29b078;
+}
+
+footer>div {
+    padding: 1rem 0;
+}
+
+footer .its-website p {
+    display: inline-block;
+    width: 10rem;
+}
+
+footer .wechat {
+    padding: 0;
+}
+
+footer>p {
+    margin-bottom: 0;
+    border-top: 1px solid #32c086;
+    background-color: #29b078;
+}

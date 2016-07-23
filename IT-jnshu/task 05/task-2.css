@@ -1,0 +1,154 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "黑体";
+}
+
+body {
+	min-width: 320px;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.container {
+	margin: 0 auto;
+}
+
+
+header {
+	height: 4rem;
+	background-color: rgb(95,192,205);
+}
+
+header .info {
+    padding-top: 0.5%;
+    width: 100%;
+    height: 1.8rem;
+    background: rgba(95, 192, 205, 0.81);
+    overflow: hidden;
+}
+
+header .info div {
+    float: left;
+    width: 32%;
+    height: 1.2rem;
+}
+
+header .info .info-left{
+    margin-left: 2%;
+    background: url("images/1/info-left.png") 0 0 no-repeat;
+    background-size: auto 50%;
+}
+
+header .info .info-center{
+    background: url("images/1/time.png") center 0 no-repeat;
+    background-size: auto 45%;
+}
+
+header .info .info-right{
+    background: url("images/1/info-right.png") right 0 no-repeat;
+    background-size: auto 45%;
+}
+
+header .title img {
+	float: right;
+	margin-right: 2%;
+	width: auto;
+	height: 1.4rem;
+}
+
+header .title span {
+	padding: .6rem;
+	color: white;
+	background-color: #55a8b3;
+	border-radius: 1rem solid #55a8b3;
+}
+
+header .title .employee {
+	margin-left: calc(50% - 66px);
+	color: white;
+	background-color: #55a8b3;
+}
+
+header .title .hire {
+	color: #55a8b3;
+	background-color: white;
+}
+
+
+section select {
+	margin: .5rem 0;
+	margin-left: 2%; 
+	padding-left: calc(3% - 2% + 1.8rem);
+	width: 30%;
+	height: 2rem;
+	font-size: 1rem;
+	color: rgb(110,110,110);
+	border-style: none;
+}
+
+section hr {
+	background-color: rgb(210,210,210);
+	height: 1px;
+	border: none;
+}
+
+section ul li {
+	padding: .3rem 0;
+	border-bottom: .1rem solid rgb(210,210,210);
+}
+
+section ul li .date {
+	margin: .5rem 3%;
+	padding-left: 2rem;
+	font-size: 1rem;
+	color: rgb(110,110,110);
+	background: url(images/2/date.png) no-repeat;
+	background-size: 1rem 1rem;
+}
+
+section ul li .time {
+	margin: .5rem 0;
+	padding-left: calc(3% + 2rem);
+}
+
+section ul li .charge {
+	float: right;
+	margin-right: 5%;
+	padding-right: 2rem;
+	color: rgb(226,97,99);
+	background: url(images/2/more.png) right no-repeat;
+	background-size: 1rem auto;
+}
+
+section ul li .location {
+	margin: .5rem 3%;
+	padding-left: 2rem;
+	font-size: 1rem;
+	color: rgb(110,110,110);
+	background: url(images/2/employee-locate.png) no-repeat;
+	background-size: auto 1rem;
+}
+
+footer div {
+	margin: .2rem calc(100%/6 - 160px/6);
+	width: 3rem;
+	float: left;
+	text-align: center;
+}
+
+footer .write {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 4rem;
+	height: 4rem;
+	border-radius: 2.5rem;
+	background-color: rgb(95,192,205);
+}
+
+footer img {
+	width: 2rem;
+	height: 2rem;
+}
