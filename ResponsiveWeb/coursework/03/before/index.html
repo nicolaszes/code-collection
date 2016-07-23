@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!-- 任务1、使用img中的srcset属性，让浏览器自动选择适合的图片 -->
+<img src="img/Star.png" alt="star"
+     srcset="img/Star.png 345w,img/Star@2x.png 690w, img/Star@3x.png 1035w">
+
+<picture>
+    <!-- 任务2、通过picture标签，手动浏览器宽度控制在500px以下，显示1倍图；1000px以下，显示2倍图；1000px以上，显示3倍图 -->
+    <source srcset="img/Star@3x.png" media="(min-width: 1000px)">
+    <source srcset="img/Star@2x.png" media="(min-width: 500px)">    
+    <img srcset="img/Star.png" alt="star">
+</picture>
+
+</body>
+</html>
