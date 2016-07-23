@@ -1,0 +1,162 @@
+
+*{
+	margin: 0;
+	padding:0;
+}
+body {
+	min-width: 800px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background-color: rgb(203,203,203);
+}
+
+/*头部样式*/
+header{
+	position: relative;
+	height: 70px;
+	background-color: rgba(0,0,0,0.6);
+	overflow:hidden; 
+}
+header .logo{
+	position: absolute;
+	width: 240px;
+	padding: 18px;
+	display: inline-block;
+}
+header .logo img{
+	width: 100%;
+	height: auto;
+}
+header .nav{
+	float: right;
+}
+header .nav li{
+	float: left;
+	margin-right: 20px;
+	padding-right: 20px;
+	line-height: 70px;
+	font-size: 20px;
+	display: list-item;
+}
+header .nav li a{
+	color: white;
+	text-decoration: none;
+}
+
+/*主内容样式*/
+section,article{
+	margin: 30px;
+	padding: 30px;
+	background-color: white;
+    box-shadow: 0 0 10px #000;
+}    
+section{
+	width: 360px;
+	height: auto;
+	float: right;
+}
+section .register{
+	border-left: 4px solid rgba(0,0,0,0.3);
+}
+section .details{
+	padding-top: 20px;
+    padding-left: 10%;
+    font-size: 2%;
+}
+section .details span{
+	width: 30%;
+	margin-right: 1%;
+	font-size: 10px;
+	text-align: right;
+	display: inline-block;
+}
+section .input-tip{
+	margin-left: 39.5%;
+	font-size: 10px;
+	color: rgba(0,0,0,0.3);
+}
+section .submit{
+	width: 100%;
+	height: 2em;
+	color: white;
+	font-size: 1em;
+	border:none;
+	border-radius: 10px;
+	background-color: rgb(51, 85, 208);
+}
+article{
+	margin-right: 480px;
+}
+article .author{
+	width: 100%;
+	height: auto;
+	font-size: 10px;
+	color: rgba(51, 51, 51,0.81);
+	display: inline-block;
+}
+article h1,{
+	font-size: 40px;
+	font-family: "黑体";
+}
+article h2{
+	font-size: 25px;
+	font-family: "黑体";
+	color: rgba(51, 51, 51,0.81); 
+}
+article img{
+	position: relative;
+	width: 80%;
+	height: auto;
+}
+article ul li{
+	list-style-type: none;
+}
+article .picture{
+	display: inline-block;
+}
+article .picture li{
+	float: left;
+	margin: 10px;
+	width: 100px;
+	height: 120px;
+	text-align: center;
+	border: 1px solid black;
+	display: inline-block;
+}	
+article .picture li img{
+	width: 80px;
+	height: 80px;
+}
+article ol{
+	margin-left: 30px;
+	padding: 20px;
+}
+article table{
+	width: 100%;
+	border: 1px; 
+	border-collapse: collapse;
+}
+article table th{
+	color: white;
+	text-align: left;
+	background-color: rgba(51, 51, 51,1);
+	border: 1px solid rgba(203, 203, 203,0.81);
+}
+article table .name{
+	width: 40%;
+}
+article table .summary{
+	background-color: rgba(51,51,51,0.5);
+	border-color: transparent;
+}
+
+/*脚部样式*/
+footer{
+	height: 3em;
+	line-height: 40px;
+	font-size: 10px;
+	text-align: center;
+	display: block;
+	vertical-align: center;
+	color: white;
+	background-color: rgba(0,0,0,0.6);
