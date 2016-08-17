@@ -9,75 +9,75 @@ body {
 }
 
 /*头部样式*/
-header {
+.log-btn {
 	position: fixed;
-	margin-right: 0;
-	width: 100%;
-}
+	right: 30px;
 
-header #logBtn {
-	float: left;
 	margin: 20px 10px 20px;
 	width: 60px;
 	height: 30px;
-	font-size: 15px;
-}
 
-input, button {
+	font-size: 15px;
+	color: white;
 	border: 1px solid white;
+	background: rgb(231,79,77);
 }
 
 /*半透明遮罩*/
-#mask{
-    display: none;
+.log-mask{
+    /*display: none;*/
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	background: rgba(110,110,110,0.6);
 }
 
-header #logBtn, #logBox, #logBox button {
-	background: rgb(231,79,77);
-}
-
-header #logBtn, #logBox span, #logBox #closeBtn, #logBox button {
-	color: white;
-}
-
 /*登录面板*/
-#logBox {
-	display: none;
+.log-box {
+	/*display: none;*/
 	position: fixed;
-	padding: 0 30px 20px;
-	width: 180px;
-	height: 180px;
 	top: calc(50% - 85.5px);
 	left: calc(50% - 120px);
+	overflow: hidden;
+	
+	padding: 10px 30px;
+	width: 180px;
+	height: 180px;
+
+	color: white;
+	background: rgb(231,79,77);
 	border-radius: 10px;
 	box-shadow: 0 0 10px black;
-	overflow: hidden;
 }
 
-#logBox #title {
+.log-box header {
 	padding-top: 20px;
 	cursor: move;
 }
 
-#logBox span {
+.log-box span {
 	margin-left: -20px;
+
+	color: white;
 	font-size: 20px;
 }
 
-#logBox #closeBtn {
+.log-box .close-btn {
 	float: right;
+
 	margin: 0 -20px 0 0;
 	width: 20px;
 	height: 20px;
+
+	color: white;
 	background-color: rgb(231,79,77);
 }
 
-#logBox input, #logBox button {
+.log-box input, .log-box button {
 	margin-top: 20px;
 	width: 180px;
 	height: 25px;
+
+	color: #fff;
+	border: 1px solid white;
 }
