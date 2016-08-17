@@ -40,50 +40,7 @@ function renderAqiList() {
     }
     document.getElementById("aqi-table").innerHTML = city ? items : "";
 
-
-	// var Table = document.getElementById('aqi-table');
-
-	// //删除子节点
-	// function removeAllChild(Table){
-	//     while(Table.hasChildNodes()) 
-	//     {
-	//         Table.removeChild(Table.firstChild);
-	//     }
-	// }
-
- //    // 标题栏
- //    var headTr = document.createElement('tr');
- //    var headCity = document.createElement('th');
- //    var headAqi = document.createElement('th');
- //    var headOption = document.createElement('th');
-
- //    headCity.innerHTML = "城市";
- //    headAqi.innerHTML = "空气质量";
- //    headOption.innerHTML = "操作";
-
- //    headTr.appendChild(headCity);
- //    headTr.appendChild(headAqi);
- //    headTr.appendChild(headOption);
- //    Table.appendChild(headTr);
-
- //    // 内容
- //    for (var city in aqiData) {
-	//     var contentTr = document.createElement("tr");
-	//     var contentCity = document.createElement("td");
-	//     var contentAqi = document.createElement("td");
-	//     var contentBtn = document.createElement("td");
-
-	//     contentCity.innerHTML = city;
-	//     contentAqi.innerHTML = aqiData[city];
-	//     contentBtn.innerHTML = "<button>删除</button>";
-
-	//     contentTr.appendChild(contentCity);
-	//     contentTr.appendChild(contentAqi);
-	//     contentTr.appendChild(contentBtn);
-	//     Table.appendChild(contentTr);	
- //    };
-
-    console.log(aqiData);
+    // console.log(aqiData);
 }
 
 /**
@@ -113,7 +70,9 @@ function init() {
     // document.getElementById("add-btn").addEventListener("keydown", addBtnHandle);
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
     document.getElementById("aqi-table").addEventListener("click", function(event){
-        if(event.target.nodeName.toLowerCase() === 'button') delBtnHandle.call(null, event.target.dataset.city);
+        if(event.target.nodeName.toLowerCase() === 'button') {
+            delBtnHandle.call(null, event.target.dataset.city);
+        }
     });
 }
 

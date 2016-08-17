@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>IFE JavaScript Task 06</title>
+  <style>
+    * {
+        margin: 5px 0;
+        padding: 0;
+        font-size: 10px;
+    }
+
+    body {
+        width: 100%;
+        /*font-size: 10px;*/
+    }
+
+    div,
+    ul {
+        margin: 0 auto;
+        width: 600px;
+    }
+
+    input {
+        width: 150px;
+        height: 27px;
+        border:1px solid #ccc;
+    }
+
+    input:focus {
+        box-shadow:0 0 4px rgba(0,0,0,.4);
+    }
+
+    button {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        background: #2D7D9A;
+        color: #fff;
+        padding: 8px 0;
+    }
+
+    #result li {
+      float: left;
+      margin: 10px 10px 10px 0;
+      padding: 10px;
+      color: white;
+      font-size: 15px;
+      background-color: rgba(255,0,0,.6);
+      text-align: center;
+      list-style: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="text" />
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+  </div>
+  <ul id="result"></ul>
+  <script>
+    //创建$方法,选择器
+    $ = function (el) { 
+      return document.querySelector(el);
+    };
+
+    //创建数组
+    var data = [];
+    function render() {
+      $('#result').innerHTML = data.map(function(d) { return "<li>" + d + "</li>"; }).join('');
+    }
+
+    function deal(func, succ) {
+      var args = [].slice.call(arguments, 2);
+      return function(e) {
+        try {
+          var arg = args.map(function(item) {
+            return typeof item === "function" ? item(e) : item;//判断item是否为函数
+          });
+          var result = func.apply(data, arg);
+
+          if (succ != null) {
+            succ(result);
+          }
+        } catch (ex) {
+          alert(ex.message);
+        }
+        render();
+      };
+    }
+
+    function getInputValue() {
+      //获取输入框中的输入函数
+      var numStr = $('input').value.trim();
+      if (!validate(numStr)) throw new Error('input error');
+      return parseInt(numStr);
+    }
+
+    // 点击队列中任何一个元素，则该元素会被从队列中删除
+    function getClickIndex(e) {
+      var node = e.target;
+      return [].indexOf.call(node.parentNode.children, node);
+    }
+
+    function validate(str) {
+      return /^\d+$/.test(str);
+    }
+
+    /*
+    **点击数字删除点击"左侧入"，将input中输入的数字从左侧插入队列中；
+    ** unshift: 在集合开头添加一个或更多元素，并返回新的长度
+    */
+    $('#left-in').onclick = deal([].unshift, null, getInputValue);
+
+    /*
+    ** 点击"右侧入"，将input中输入的数字从右侧插入队列中；
+    ** push:在集合中添加元素，并返回新的长度
+    */
+    $('#right-in').onclick = deal([].push, null, getInputValue);
+
+    /*
+    ** 点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值；
+    ** shift:从集合中把第一个元素删除，并返回这个元素的值。
+    */
+    $('#left-out').onclick = deal([].shift, window.alert);
+
+    /*
+    ** 点击"右侧出"，读取并删除队列又侧第一个元素，并弹窗显示元素中数值；
+    ** pop:从集合中把最后一个元素删除，并返回这个元素的值。
+    */
+    $('#right-out').onclick = deal([].pop, window.alert);
+
+    // 点击队列中任何一个元素，则该元素会被从队列中删除
+    $('#result').onclick = deal([].splice, null, getClickIndex, 1);
+  </script>
+</body>
+</html>

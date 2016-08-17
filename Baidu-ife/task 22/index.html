@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 10</title>
+</head>
+    <style>
+        body {
+            width: 100%;
+        }
+
+        #root {
+            margin: 50px auto;
+            width: 700px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            box-sizing: border-box;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid;
+            background-color: white;
+            border: 1px solid rgb(150,150,150);
+        }
+
+        fieldset {
+            margin: 20px auto;
+            width: 675px;
+            border: 1px solid rgb(150,150,150);
+        }
+
+        button {
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: #2D7D9A;
+            color: #fff;
+            padding: 8px 0;
+        }
+
+        .bt4{
+            width: 50px;
+            height: 30px;
+        }
+    </style>
+<body>
+    <div id="root" class="bt1">
+        <div class="bt2">
+            <div class="bt3">
+                <div class="bt4"></div>
+                <div class="bt4"></div>
+            </div>
+            <div class="bt3">
+                <div class="bt4"></div>
+                <div class="bt4"></div>
+            </div>
+        </div>
+        <div class="bt2">
+            <div class="bt3">
+                <div class="bt4"></div>
+                <div class="bt4"></div>
+            </div>
+            <div class="bt3">
+                <div class="bt4"></div>
+                <div class="bt4"></div>
+            </div>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>动画</legend>
+        <button id="preOrder">前序遍历</button>
+        <button id="inOrder">中序遍历</button>
+        <button id="postOrder">后序遍历</button>            
+        &nbsp;&nbsp;速度：
+        <label><input type="radio" name="speed" value="fast" checked="checked">快</label>
+        <label><input type="radio" name="speed" value="slow">中</label>
+        <label><input type="radio" name="speed" value="slow">慢</label>
+    </fieldset>
+    <script src="index.js"></script>
+</body>
+</html>
