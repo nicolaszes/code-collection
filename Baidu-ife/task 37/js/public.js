@@ -10,6 +10,10 @@ var createEle = function(tagName) {
     return document.createElement(tagName);
 };
 
+var createNode = function(text) {
+    return document.createTextNode(text);
+};
+
 // 兼容的事件方法
 function addEvent(ele, event, hanlder) {
     if (ele.addEventListener) {

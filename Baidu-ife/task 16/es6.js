@@ -8,16 +8,16 @@
  * };
  */
 let aqiData = {};
-let cityInput = document.getElementById("aqi-city-input");
-let aqiInput = document.getElementById("aqi-value-input");
+let aqiCityInput = document.getElementById("aqi-city-input");
+let aqiValueInput = document.getElementById("aqi-value-input");
 
 /**
  * 从用户输入中获取数据，向aqiData中增加一条数据
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-    let city = cityInput.value.trim();
-    let aqi = aqiInput.value.trim();
+    let city = aqiCityInput.value.trim();
+    let aqi = aqiValueInput.value.trim();
 
     if(!city.match(/^[A-Za-z\u4E00-\u9FA5]+$/)){
         alert("城市名必须为中英文字符！");

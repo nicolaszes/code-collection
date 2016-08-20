@@ -8,7 +8,10 @@ body {
 	width: 100%;
 }
 
-/*头部样式*/
+
+/*logbox start*/
+
+/*header */
 .log-btn {
 	position: fixed;
 	right: 30px;
@@ -23,7 +26,7 @@ body {
 	background: rgb(231,79,77);
 }
 
-/*半透明遮罩*/
+/*mask*/
 .log-mask{
     /*display: none;*/
 	position: fixed;
@@ -32,21 +35,21 @@ body {
 	background: rgba(110,110,110,0.6);
 }
 
-/*登录面板*/
+/*logbox*/
 .log-box {
 	/*display: none;*/
 	position: fixed;
 	top: calc(50% - 85.5px);
-	left: calc(50% - 120px);
+	left: calc(50% - 150px);
 	overflow: hidden;
 	
-	padding: 10px 30px;
+	padding: 10px 60px;
 	width: 180px;
 	height: 180px;
 
 	color: white;
 	background: rgb(231,79,77);
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 0 0 10px black;
 }
 
@@ -56,7 +59,7 @@ body {
 }
 
 .log-box span {
-	margin-left: -20px;
+	margin-left: -40px;
 
 	color: white;
 	font-size: 20px;
@@ -65,7 +68,7 @@ body {
 .log-box .close-btn {
 	float: right;
 
-	margin: 0 -20px 0 0;
+	margin: 5px -20px 0 0;
 	width: 20px;
 	height: 20px;
 
@@ -78,6 +81,13 @@ body {
 	width: 180px;
 	height: 25px;
 
-	color: #fff;
+	font-size: 15px;
 	border: 1px solid white;
 }
+
+.log-box button {
+	color: #fff;
+	background-color: rgb(231,79,77);
+}
+
+/*logbox end*/
