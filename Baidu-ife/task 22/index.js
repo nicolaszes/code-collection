@@ -17,7 +17,7 @@ var timer;
 //元素被遍历到之后，进行渲染
 var render = function() {
 	currentNode.style.backgroundColor = 'white';
-	if (nodeList.length == 0) {
+	if (nodeList.length === 0) {
 		clearInterval(timer);
 	} else {
 		currentNode = nodeList.shift();
@@ -31,44 +31,57 @@ var preOrder = function(e) {
 	//当前节点入队
 	nodeList.push(e);
 	//递归遍历左右子树
-	if (e.firstElementChild) preOrder(e.firstElementChild);
-    if (e.lastElementChild) preOrder(e.lastElementChild);
+	if (e.firstElementChild) {
+		preOrder(e.firstElementChild);
+	}
+    if (e.lastElementChild) {
+    	preOrder(e.lastElementChild);
+    }
 };
 
 
 //中序排列
 var inOrder = function(e) {
 	//递归遍历左子树
-	if (e.firstElementChild) inOrder(e.firstElementChild);
+	if (e.firstElementChild) {
+		inOrder(e.firstElementChild);
+	}
 	//当前节点入队
 	nodeList.push(e);
 	//递归遍历右子树
-	if (e.lastElementChild) inOrder(e.lastElementChild);
+	if (e.lastElementChild) {
+		inOrder(e.lastElementChild);
+	}
 };
 
 
 //后序排列
 var postOrder = function(e) {
 	//递归遍历左子树
-	if (e.firstElementChild) postOrder(e.firstElementChild);
+	if (e.firstElementChild) {
+		postOrder(e.firstElementChild);
+	}
 	//递归遍历右子树
-	if (e.lastElementChild) postOrder(e.lastElementChild);
+	if (e.lastElementChild) {
+		postOrder(e.lastElementChild);
+	}
 	//当前节点入队
 	nodeList.push(e);
 };
 
 
 var btnHandler = function(e) {
+	//兼容性
     var target = e.target || e.srcElement;
     var option = document.getElementsByName('speed');
 
-    if (option[0].checked) var interval = 100;
-    else if (option[1].checked) var interval = 400;
-    else var interval = 700;
+    if (option[0].checked) interval = 100;
+    else if (option[1].checked) interval = 400;
+    else interval = 700;
     
     //若有正在执行的动画，则立即停止
     currentNode = document.getElementById('root');
-    if(currentNode != null) currentNode.style.backgroundColor = 'white';
+    if(currentNode !== null) currentNode.style.backgroundColor = 'white';
     
     nodeList.length = 0; // 清空队列
     clearInterval(timer); // 停止动画

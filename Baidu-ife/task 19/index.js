@@ -152,6 +152,8 @@ window.onload = function(argument) {
         '#edae9e', '#c1b9c2', '#bec3cb', '#9ea7bb', '#99b4ce', '#d7f0f8'
     ];
 
+    colors.reverse();
+
     function getBGColor(num) {
         return colors[Math.floor(num / 10)];
     }

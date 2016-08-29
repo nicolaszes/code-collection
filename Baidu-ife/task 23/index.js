@@ -25,9 +25,12 @@
 
 	//根据按钮的选中情况切换速度
 	var option = document.getElementsByTagName('input');
-	if (option[1].checked) var interval = 100;
-	else if (option[2].checked) var interval = 400;
-	else var interval = 700;
+
+	//判断按钮进行速度切换
+	var interval = '';
+	if (option[1].checked) interval = 100;
+	else if (option[2].checked) interval = 400;
+	else interval = 700;
 		
 	console.log(interval);
 
@@ -37,31 +40,27 @@
 		var len = nodeList.length;
 
 		//判断inputText与div中的值是否相等
-		// var inputText = (function (inputText) {		
 		if ( nodeList[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, '') === inputText) {
 			nodeList[i].className = 'found';
-			doing = false;
-			clearInterval(timer);
+			// doing = false;
+			// setInterval(timer);
 		} else {
 			nodeList[i++].className = 'active';
 		}
-		// })();
 
 		var doing = true;
 		var timer = setInterval(function (){
+			nodeList[i - 1].className = '';
+
 			if(i < len){
-				nodeList[i - 1].className = '';
 				if ( nodeList[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, '') === inputText ) {
 					nodeList[i].className = 'found';
 					// doing = false;
-					setInterval(timer);
+					// setInterval(timer);
 				} else {
 					nodeList[i++].className = 'active';
 				}
-			}
-
-			else{
-				nodeList[i - 1].className = '';
+			} else {
 				doing = false;
 				clearInterval(timer);
 			}
@@ -71,22 +70,22 @@
 
 
 	//打包遍历函数
-	var traverse = function (e, nodeList){
+	var traverse = function (i, nodeList){
 		//获取当前节点的位置
 		var currentNode = document.getElementById('root');
 		var nodeList = [];
 
-		switch(e){
+		switch(i){
 			case 0: depthFirstTraversal(currentNode,nodeList);
 				break;
 			case 1: BFindex = 0;
 				    breadthFirstTraversal(currentNode,nodeList);
 				break;
-			case 2: var inputText = document.getElementsByTagName('input')[0].value;
+			case 2: var inputText = document.getElementsByTagName('input').value.trim();
 				    depthFirstTraversal(currentNode,nodeList);
 				break;
 			case 3: BFindex = 0;
-				    var inputText = document.getElementsByTagName('input')[0].value;
+				    var inputText = document.getElementsByTagName('input').value.trim();
 				    breadthFirstTraversal(currentNode,nodeList);
 				break;
 		}
@@ -96,10 +95,10 @@
 	};
 
 	//绑定按钮事件
-	function init() {
+	function buttonClick() {
 		var oBtns = document.getElementsByTagName('button');
 
-		for (let i = 0; i < oBtns.length; i++) {
+		for (var i = 0; i < oBtns.length; i++) {
 			// 闭包参数传入
 			(function (i) {
 				oBtns[i].onclick = function () {
@@ -127,5 +126,5 @@
 		}
 	}
 
-	init();
+	buttonClick();
 })();

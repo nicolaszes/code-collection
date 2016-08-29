@@ -63,6 +63,10 @@ var colors = [
     '#edae9e', '#c1b9c2', '#bec3cb', '#9ea7bb', '#99b4ce', '#d7f0f8'
 ];
 
+colors.reverse();
+
+console.log(colors);
+
 
 /**
  * 渲染图表
@@ -85,8 +89,7 @@ function renderChart() {
         var aqiValue = chartData[date];
         var li = document.createElement('li');
         aqiChartWrap.innerHTML += '<li style = "background-color:' + colors[Math.floor(aqiValue / 50)] +'; margin:0 1px; width: 100px;' + 'list-style: none;' + 'height:' + aqiValue + 'px;" title =' + (date + '空气质量：' + aqiValue) + '></li>';
-    }
-    
+    }  
 }
 
 /**
