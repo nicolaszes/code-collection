@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ajax</title>
+    <style>
+        * {
+            margin: 5px 0;
+            padding: 0;
+            font-size: 18px;
+            font-family: "黑体";
+        }
+
+        body {
+            width: 100%;
+            /*font-size: 10px;*/
+        }
+
+        div {
+            margin: 0 auto;
+            padding: 20px;
+            width: 600px;
+            background-color: #eee;
+        }
+
+        h1 {
+            font-size: 25px;
+        }
+
+        label {
+            display: inline-block;
+            /*float: left;*/
+            margin: 0 20px 10px 0;
+            width: 300px;
+        }
+
+        input {
+            display: inline-block;
+            width: 150px;
+            height: 30px;
+            border:1px solid #ccc;
+        }
+
+        input:focus {
+            box-shadow:0 0 4px rgba(0,0,0,.4);
+        }
+
+        button {
+            float: right;
+            width: 100px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: #2D7D9A;
+            color: #fff;
+            padding: 6px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- [if lte IE8]>
+
+    <![endif] -->
+    <div>
+        <h1>Stuff search:</h1>
+        <label>Please input the staff number:</label>
+        <input type="text" id="keyword">
+        <button id="search">Search</button>
+        <p id="searchResult"></p>
+
+        <h1>Staff create:</h1>
+        <label>Please input the staff name:</label>
+        <input type="text" id="staffName">
+        <label>Please input the staff number:</label>
+        <input type="text" id="staffNumber">
+        <label>Please input the staff sex:</label>
+        <select id="staffSex">
+            <option>man</option>
+            <option>woman</option>
+        </select>
+        <label>Please input the staff job:</label>
+        <input type="text" id="staffJob">
+        <button id="save">save</button>
+        <p id="searchResult"></p>
+    </div>
+
+    <script>
+        document.getElementById('search').onclick = function() {
+            //send search request to deal with
+            var request = new XMLHttpRequest();
+            request.open('GET','php/server.php?number=' + document.getElementById('keyword').value);
+            request.send('POST');
+        };
+    </script>
+</body>
+</html>
+
