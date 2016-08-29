@@ -1,0 +1,43 @@
+html{
+	font-size: 125%;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+h1{
+	text-align: center;
+	font-size: 25px;
+	font-family: "Microsoft YaHei";
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+.wrap{
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	background-color: #ccc;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -100px;
+    overflow: hidden;
+}
+.wrap .top-corner,
+.wrap .bottom-corner{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	background-color: #fc0;
+}
+.wrap .top-corner{
+	top: -50px;
+	left: -50px;
+}
+.wrap .bottom-corner{
+	right: -50px;
+	bottom: -50px;
+}

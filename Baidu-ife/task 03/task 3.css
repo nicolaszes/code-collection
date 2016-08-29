@@ -1,0 +1,66 @@
+html{
+	font-size: 125%;
+	font-family: Arial, "Microsoft YaHei", Sans-Serif;
+}
+
+*{
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+body{
+	min-width: 480px;
+}
+
+img{
+	margin-top: 20px;
+	margin-left: 20px;
+	width: 80px;
+	height: 80px;
+	float: left;
+    border: 1px solid #999;
+}
+
+.content{
+	margin: 20px;
+	padding: 20px;
+	overflow: hidden;
+	border: 1px solid #999;
+	background-color: #eee;
+}
+
+.left, .main, .right{
+	border: 1px solid #999; 
+	background-color: #fff;
+}
+.left{
+	width: 200px;
+	height: 120px;
+	float: left;	
+}
+.left .team-name{
+    padding-top: 20px;
+    padding-left: 10px;
+	display: inline-block;
+	font-size: 10px;
+}
+
+.right{
+	width: 120px;
+	height: 520px;
+	float: right;
+}
+
+.main{
+	margin-left: 220px;
+	margin-right: 140px;
+	padding: 20px;
+	word-wrap: break-word; 
+}
+.main p{
+	font-size: 15px;
+}
+.main .self-intro{
+	padding-left: 100px;
+}

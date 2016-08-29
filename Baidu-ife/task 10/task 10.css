@@ -1,0 +1,44 @@
+html {
+	width: 100%
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul:before, ul:after{
+	content: "";
+    display: table;
+    clear: both;
+}
+
+ul {
+	width: 100%;
+	display:-moz-box;
+    display:-webkit-box;
+    display:box;
+    box-sizing: border-box;
+}
+li {
+	width: 150px;
+	-moz-box-flex:1;
+    -webkit-box-flex:1;
+    box-flex:1;
+    box-sizing: border-box;
+    list-style-type: none;
+    margin: 20px;
+}
+ @media (min-width: 640px;) {
+ 	.one {
+ 		height: 120px;
+ 	}
+ 	.two {
+ 		height: 100px;
+ 	}
+ 	.three {
+ 		height: 40px;
+ 	}
+ 	.four {
+ 		height: 200px;
+ 	}
+ }
