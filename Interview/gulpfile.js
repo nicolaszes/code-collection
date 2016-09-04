@@ -56,18 +56,3 @@ gulp.task('index', function() {
   var html = 'index.html';
   compress(html);
 });
-
-gulp.task('projects', function() {
-  var html = 'projects.html';
-  compress(html);
-});
-
-gulp.task('portfolio', function() {
-  var html = 'portfolio.html';
-  compress(html);
-});
-
-gulp.task('tourism', function() {
-  var html = 'tourism.html';
-  compress(html);
-});
