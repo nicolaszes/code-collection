@@ -1,3 +1,8 @@
+###一.HTML/CSS
+效果 [https://nicolaszs.github.io/Practice/Interview/src/index.html](https://nicolaszs.github.io/Practice/Interview/src/index.html)
+源码 [https://github.com/nicolaszs/Practice/tree/gh-pages/Interview/src](https://github.com/nicolaszs/Practice/tree/gh-pages/Interview/src)
+
+
 ###二. JavaScript
 ####1.优化代码，提高可读性
 Promise优化回调函数
@@ -76,7 +81,7 @@ whale.swim();
 https应该用于任何场景！
 针对：
 （1）钓鱼网站？网站背后的公司是否可信？DNS劫持？DNS污染？
-（2）运营商如果耍流氓搞http劫持你能怎么办？嵌入广告，或者整个拦截掉，甚至A公司的产品给你重定向到B公司页面。
+（2）运营商如果耍流氓搞http劫持？嵌入广告，或者整个拦截掉，甚至A公司的产品给你重定向到B公司页面。
 ####3）是否天衣无缝？如果不是，请提供一个场景和前提条件来攻破HTTPS。
 #####中间人攻击
 开发中难免遇到http抓包的需求，有时遇到https的请求，一般抓包方式就没法正确截获数据了。不过通过伪造证书，https的包也是可以抓的，参见iOS抓包利器Charles 。难道https如此脆弱？既然https能轻易被抓包，还要来干啥？
@@ -86,7 +91,7 @@ https应该用于任何场景！
 
 这种方式起效的前提是代码关闭了证书验证：AFNetWorking中的allowInvalidCertificates，所以release时记得打开证书验证，这样伪造的证书就不被接受了。
 
-好了，看起来安全了？等等，allowInvalidCertificates只是实现了拒绝不受信任的证书，注意，重点是信任，如果证书是受到信任的呢？虽然可能性有点小，不过假设有一个攻击者手上拥有一个受信任的证书，首先iPhone信任的证书包括一些预装的证书iOS 8 中可用的受信任根证书的列表，和用户自己安装的证书。那么即使开启了证书allowInvalidCertificates，中间人攻击依然能够发生。这时候就需要开启SSL Ping Mode了
+<!-- 好了，看起来安全了？等等，allowInvalidCertificates只是实现了拒绝不受信任的证书，注意，重点是信任，如果证书是受到信任的呢？虽然可能性有点小，不过假设有一个攻击者手上拥有一个受信任的证书，首先iPhone信任的证书包括一些预装的证书iOS 8 中可用的受信任根证书的列表，和用户自己安装的证书。那么即使开启了证书allowInvalidCertificates，中间人攻击依然能够发生。这时候就需要开启SSL Ping Mode了
 
 AFNetWorking里通过AFURLConnectionOperationSSLPinningMode设置
 原理是把证书打包或者公钥打包在APP中，在NSURLConnectionDelegate协议中的connection:willSendRequestForAuthenticationChallenge:中检测证书是否没被篡改。
@@ -117,7 +122,7 @@ chrome不信任SRCA，所以就锁就红了，
 
 ![https](https-3.png)
 
-一句话总结是，绿色的基本可以安全访问，红色的建议留点心。
+一句话总结是，绿色的基本可以安全访问，红色的建议留点心。 -->
 
 ###2.你最喜欢的框架／语言
 ####1）是什么？为什么？
@@ -189,5 +194,4 @@ React可以在服务器上预渲染应用再发送到客户端。它可以从预
 ###5.有什么想对我们说的？
 （1）感谢贵公司给我这次机会;
 （2）希望贵公司能够指出我题目答案的不足之处（js题目最好能给出最优答案，谢谢）;
-（3）希望贵公司能够介绍目前团队的构成;
-（4）
+（3）如果方便的话，希望贵公司能够介绍目前团队的构成;
