@@ -1,5 +1,17 @@
 ###二. JavaScript
 ####1.优化代码，提高可读性
+Promise优化回调函数
+```
+var promise = new Promise(function(resolve, reject) {
+  function async_add (m, n) {   
+    resolve(setTimeout(m+n, 500));
+  }
+});
+
+promise.then(function(1, 2) {
+  console.log(res);
+});
+```
 
 ####2.优化代码，达到预期输出
 ```
@@ -37,6 +49,25 @@ whale.swim();
 
 1）显示结果4 ，2、4、8；
 2）
+    class方法定义了一个Animal，默认this.pos = pos;
+    class方法定义了一个Whale，通过extends实现继承Animal的所有属性;
+    const方法创建了一个whale()构造函数，使其继承了Whale的属性;
+
+    传入全局变量pos = 1;
+    调用whale.swim()方法，就相当于调用了Whale的swim()方法，
+    super(pos + 1)方法使得pos = pos + 1 = 2，
+    swim()方法里this.pos 向上查找Animal里有，于是this.pos = pos;
+    this.pos << 1;即this.pos * 2^1 = 4;
+
+    先调用执行console.log(this.pos) = 4;
+
+    setTimeout()延迟一段时间，再进行内部操作: 
+
+    setTimeout()里调用函数timer(), 函数timer()里设置了定时器setTimeout();
+    而在第一层定时器里面this.pos = pos = 1; this.pos <<= 1;即this.pos = this.pos * 2^1 = 2,输出console.log(this.pos);判断this.pos < 8 && setTimeout(timer, 0)，符合条件，循环继续;
+    循环this <<= 1;即this.pos = this.pos * 2^1 = 4;输出console.log(this.pos) = 4,判断this.pos < 8 && setTimeout(timer, 0)，符合条件，循环继续;
+    循环this <<= 1;即this.pos = this.pos * 2^1 = 8;输出console.log(this.pos) = 8,判断this.pos < 8 && setTimeout(timer, 0)，符合条件，循环停止;
+    函数停止;
 ###三. 开放性问题
 ###1.HTTPS 是安全的，那么
 ####1）保证了谁的安全？
@@ -90,12 +121,43 @@ chrome不信任SRCA，所以就锁就红了，
 
 ###2.你最喜欢的框架／语言
 ####1）是什么？为什么？
-CSS，它可以将好的UI设计转化成吸引人的页面效果，看得到的美学东西本身就是一种享受
-####2）如果允许你为它添加一项特性，你希望是什么？为什么？
-（1）要是允许的话，我个人希望添加一个background-img的rotate属性；
+（1）React.js
 （2）
+######React速度很快
+与其它框架相比，React采取了一种特立独行的操作DOM的方式。
+它并不直接对DOM进行操作。
+它引入了一个叫做虚拟DOM的概念，安插在JavaScript逻辑和实际的DOM之间。
+这一概念提高了Web性能。在UI渲染过程中，React通过在虚拟DOM中的微操作来实对现实际DOM的局部更新。
+######跨浏览器兼容
+虚拟DOM帮助我们解决了跨浏览器问题，它为我们提供了标准化的API，甚至在IE8中都是没问题的。
+######模块化
+为你程序编写独立的模块化UI组件，这样当某个或某些组件出现问题是，可以方便地进行隔离。
+每个组件都可以进行独立的开发和测试，并且它们可以引入其它组件。这等同于提高了代码的可维护性。
+######结构清晰
+因为 react 本身就是组件化的，所以整个页面按结构被分为几个组件，每个组件自己管理自己的展示和行为，最后通过容器组合起来，结构非常清晰。
+组件的状态都是通过 state 或者 props 来控制，而我认为大多数组件只需要 props 就行了，只在顶层组件上控制 state，这样可以更加清晰的管理 state。
+######易于维护
+因为结构清晰，所以可以预想到，这样是易于维护的。比如头部要改结构和样式，那就只改 Hearker.js 和对应 _Header.scss 就行了，或者要改逻辑，那只要修改 Hearker.js 中和 props 或者 state 相关的代码就行了，不用像以前那样在整个页面的逻辑里面去找这块的代码。
+######省去了模版引擎
+因为 react 可以说是自带了模版引擎，类似的 jade 或者 ejs 之类的模版引擎也就不需要了，类似这样拿到数据直接渲染就行了。
+######单向数据流让事情一目了然
+Flux是一个用于在JavaScript应用中创建单向数据层的架构，它随着React视图库的开发而被Facebook概念化。它只是一个概念，而非特定工具的实现。它可以被其它框架吸纳。例如，Alex Rattray有一个很好的Flux实例，在React中使用了Backbone的集合和模型。
+######纯粹的JavaScript
+现代Web应用程序与传统的Web应用有着不同的工作方式。
+例如，视图层的更新需要通过用户交互而不需要请求服务器。因此视图和控制器非常依赖彼此。
+许多框架使用Handlebars或Mustache等模板引擎来处理视图层。但React相信视图和控制器应该相互依存在一起而不是使用第三方模板引擎，而且，最重要的是，它是纯粹的JavaScript程序。
+######同构的JavaScript
+单页面JS应用程序的最大缺陷在于对搜索引擎的索引有很大限制。React对此有了解决方案。
+React可以在服务器上预渲染应用再发送到客户端。它可以从预渲染的静态内容中恢复一样的记录到动态应用程序中。
+因为搜索引擎的爬虫程序依赖的是服务端响应而不是JavaScript的执行，预渲染你的应用有助于搜索引擎优化。
+######React与其它框架/库兼容性好
+比如使用RequireJS来加载和打包，而Browserify和Webpack适用于构建大型应用。它们使得那些艰难的任务不再让人望而生畏。
+####2）如果允许你为它添加一项特性，你希望是什么？为什么？
+（1）
+（2）并不是一个完整的框架，基本都需要加上ReactRouter和Redux才能写大型应用；
 ####3）如果允许你从中删除一项特性，你希望是什么？为什么？
 （1）
+（2）
 
 ####3.你做过的最酷炫或倾注最多心血的项目是什么？向我们介绍一下
 自己的个人网站nicolaszs.com
@@ -125,5 +187,7 @@ CSS，它可以将好的UI设计转化成吸引人的页面效果，看得到的
 （5）最好定期有技术交流和培训；
 （6）五险一金是必须的
 ###5.有什么想对我们说的？
-（1）感谢贵公司给我给我这次机会；
-（2）我想
+（1）感谢贵公司给我这次机会;
+（2）希望贵公司能够指出我题目答案的不足之处（js题目最好能给出最优答案，谢谢）;
+（3）希望贵公司能够介绍目前团队的构成;
+（4）
