@@ -1,0 +1,220 @@
+html {
+	font-family: '微软雅黑';
+	font-size: 125%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+$height: 3rem !default;
+
+.wrap {
+	position: relative;
+	overflow: hidden;
+
+	margin: 0 auto;
+	width: 40rem;
+	height: 10 * $height;	
+
+	background-color: rgba(133,153,170,.6);
+}
+
+// 表单背景 --开始
+.bgc {
+	margin: -195px -90px;
+
+	width: 1000px;
+	height: 988px;
+
+	background-size: cover;
+	background-image: url('../img/bgc.png');
+	background-position: 0 0;
+
+	transform: rotate(-15deg);
+}
+
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(97,111,124,.6);
+
+
+	// 表单内容 --开始
+	form {
+		position: absolute;
+		top: 5rem;
+		left: 9.5rem;
+
+		width: 21rem;
+
+		box-shadow: 0 0 1rem #596775;
+		border-radius: 0.25rem;
+		background-color: #fff;
+
+		// transform: rotate(15deg);
+
+		// 表单头部 --开始
+		.log-header {
+			display: flex;
+
+			height: .9 * $height;
+
+			h3 {
+				line-height: .9 * $height;
+
+				margin: 0;
+				width: 50%;
+
+				font-size: .9rem;
+				font-weight: 500;
+				text-align: center;
+				cursor: pointer;
+
+				&:last-child {
+					border-left: 1px solid rgba(217,217,217,1);
+					background-color: rgba(231,231,231,1);
+					border-radius: 0 .25rem 0 0;
+				}
+			}
+		}
+		// 表单头部 --结束
+
+		// 表单主体 --开始
+		.log-body {
+			height: 5 * $height;
+
+			text-align: center;
+
+			p {
+				box-sizing: border-box;
+				line-height: $height;
+
+				margin: 0;
+				padding-left: 1.5rem;
+				height: $height;
+
+				font-size: .65rem;
+				text-align: left;
+
+				border-bottom: 1px solid rgba(231,231,231,1); 
+
+				&:first-child {
+					padding-left: 2.7rem;
+
+					color: #fff;
+
+					border-bottom: 1px solid rgba(231,231,231,1); 
+					background-color: rgba(74,144,226,1);
+				}
+
+				label {
+					display: inline-block;
+
+					width: 4.5rem;
+
+					font-weight: 600;
+				}
+
+				input {
+					width: 10rem;
+					height: .6 * $height;
+
+					outline: none;
+					border: none;
+				}
+			}
+
+			div {
+				display: flex;
+				align-items: center;
+				padding-left: 1.5rem;
+				line-height: (2 / 3) * $height;
+
+				height: 2 * $height;
+				
+				text-align: left;
+
+				button {
+					width: 9rem;
+					height: $height;
+
+					color: #fff;
+					font-size: 1rem;
+
+					border: none;
+					border-radius: .25rem;
+					background-color: rgba(72,217,133,1);
+				}
+
+				a {
+					width: 10.5rem;
+
+					color: #5f6b76;
+					font-size: .7rem;
+					font-weight: bold;
+					text-align: center;
+				}
+			}
+		}
+		// 表单主体 --结束
+
+		// 表单底部 --开始
+		.log-footer {
+			display: flex;
+
+			height: $height;
+
+			text-align: center;
+
+			p {
+				line-height: $height;
+				box-sizing: border-box;
+
+				margin: 0;
+				width: 7rem;
+
+				color: #fff;
+				font-size: .7rem;
+
+				background-color: rgba(69,83,95,1);
+
+				+ p {
+					border-left: 1px solid rgba(100,112,121,1);
+				}
+
+				&:first-child {
+					border-radius: 0 0 0 .25rem;
+				}
+
+				&:last-child {
+					border-radius: 0 0 .25rem 0;
+
+					a {
+						background-position: 0 -21px;
+					}
+				}
+
+				a {
+					text-decoration: none;
+
+					padding-left: 1.25rem;
+
+					color: #fff;
+
+					background: url(../img/social.png) no-repeat;
+					background-size: auto 38px;
+					background-position: 0 0;
+				}
+
+			}
+		}
+		// 表单底部 --结束
+	}
+	// 表单内容 --结束
+}
+// 表单背景 --结束
