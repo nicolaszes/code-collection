@@ -9,22 +9,28 @@ body {
 	/*font-size: 10px;*/
 }
 
-body>div {
+body > div {
 	margin: 20px auto;
 	padding: 20px;
 	width: 540px;
+
 	border: 1px solid #ddd;
 	box-shadow: 0 1px 3px #ccc;
 }
 
 button {
-	width: 100px;
+	position: absolute;
 	text-align: center;
+	margin-top: 20px;
+	margin-left: 420px;
+
+	width: 100px;
+	padding: 5px 0;
+	color: #fff;
+
 	cursor: pointer;
 	border: none;
 	background: #2D7D9A;
-	color: #fff;
-	padding: 5px 0;
 }
 
 ul {
