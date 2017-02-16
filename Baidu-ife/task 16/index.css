@@ -20,13 +20,14 @@ label {
 }
 
 input {
+	padding-left: 10px; 
 	width: 150px;
 	height: 30px;
-	border:1px solid #ccc;
+	border: 1px solid #ccc;
 }
 
 input:focus {
-	box-shadow:0 0 4px rgba(0,0,0,.4);
+	box-shadow: 0 0 4px rgba(0,0,0,.4);
 }
 
 #add-btn {
@@ -51,11 +52,11 @@ table {
 table th {
 	width: 200px;
 	font-size: 15px;
-	border-bottom:1px solid #ccc;
-	text-align:center;
-	padding:5px 10px;
-	color:#fff;
-	background:#ccc;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+	padding: 5px 10px;
+	color: #fff;
+	background: #ccc;
 }
 
 table th:last-child {
@@ -64,9 +65,9 @@ table th:last-child {
 }
 
 table td {
-	border-bottom:1px solid #ccc;
-	text-align:center;
-	padding:5px 10px;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+	padding: 5px 10px;
 	/*color:#fff;*/
 	/*background:#ccc;*/
 }
