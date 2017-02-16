@@ -6,10 +6,9 @@
 
 body {
 	width: 100%;
-	/*font-size: 10px;*/
 }
 
-body>div {
+form {
 	margin: 20px auto;
 	padding: 20px;
 	width: 540px;
@@ -18,26 +17,25 @@ body>div {
 }
 
 label {
-	/*float: left;*/
 	margin: 0 20px 10px 0;
 }
 
 input {
 	width: 200px;
 	height: 25px;
-	border:1px solid #ccc;
+	border: 1px solid #ccc;
 }
 
 input:focus {
-	box-shadow:0 0 4px rgba(0,0,0,.4);
+	box-shadow: 0 0 4px rgba(0,0,0,.4);
 }
 
 button {
-	width: 100px;
 	text-align: center;
+	padding: 5px 0;
+	width: 100px;
 	cursor: pointer;
+	color: #fff;
 	border: none;
 	background: #2D7D9A;
-	color: #fff;
-	padding: 5px 0;
 }

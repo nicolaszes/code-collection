@@ -1,7 +1,7 @@
-(function() {
-	var aqiInput = document.getElementById("aqi-input");
-		button = document.getElementById("button");
-		aqiDisplay = document.getElementById("aqi-display");
+function DisplayAirData() {
+	let aqiInput = document.getElementById("aqi-input");
+	let	button = document.getElementById("button");
+	let	aqiDisplay = document.getElementById("aqi-display");
 	
 	// 获取aqi-input输入的值，并显示在aqi-display中
 	function updateDisplay() {
@@ -14,12 +14,15 @@
 		}
 	}
 
-	button.onclick = updateDisplay;//给按钮button绑定一个点击事件
-
+	//给按钮button绑定一个点击事件
+	button.onclick = updateDisplay();
+	
 	// enter键入
 	aqiInput.onkeydown = function(evt) {
 		if (evt.keyCode === 13) {
 			updateDisplay();
 		}
 	};
-})();
+};
+
+DisplayAirData();
