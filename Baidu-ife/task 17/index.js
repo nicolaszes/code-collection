@@ -59,8 +59,18 @@ var pageState = {
  */
 
 var colors = [
-    '#16324a', '#24385e', '#393f65', '#4e4a67', '#5a4563', '#b38e95',
-    '#edae9e', '#c1b9c2', '#bec3cb', '#9ea7bb', '#99b4ce', '#d7f0f8'
+    '#16324a', 
+    '#24385e', 
+    '#393f65', 
+    '#4e4a67',
+    '#5a4563', 
+    '#b38e95',
+    '#edae9e', 
+    '#c1b9c2', 
+    '#bec3cb', 
+    '#9ea7bb', 
+    '#99b4ce', 
+    '#d7f0f8'
 ];
 
 colors.reverse();
@@ -77,9 +87,16 @@ function renderChart() {
     //给图表添加css样式
     var aqiChartWrap = document.getElementsByClassName('aqi-chart-wrap')[0];
     aqiChartWrap.innerHTML = '';
-    aqiChartWrap.style.cssText = 'border:2px solid #ddd; width: 90%; height: 550px;' +
-           'display: flex; justify-content: center;align-items: flex-end; align-content:center;' +
-           'margin: 10px auto; padding: 10px;';
+    aqiChartWrap.style.cssText = `  border:2px solid #ddd; 
+                                    width: 90%; 
+                                    height: 550px;
+                                    display: flex; 
+                                    justify-content: center;
+                                    align-items: flex-end; 
+                                    align-content:center;
+                                    margin: 10px auto; 
+                                    padding: 10px;
+                                `
 
     //渲染每个图表的样式
     //获取表格数据中的date属性
