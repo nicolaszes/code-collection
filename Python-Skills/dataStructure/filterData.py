@@ -22,6 +22,7 @@ print(newD)
 
 
 # sort set data
+# --------solution 2: 集合解析
 s = set(data)
 newS = { x for x in s if x % 3 == 0 }
 print(newS)
