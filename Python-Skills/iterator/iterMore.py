@@ -1,3 +1,4 @@
+# for 语句迭代多个对象
 from random import randint
 from itertools import chain
 
