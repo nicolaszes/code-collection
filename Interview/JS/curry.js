@@ -5,9 +5,9 @@
  */
 // 示意而已
 function ajax(type, url, data) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(type, url, true);
-    xhr.send(data);
+  var xhr = new XMLHttpRequest();
+  xhr.open(type, url, true);
+  xhr.send(data);
 }
 
 // 虽然 ajax 这个函数非常通用，但在重复调用的时候参数冗余
@@ -50,3 +50,79 @@ addCurry(2);
 
 var addCurry = curry(add);
 addCurry(1, 2);
+
+
+/*
+ * curry second edition
+ */
+function sub_curry (fn) {
+  var args = [].slice.call(arguments, 1);
+  return function () {
+    return fn.apply(this, args.concat([].slice.call(arguments)))
+  }
+}
+
+function curry (fn, length) {
+  // 判断所需传入的参数的个数
+  length = fn.length || length;
+  var slice = Array.prototype.slice;
+
+  return function () {
+    if (arguments.length < length) {
+      var combined = [fn].concat(slice.call(arguments));
+      return curry(sub_curry.apply(this, combined), length - arguments.length);
+    }
+    return fn.apply(this, arguments);
+  }
+}
+
+var fn = curry(function(a, b, c) {
+  return [a, b, c];
+});
+
+function curry (fn, args) {
+  var length = fn.length;
+  args = args || [];
+
+  return function () {
+    var _args = args.slice(0);
+    for (var i = 0; i < arguments.length; i++) {
+      _args.push(arguments[i]);
+    }
+
+    if (_args.length < length) {
+      return curry.call(this, fn, _args)
+    }
+    return fn.apply(this, _args)
+  }
+}
+
+var fn = curry(function (a, b, c) {
+  console.log([a, b, c])
+})
+
+fn('a', 'b', 'c') // ['a', 'b', 'c']
+fn('a', 'b')('c') // ['a', 'b', 'c']
+fn('a')('b')('c') // ['a', 'b', 'c']
+fn('a')('b', 'c') // ['a', 'b', 'c']
+
+
+/*
+ * es6 实现 curry
+ * judge 函数判断当前传入的参数 ...args总长度是否满足 fn.length
+ * ...扩展运算符，=> 函数，省去了 this的绑定
+ */
+let curry = fn =>
+    judge = (...args) =>
+      args.length === fn.length
+      ? fn(...args)
+      : (...ele) => judge(...args, ...ele)
+let fn = curry((a, b, c, d, e) => (console.log([a, b, c, d, e])))
+
+fn(1)(2)(3)(4)(5)
+fn(1, 2, 3, 4, 5)
+fn(1, 2, 3)(4, 5)
+fn(1, 2)(3, 4, 5)
+fn(1, 2)(3, 4)(5)
+fn(1)(2)(3, 4)(5)
+fn(1)(2)(3)(4, 5)
