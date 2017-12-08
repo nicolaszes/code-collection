@@ -90,6 +90,7 @@ function curry (fn, args) {
       _args.push(arguments[i]);
     }
 
+    // 如果不满足 fn.length的参数长度，递归调用 curry
     if (_args.length < length) {
       return curry.call(this, fn, _args)
     }
