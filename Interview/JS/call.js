@@ -101,3 +101,25 @@ function bar(name, age) {
 
 bar.call(null); // 2
 console.log(bar.call2(obj, 'kevin', 18));
+
+/*
+ * apply的模拟实现
+ */
+Function.prototype.apply = function (context, arr) {
+  var context = object(context) || window;
+  context.fn = this;
+
+  var result;
+  if (!arr) {
+    result = context.fn();
+  } else {
+    var args = [];
+    for (var i = 0; i < arr.length; i++) {
+      args.push('arr[' + i + ']');
+    }
+    result = eval('context.fn(' + args + ')');
+  }
+
+  delete context.fn;
+  return result;
+}
