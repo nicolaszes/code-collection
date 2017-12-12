@@ -85,7 +85,7 @@ NaN == NaN; // false;
 var a = new Object();
 a.value = 1;
 b = a;
-b.value = a;
+b.value = 2;
 alert(a.value);
 ```
 输出：2；
