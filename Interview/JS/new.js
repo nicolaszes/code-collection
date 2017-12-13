@@ -16,3 +16,50 @@ function ObjectFactory () {
  * 将 obj的原型指向构造函数
  * 改变 this的指向到新建的对象
  */
+
+/**
+ * 返回值效果实现
+ * 返回值需要是一个对象 {}
+ */
+function Otaku (name, age) {
+  this.strength = 60;
+  this.age = age;
+  return {
+    name: name,
+    habit: 'Games'
+  }
+}
+var person = new Otaku('kevin', 18)
+
+console.log(person.name)
+console.log(person.habit)
+console.log(person.strength)
+console.log(person.age)
+
+/**
+ * 如果只返回一个基本类型
+ * 相当于没有返回值来处理
+ */
+function Otaku (name, age) {
+  this.strength = 60;
+  this.age = age;
+  return 'handsome body'
+}
+var person = new Otaku('kevin', 18)
+
+console.log(person.name)
+console.log(person.habit)
+console.log(person.strength)
+console.log(person.age)
+
+/**
+ * 第二版
+ */
+function objectFactory () {
+  var obj = new Object();
+  var Constructor = [].shift.call(arguments);
+
+  obj.__prpto__ = Constructor.prototype;
+  var ret = Constructor.apply(obj, arguments)
+  return typeof ret === 'object' ? ret : obj;
+}
