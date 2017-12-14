@@ -69,3 +69,28 @@ users.find('John', 'E', 'Resig'); // Does nothing
  * 绑定 find1时，old为 find0
  * 3个函数 find0，find1，find2就这样通过闭包链接起来了
  */
+
+
+/**
+ * different edition use ts
+ */
+class Chicken {}
+class Beef {}
+
+function (c: Chicken) : any;
+function (c: Beef) : any;
+
+function cooking (food) : any {
+  if (food instanceof Chicken) {
+    console.log("第一步： 杀鸡取卵");
+  }
+
+  if(food instanceof Beef) {
+    console.log("牛肉不能煮太久，要不然不好吃了")
+  }
+}
+
+let c = new Chicken();
+let b = new Beef();
+cooking(c)
+cooking(b)
