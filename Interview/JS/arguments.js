@@ -106,6 +106,7 @@ function foo(name, age, sex, hobbit) {
   // 改变arguments
   arguments[1] = 'new age';
   console.log(age, arguments[1]); // new age new age
+
   // 测试未传入的是否会绑定
   console.log(sex); // undefined
   sex = 'new sex';
@@ -114,3 +115,21 @@ function foo(name, age, sex, hobbit) {
   console.log(hobbit, arguments[3]); // undefined new hobbit
 }
 foo('name', 'age')
+
+/**
+ * 传递参数
+ */
+function foo () {
+  bar.apply(this, arguments)
+}
+
+function bar (a, b, c) {
+  console.log(a, b, c);
+}
+
+foo(1, 2, 3)
+
+function baz (...arguments) {
+  console.log(arguments)
+}
+foo(4, 5, 6)
