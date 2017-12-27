@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Layout</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: grid;
+      grid-gap: 10px;
+      height: 100vh;
+      /* grid-template-rows: 20px 30px 40px 2fr 1fr; */
+      grid-template-rows: 1fr 3fr 3fr 3fr 1fr;
+    }
+    .container > .box {
+      background-color: dodgerblue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box a">A</div>
+    <div class="box b">B</div>
+    <div class="box c">C</div>
+    <div class="box d">D</div>
+    <div class="box e">E</div>
+  </div>
+</body>
+</html>

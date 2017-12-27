@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Layout</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: grid;
+      grid-gap: 5px;
+      grid-template-areas:
+        "header"
+        "section"
+        "aside-1"
+        "aside-2"
+        "footer";
+    }
+    .container > * {
+      background-color: mediumseagreen;
+      font-size: 80px;
+    }
+
+    @media (min-width: 700px) {
+      .container {
+        grid-template-areas:
+          "header header header"
+          "aside-1 section aside-2"
+          "footer footer footer";
+      }
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    aside:nth-of-type(1) {
+      grid-area: aside-1;
+    }
+
+    section {
+      grid-area: section;
+    }
+
+    aside:nth-of-type(2) {
+      grid-area: aside-2;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>Header</header>
+    <aside>Aside 1</aside>
+    <section>Section</section>
+    <aside>Aside 2</aside>
+    <footer>Footer</footer>
+  </div>
+</body>
+</html>
