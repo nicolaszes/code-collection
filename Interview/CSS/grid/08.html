@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Layout</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: grid;
+      grid-gap: 10px;
+      height: 100vh;
+      grid-template-columns:
+        repeat(3,
+          minmax(20px, auto)
+          minmax(40px, auto)
+          minmax(20px, auto)
+          minmax(80px, auto)
+        );
+    }
+    .container > .box {
+      background-color: orangered;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box a">a</div>
+    <div class="box b">b</div>
+    <div class="box c">c</div>
+    <div class="box d">d</div>
+    <div class="box e">e</div>
+    <div class="box f">f</div>
+    <div class="box g">g</div>
+    <div class="box h">h</div>
+    <div class="box i">i</div>
+    <div class="box j">j</div>
+    <div class="box k">k</div>
+    <div class="box l">l</div>
+    <div class="box m">m</div>
+    <div class="box n">n</div>
+    <div class="box o">o</div>
+    <div class="box p">p</div>
+    <div class="box q">q</div>
+    <div class="box r">r</div>
+    <div class="box s">s</div>
+    <div class="box t">t</div>
+    <div class="box u">u</div>
+    <div class="box v">v</div>
+    <div class="box w">w</div>
+    <div class="box x">x</div>
+    <div class="box y">y</div>
+    <div class="box z">z</div>
+
+  </div>
+</body>
+</html>
