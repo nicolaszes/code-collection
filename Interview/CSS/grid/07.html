@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Layout</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: grid;
+      grid-gap: 10px;
+      height: 100vh;
+      grid-template-columns:
+        minmax(min-content, 1fr)
+        minmax(max-content, 4fr)
+    }
+    .container > .box {
+      background-color: mediumpurple;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box a">Lorem ipsum dolor sit amet, mei no utamur efficiantur. Te malorum equidem referrentur cum, vim facilisi singulis efficiendi ei. Fabulas dissentias definitionem no qui. Te saepe copiosae mediocrem cum. In eos adhuc nulla novum.</div>
+    <div class="box b">Petentium dignissim et vel. In vim feugiat volutpat salutandi, vel id dicat delenit explicari. Ei alia quaestio sit, vel ex regione inimicus erroribus, modus theophrastus disputationi duo ei. Pro an mundi omnes. An quo case veri quaerendum. Nulla cotidieque id qui.</div>
+  </div>
+</body>
+</html>
