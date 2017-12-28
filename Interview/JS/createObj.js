@@ -109,15 +109,74 @@ var person1 = new Person();
  */
 function Person(name) {
   this.name = name;
+  console.log(Person.prototype)
   if (typeof this.getName !== 'function') {
+    console.log(Person.prototype)
     Person.prototype = {
       constructor: Person,
       getName: function () {
         console.log(this.name);
       }
     }
+    return new Person(name)
   }
 }
 
 var person1 = new Person('nico');
 var person2 = new Person('coco');
+
+/**
+ * 5.1 寄生构造函数模式
+ * "特殊情况下使用。比如我们想创建一个具有额外方法的特殊数组，但是又不想直接修改Array构造函数，我们可以这样写"
+ */
+function Person(name) {
+  var o = new Object();
+  o.name = name;
+  o.getName = function () {
+    console.log(this.name)
+  };
+  return o;
+}
+
+var person1 = new Person('co');
+console.log(person1 instanceof Person) // false
+console.log(person1 instanceof Object)  // true
+
+function SpecialArray () {
+  var values = new Array();
+  values.push.apply(values, arguments);
+  values.toPipedString = function () {
+    return this.join('|');
+  };
+  return values;
+}
+var colors = new SpecialArray('red', 'blue', 'green');
+var colors2 = SpecialArray('red2', 'blue2', 'green2');
+
+console.log(colors);
+console.log(colors.toPipedString()); // red|blue|green
+
+console.log(colors2);
+console.log(colors2.toPipedString()); // red2|blue2|green2
+
+
+/**
+ * 5.2 稳妥构造函数模式
+ * "有公共属性，而且其方法也不引用 this 的对象"
+ */
+function Person (name) {
+  var o = new Object();
+  o.sayName = function () {
+    console.log(name);
+  };
+  return o;
+}
+
+var person1 = Person('coco');
+person1.sayName();
+person1.name = 'daisy';
+person1.sayName();
+console.log(person1.name); // daisy
+
+// 优点： 适合在一些安全的环境中
+// 缺点： 稳妥构造函数模式也跟工厂模式一样，无法识别对象所属类型。
