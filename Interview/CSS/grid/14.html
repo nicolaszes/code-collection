@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Layout</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: grid;
+      grid-gap: 10px;
+      height: 100vh;
+      /* grid-template-areas:
+        "nav1 nav2 nav3"
+        "main main nav3";
+      grid-template-rows:
+        [header-top] 1fr
+        [header-bottom main-top] 5fr
+        [main-bottom];
+      grid-template-columns: 2fr auto 1fr; */
+      grid-template:
+        [header-top] "nav1 nav2 nav3" 1fr [header-bottom]
+        [main-top]   "main main nav3" 5fr [main-bottom]
+        / 2fr auto 1fr;
+    }
+    .container > * {
+      background-color: orange;
+      font-size: 30px;
+    }
+    nav:nth-of-type(1) {
+      grid-area: nav1;
+    }
+    nav:nth-of-type(2) {
+      grid-area: nav2;
+    }
+    nav:nth-of-type(3) {
+      grid-area: nav3;
+    }
+    section {
+      grid-area: main;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>Menu 1</nav>
+    <nav>Menu 2</nav>
+    <nav>Menu 3</nav>
+    <section>Main</section>
+  </div>
+</body>
+</html>

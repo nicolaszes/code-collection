@@ -15,21 +15,17 @@
       grid-gap: 10px;
       height: 100vh;
       /* grid-template-columns:
-        repeat(2,
-          minmax(20px, auto)
-          minmax(40px, auto)
-          minmax(20px, auto)
-          minmax(80px, auto)
+        repeat(
+          auto-fill,
+          minmax(50px, auto)
+          minmax(70px, auto)
+          minmax(100px, auto)
         ); */
       grid-template-columns:
-        [start]
-        repeat(2,
-          [col-sml-start] minmax(20px, auto)
-          [col-sml-end col-med-start] minmax(40px, auto)
-          [col-med-end col-sml-start] minmax(20px, auto)
-          [col-sml-end col-lgr-start] minmax(80px, auto)
-          [col-lgr-end]
-        ) [end];
+        repeat(
+          auto-fit,
+          minmax(100px, auto)
+        );
     }
     .container > .box {
       background-color: orangered;
@@ -42,7 +38,7 @@
     <div class="box a">a</div>
     <div class="box b">b</div>
     <div class="box c">c</div>
-    <div class="box d">d</div>
+    <!-- <div class="box d">d</div>
     <div class="box e">e</div>
     <div class="box f">f</div>
     <div class="box g">g</div>
@@ -64,8 +60,7 @@
     <div class="box w">w</div>
     <div class="box x">x</div>
     <div class="box y">y</div>
-    <div class="box z">z</div>
-
+    <div class="box z">z</div> -->
   </div>
 </body>
 </html>
