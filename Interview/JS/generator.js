@@ -127,3 +127,38 @@ function *bar() {
 
 var it = bar()
 console.log('outside:', it.next().value)
+
+/**
+ * 异常委托
+ */
+function *foo () {
+  try {
+    yield 'B'
+  }
+  catch (err) {
+    console.log('error caught inside *foo():', err)
+  }
+
+  yield 'C'
+  throw 'D'
+}
+
+function *bar() {
+  yield 'A'
+  try {
+    yield *foo()
+  }
+  catch(err) {
+    console.log('error caught inside *bar:', err)
+  }
+  yield 'C'
+  yield *baz()
+  yield 'G'
+}
+
+function *baz() {
+  yield 'F'
+}
+
+var it = bar()
+console.log('outside:', it.next().value)

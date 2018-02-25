@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Two top and bottom</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      width: 100%;
+      min-width: 100px;
+    }
+
+    .layout {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- absolute 解决方案 -->
+  <!-- <section class="layout absolute">
+    <style media="screen">
+      .layout.absolute .top-bottom-center > div {
+        position: absolute;
+      }
+
+      .layout.absolute .top {
+        top: 0;
+        height: 100px;
+        background: red;
+      }
+
+      .layout.absolute .bottom {
+        top: 100px;
+        bottom: 0;
+        /* height: 100px; */
+        background: blue;
+      }
+    </style>
+    <article class="top-bottom-center">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </article>
+  </section> -->
+
+  <!-- flexbox 解决方案 -->
+  <!-- <section class="layout flexbox">
+    <style media="screen">
+      .layout.flexbox .top-bottom-center {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .layout.flexbox .top {
+        height: 100px;
+        background: red;
+      }
+
+      .layout.flexbox .bottom {
+        flex: 1;
+        background: blue;
+      }
+    </style>
+    <article class="top-bottom-center">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </article>
+  </section> -->
+
+  <!-- grid 解决方案 -->
+  <section class="layout grid">
+    <style media="screen">
+      .layout.grid .left-right-center {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 100%;
+        grid-template-rows: 100px auto;
+      }
+
+      .layout.grid .left {
+        background: red;
+      }
+
+      .layout.grid .right {
+        background: blue;
+      }
+    </style>
+    <article class="left-right-center">
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+</body>
+</html>

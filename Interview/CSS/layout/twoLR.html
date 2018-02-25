@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Two Left and Right</title>
+  <style media="screen">
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 100px;
+    }
+
+    .layout {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- float 解决方案 -->
+  <section class="layout float">
+    <style media="screen">
+      .layout.float .left {
+        height: 200px;
+        background: red;
+        overflow: hidden;
+      }
+
+      .layout.float .right {
+        float: right;
+        width: 300px;
+        background: blue;
+      }
+    </style>
+    <article class="left-right">
+      <div class="right"></div>
+      <div class="left"></div>
+    </article>
+  </section>
+
+  <!-- absolute 解决方案 -->
+  <section class="layout absolute">
+    <style media="screen">
+      .layout.absolute .left-right > div {
+        position: absolute;
+      }
+
+      .layout.absolute .left {
+        left: 0;
+        right: 300px;
+        background: red;
+      }
+
+      .layout.absolute .right {
+        right: 0;
+        width: 300px;
+        background: blue;
+      }
+    </style>
+    <article class="left-right">
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- flexbox 解决方案 -->
+  <section class="layout flexbox">
+    <style media="screen">
+      .layout.flexbox {
+        margin-top: 140px;
+      }
+
+      .layout.flexbox .left-right {
+        display: flex;
+      }
+
+      .layout.flexbox .left {
+        flex: 1;
+        background: red;
+      }
+
+      .layout.flexbox .right {
+        width: 300px;
+        background: blue;
+      }
+    </style>
+    <article class="left-right">
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- table-cell 解决方案 -->
+  <section class="layout table">
+    <style media="screen">
+      .layout.table .left-right {
+        width: 100%;
+        display: table;
+        height: 100px;
+      }
+
+      .layout.table .left-right > div {
+        display: table-cell;
+      }
+
+      .layout.table .left {
+        /* width: 300px; */
+        background: red;
+      }
+
+      .layout.table .right {
+        width: 300px;
+        background: blue;
+      }
+    </style>
+    <article class="left-right">
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- grid 解决方案 -->
+  <section class="layout grid">
+    <style media="screen">
+      .layout.grid .left-right {
+        width: 100%;
+        display: grid;
+        height: 100px;
+        grid-template-rows: 100px;
+        grid-template-columns: auto 300px;
+      }
+
+      .layout.grid .left {
+        background: red;
+      }
+
+      .layout.grid .right {
+        background: blue;
+      }
+    </style>
+    <article class="left-right">
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+</body>
+</html>
