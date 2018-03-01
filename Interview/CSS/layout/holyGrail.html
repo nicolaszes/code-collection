@@ -11,7 +11,6 @@
       min-width: 304px;
     }
 
-
     .layout.grail .left-center-right>div {
       float: left;
       min-height: 100px;
@@ -36,7 +35,10 @@
   </style>
 </head>
 <body>
-  <!-- 缺点：当面板的 main部分比两边的子面板宽度小时，布局就会乱掉 -->
+  <!--
+    中间栏要在放在文档流前面以优先渲染
+    缺点：当面板的 main部分比两边的子面板宽度小时，布局就会乱掉
+  -->
   <section class="layout grail">
     <h1>圣杯布局</h1>
     <article class="left-center-right">
