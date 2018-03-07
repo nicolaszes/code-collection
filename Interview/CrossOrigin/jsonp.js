@@ -1,7 +1,7 @@
 <script src="http://www.abc.com/?data=name&callback=jsonp"></script>
 <script>
   jsonp({
-    data:
+    data: res
   })
 </script>
 /**
