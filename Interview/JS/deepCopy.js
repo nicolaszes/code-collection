@@ -63,7 +63,9 @@ var deepCopy = function (obj) {
   // 根据 obj的类型判断是新建一个数组还是对象
   var newObj = obj instanceof Array ? [] : {}
   for (var key in obj) {
-    newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key];
+    newObj[key] = typeof obj[key] === 'object'
+                  ? deepCopy(obj[key]) 
+                  : obj[key];
   }
   return newObj
 }
