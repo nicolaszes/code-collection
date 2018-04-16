@@ -119,7 +119,43 @@ let proxy = new Proxy(target, {
   preventExtensions (trapTarget) {
     // return false
     return Reflect.preventExtensions(trapTarget)
-  }
+  },
+  /**
+   * defineProperty
+   * @param {*} trapTarget 
+   * @param {*} key 
+   * @param {*} descriptor 
+   */
+  defineProperty (trapTarget, key, descriptor) {
+    // 阻止 Object.defineProperty，当 key === 'symbol'
+    if (typeof key === 'symbol') {
+      return false
+    }
+    return Reflect.defineProperty(trapTarget, key, descriptor)
+  },
+  /**
+   * getOwnPropertyDescriptor
+   * 返回的对象包含了不被许可的自有属性，则程序会抛出错误
+   * Object.getOwnPropertyDescriptor() 方法会在接收的第一个参数是一个基本类型值时，将该参数转换为一个对象。
+   * 另一方面， Reflect.getOwnPropertyDescriptor() 方法则会在第一个参数是基本类型值的时候抛出错误。
+   * @param {*} trapTarget 
+   * @param {*} key 
+   */
+  getOwnPropertyDescriptor (trapTarget, key) {
+    return {
+      name: 'proxy'
+    }
+    return Reflect.getOwnPropertyDescriptor(trapTarget, key)
+  },
+  /**
+   * ownKeys 返回一个数组或者一个类数组对象，不合要求的返回值会导致错误
+   * @param {*} trapTarget 
+   */
+  ownKeys (trapTarget) {
+    return Reflect.ownKeys(trapTarget).filter(key => {
+      return typeof key !== 'string' || key[0] !== '_'
+    })
+  },
 })
 
 // 添加一个新属性
