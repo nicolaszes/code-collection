@@ -13,7 +13,59 @@ class Colleague {
   send (msg) {
     throw new Error('Abstract method')
   }
+
+  receive (msg) {
+    throw new Error('Abstract method')
+  }
 }
+
+class ConcreteColleagueA extends Colleague {
+  constructor (mediator) {
+    super(mediator)
+  }
+
+  send (msg) {
+    this.mediator.send(msg, this)
+  }
+
+  receive (msg) {
+    console.log(msg, "`receive` of ConcreteColleagueA is being called!")
+  }
+}
+
+class ConcreteColleagueB extends Colleague {
+  constructor (mediator) {
+    super(mediator)
+  }
+
+  send (msg) {
+    this.mediator.send(msg, this)
+  }
+
+  receive (msg) {
+    console.log(msg, "`receive` of ConcreteColleagueA is being called!")
+  }
+}
+
+class ConcreteMediator extends Mediator {
+  send (msg, colleague) {
+    if (this.concreteColleagueA === colleague) {
+      this.concreteColleagueB.receive(msg)
+    } else {
+        this.concreteColleagueA.receive(msg)
+    }
+  }
+}
+
+var cm = new ConcreteMediator()
+let c1 = new ConcreteColleagueA(cm)
+let c2 = new ConcreteColleagueB(cm)
+
+cm.concreteColleagueA = c1
+cm.concreteColleagueB = c2
+
+c1.send("`send` of ConcreteColleagueA is being called!")
+c2.send("`send` of ConcreteColleagueB is being called!")
 
 /**
  * 中介者模式玩泡泡堂
