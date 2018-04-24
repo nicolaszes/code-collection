@@ -1,3 +1,6 @@
+/**
+ * es6 class 存在暂时性死区
+ */
 class PersonClass {
   constructor(name) {
     this.name = name

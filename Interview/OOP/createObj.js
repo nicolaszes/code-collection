@@ -25,7 +25,7 @@ function Person (name) {
 }
 
 var person2 = new Person('name')
-// 优点：实例可以识别为y一个特定的类型
+// 优点：实例可以识别为一个特定的类型
 // 缺点：每次创建实例时，每个方法都要被创建一次
 
 /**
