@@ -131,7 +131,7 @@ class ConcreteDecorator extends Decorator {
 
   operation() {
     super.operation()
-    console.log("`operation` of ConcreteDecorator", this.Id, " is being called!")
+    console.log("`operation` of ConcreteDecorator", this.id, " is being called!")
   }
 }
 
