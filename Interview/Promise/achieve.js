@@ -57,6 +57,7 @@ function executeResolver(resolver) {
 function executeCallback (type, x) {
   var isResolve = type === 'resolve', thenable;
 
+  // resolve 后面跟着的是 object || 回调函数
   if (isResolve && (typeof x === 'object' || typeof x === 'function')) {
     try {
       thenable = getThen(x)
