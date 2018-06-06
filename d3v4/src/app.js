@@ -60,7 +60,7 @@ const scores = [
   { name: 'Emily', score: 88 },
 ]
 
-const update = d3.select('.chart')
+const bar = d3.select('.chart')
   .append('svg')
     .attr('width', 225)
     .attr('height', 300)
@@ -70,20 +70,15 @@ const update = d3.select('.chart')
   })
   .style('color', 'blue')
   .enter()
-    .append('rect')
-    .attr('y', (d, i) => i * 33)
+    .append('g')
+    .attr('transform', (d, i) => `translate(0, ${i * 33})`)
+
+bar.append('rect')
     .text((d) => d.name)
     .attr('class', 'bar')
     .style('width', d => d.score)
 
-// const enter = update.enter()
-//   .append('div')
-//   .text((d) => d.name)
-//   .style('color', 'green')
-  
-
-// update.exit().remove()
-// update.merge(enter)
-//   // .classed('bar', true)
-//   .attr('class', 'bar')
-//   .style('width', d => d.score + 'px')
+bar.append('text')
+  .text(d => d.name)
+  .attr('y', 20)
+  .attr('x', 10)
