@@ -60,6 +60,14 @@ const scores = [
   { name: 'Emily', score: 88 },
 ]
 
+function scaleBar (selection, scale) {
+  selection.style('transform', `scaleX(${scale})`)
+}
+
+function fade (selection, opacity) {
+  selection.style('fill-opacity', opacity)
+}
+
 const bar = d3.select('.chart')
   .append('svg')
     .attr('width', 225)
@@ -77,6 +85,21 @@ bar.append('rect')
     .text((d) => d.name)
     .attr('class', 'bar')
     .style('width', d => d.score)
+    .on('mouseover', function (d, i, elements) {
+      d3.select(this).call(scaleBar, 2)
+      // console.log(d3.selectAll(elements)
+      // .filter(':not(:hover)'))
+      d3.selectAll(elements)
+        .filter(':not(:hover)')
+        .style('fill-opacity', .5)
+        // .classed('barOn', true)
+    })
+    .on('mouseout', function (d, i, elements) {
+      d3.selectAll(elements)
+        .style('fill-opacity', 1)
+      d3.select(this).classed('barOn', false)
+      d3.select(this).call(scaleBar, 1)
+    })
 
 bar.append('text')
   .text(d => d.name)
