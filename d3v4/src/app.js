@@ -115,10 +115,15 @@ const margin = {
 const width = 425 - margin.left - margin.right
 const height = 625 - margin.top - margin.bottom
 
+const fullWidth = width + margin.left + margin.right
+const fullHeight = height + margin.top + margin.bottom
+
 const svg = d3.select('.chart')
   .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
+    .attr('width', fullWidth)
+    .attr('height', fullHeight)
+    .call(responsify)
+    // .attr('viewBox', `0, 0, ${fullWidth * 2}, ${fullHeight * 2}`)
   .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
@@ -141,7 +146,7 @@ const yScale = d3.scaleLinear()
 
 const yAxis = d3.axisLeft(yScale)
   // .ticks(5, 's')
-  .tickValues([8, 19, 43, 77])
+  // .tickValues([8, 19, 43, 77])
 svg.call(yAxis)
 
 const xScale = d3.scaleTime()
@@ -157,3 +162,24 @@ const xAxis = d3.axisBottom(xScale)
 svg.append('g')
   .attr('transform', `translate(0, ${height})`)
   .call(xAxis)
+
+function responsify (svg) {
+  console.log(svg)
+  var container = d3.select(svg.node().parentNode),
+    width = parseInt(svg.style('width')),
+    height = parseInt(svg.style('height')),
+    aspect = width / height
+    console.log(container)
+
+    svg.attr('viewBox', `0, 0, ${width}, ${height}`)
+      .attr('preserveAspectRatio', 'xMinYMid')
+      .call(resize)
+
+    d3.select(window).on(`resize.${container.attr('id')}`, resize)
+    
+    function resize () {
+      var targetWidth = parseInt(container.style('width'))
+      svg.attr('width', targetWidth)
+      svg.attr('height', Math.round(targetWidth / aspect))
+    }
+}
