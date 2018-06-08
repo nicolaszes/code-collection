@@ -106,63 +106,6 @@
 //   .attr('y', 20)
 //   .attr('x', 10)
 
-const margin = {
-  top: 25,
-  right: 25,
-  bottom: 40,
-  left: 40,
-}
-const width = 425 - margin.left - margin.right
-const height = 625 - margin.top - margin.bottom
-
-const fullWidth = width + margin.left + margin.right
-const fullHeight = height + margin.top + margin.bottom
-
-const svg = d3.select('.chart')
-  .append('svg')
-    .attr('width', fullWidth)
-    .attr('height', fullHeight)
-    .call(responsify)
-    // .attr('viewBox', `0, 0, ${fullWidth * 2}, ${fullHeight * 2}`)
-  .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`)
-
-svg.append('rect')
-  .attr('width', width)
-  .attr('height', height)
-  .style('fill', 'lightblue')
-  .style('stroke', 'green')
-
-// svg.append('rect')
-//   .attr('x', width / 2)
-//   .attr('width', width / 2)
-//   .attr('height', height)
-//   .style('fill', 'lightblue')
-//   .style('stroke', 'green')
-
-const yScale = d3.scaleLinear()
-  .domain([0, 100])
-  .range([height, 0])
-
-const yAxis = d3.axisLeft(yScale)
-  // .ticks(5, 's')
-  // .tickValues([8, 19, 43, 77])
-svg.call(yAxis)
-
-const xScale = d3.scaleTime()
-  .domain([new Date(2016, 0, 1, 6), new Date(2016, 0, 1, 9)])
-  .range([0, width])
-
-const xAxis = d3.axisBottom(xScale)
-  // .ticks(d3.timeMinute.every(45))
-  .ticks(5)
-  .tickSizeInner(10)
-  .tickSizeOuter(20)
-  .tickPadding(15)
-svg.append('g')
-  .attr('transform', `translate(0, ${height})`)
-  .call(xAxis)
-
 function responsify (svg) {
   console.log(svg)
   var container = d3.select(svg.node().parentNode),
@@ -183,3 +126,88 @@ function responsify (svg) {
       svg.attr('height', Math.round(targetWidth / aspect))
     }
 }
+
+const margin = {
+  top: 25,
+  right: 25,
+  bottom: 60,
+  left: 40,
+}
+const width = 425 - margin.left - margin.right
+const height = 625 - margin.top - margin.bottom
+
+const fullWidth = width + margin.left + margin.right
+const fullHeight = height + margin.top + margin.bottom
+
+const data = [
+  { score: 63, subject: 'Mathmatics'},
+  { score: 72, subject: 'Geography'},
+  { score: 81, subject: 'Spelling'},
+  { score: 90, subject: 'Reading'},
+  { score: 97, subject: 'Science'},
+  { score: 74, subject: 'Chemistry'},
+  { score: 97, subject: 'Physics'},
+  { score: 52, subject: 'ASL'},
+]
+
+const svg = d3.select('.chart')
+  .append('svg')
+    .attr('width', fullWidth)
+    .attr('height', fullHeight)
+    .call(responsify)
+    // .attr('viewBox', `0, 0, ${fullWidth * 2}, ${fullHeight * 2}`)
+  .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+// svg.append('rect')
+//   .attr('width', width)
+//   .attr('height', height)
+//   .style('fill', 'lightblue')
+//   .style('stroke', 'green')
+
+// svg.append('rect')
+//   .attr('x', width / 2)
+//   .attr('width', width / 2)
+//   .attr('height', height)
+//   .style('fill', 'lightblue')
+//   .style('stroke', 'green')
+
+const yScale = d3.scaleLinear()
+  .domain([0, 100])
+  .range([height, 0])
+
+const yAxis = d3.axisLeft(yScale)
+  // .ticks(5, 's')
+  // .tickValues([8, 19, 43, 77])
+svg.call(yAxis)
+
+const xScale = d3.scaleBand()
+  .paddingInner(.2)
+  .paddingOuter(.5)
+  .domain(data.map(d => d.subject))
+  .range([0, width])
+
+const xAxis = d3.axisBottom(xScale)
+  // .ticks(d3.timeMinute.every(45))
+  .ticks(5)
+  .tickSizeInner(10)
+  .tickSizeOuter(20)
+  .tickPadding(15)
+svg.append('g')
+  .attr('transform', `translate(0, ${height})`)
+  .call(xAxis)
+  .selectAll('text')
+  .style('text-anchor', 'end')
+  .attr('transform', 'rotate(-45)')
+  // .attr('transform', 'translateX(-20)')
+
+svg.selectAll('rect')
+  .data(data)
+  .enter()
+  .append('rect')
+  .attr('x', d => xScale(d.subject))
+  .attr('y', d => yScale(d.score))
+  .attr('width', d => xScale.bandwidth())
+  .attr('height', d => height - yScale(d.score))
+  .classed('score', true)
+  // .style('fill', 'steelblue')
