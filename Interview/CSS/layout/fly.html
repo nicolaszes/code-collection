@@ -6,27 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fly</title>
   <style media="screen">
-    .layout.ued .left-center-right>div {
+    #main,#left,#right{
+      height: 200px;
       float: left;
     }
-    .layout.ued .wrap {
-      margin-left: 300px;
-      margin-right: 300px;
+    #main-wrap{
+      margin: 0 100px;
     }
-    .layout.ued .center {
-      background: yellow;
+    #main{
+      width: 100%;
+      background: pink;
     }
-    .layout.ued .left {
-      background: red;
-      min-height: 100px;
-      width: 300px;
-      margin-left: -100%;
-    }
-    .layout.ued .right {
+    #left{
       background: blue;
-      min-height: 100px;
-      width: 300px;
-      margin-left: -300px;
+      width: 100px;
+      margin-left: -100%;
+      position: relative;
+      left: 100px;
+    }
+    #right{
+      width: 100px;
+      margin-right: -100px;
+      background: green;
     }
   </style>
 </head>
@@ -34,23 +35,11 @@
   <!-- 缺点：多了一个 DOM节点 -->
   <section class="layout ued">
     <h1>双飞翼布局</h1>
-    <article class="left-center-right">
-      <div class="wrap">
-        <div class="center">
-          1.这是三栏布局的双飞翼布局解决方案；
-          2.这是三栏布局的双飞翼布局解决方案；
-          3.这是三栏布局的双飞翼布局解决方案；
-          4.这是三栏布局的双飞翼布局解决方案；
-          5.这是三栏布局的双飞翼布局解决方案；
-          6.这是三栏布局的双飞翼布局解决方案；
-          7.这是三栏布局的双飞翼布局解决方案；
-          8.这是三栏布局的双飞翼布局解决方案；
-          9.这是三栏布局的双飞翼布局解决方案；
-        </div>
-      </div>
-      <div class="left"></div>
-      <div class="right"></div>
-    </article>
+    <div id="content">
+      <div id="main-wrap"><div id="main"></div></div>
+      <div id="left"></div>
+      <div id="right"></div>
+    </div>
   </section>
 </body>
 </html>
