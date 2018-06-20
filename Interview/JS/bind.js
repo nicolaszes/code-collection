@@ -1,7 +1,7 @@
 /*
  * 返回函数的模拟实现
  */
-Function.prototype.bind2 = function(context) {
+Function.prototype.bind2 = function (context) {
   var self = this;
   return function () {
     return self.apply(context) // 绑定函数可能是有返回值的
@@ -89,12 +89,11 @@ Function.prototype.bind2 = function (context) {
   var fNOP = function () {};
 
   var fBound = function () {
-      var bindArgs = Array.prototype.slice.call(arguments);
-      return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+    var bindArgs = Array.prototype.slice.call(arguments);
+    return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
   }
 
   fNOP.prototype = this.prototype;
   fBound.prototype = new fNOP();
   return fBound;
 }
-  

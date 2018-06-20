@@ -5,7 +5,8 @@
 var foo = {
   value: 1,
 }
-function bar () {
+
+function bar() {
   console.log(this.value)
 }
 bar.call(foo)
@@ -34,7 +35,8 @@ Function.prototype.call2 = function (context) {
 var foo = {
   value: 1,
 }
-function bar () {
+
+function bar() {
   console.log(this.value)
 }
 bar.call2(foo)
@@ -49,7 +51,7 @@ Function.prototype.call2 = function (context) {
     args.push('arguments[' + i + ']');
   }
   console.log(args)
-  eval('context.fn(' + args +')');
+  eval('context.fn(' + args + ')');
   delete context.fn
 }
 
@@ -64,7 +66,7 @@ function bar(name, age) {
   console.log(this.value);
 }
 
-bar.call2(foo, 'kevin', 18); 
+bar.call2(foo, 'kevin', 18);
 
 /*
  * step two
@@ -78,7 +80,7 @@ Function.prototype.call2 = function (context) {
     args.push('arguments[' + i + ']');
   }
 
-  var result = eval('context.fn(' + args +')');
+  var result = eval('context.fn(' + args + ')');
   delete context.fn;
   return result;
 }
@@ -87,16 +89,16 @@ Function.prototype.call2 = function (context) {
 var value = 2;
 
 var obj = {
-    value: 1
+  value: 1
 }
 
 function bar(name, age) {
-    console.log(this.value);
-    return {
-        value: this.value,
-        name: name,
-        age: age
-    }
+  console.log(this.value);
+  return {
+    value: this.value,
+    name: name,
+    age: age
+  }
 }
 
 bar.call(null); // 2

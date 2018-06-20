@@ -1,9 +1,11 @@
 function test1() {
   console.log('this is function --- test1')
+  return 'test1'
 }
 
 function test2() {
   console.log('this is function --- test2')
+  return 'test2'
 }
 /**
  * basic once
@@ -72,6 +74,15 @@ onceTest2()
 onceTest2()
 
 
+function test1() {
+  console.log('this is function --- test1')
+  return 'test1'
+}
+
+function test2() {
+  console.log('this is function --- test2')
+  return 'test2'
+}
 /**
  * once 第二次改进
  */
@@ -85,10 +96,12 @@ var once = function() {
     // 遍历 hasRan 数组，如果数组中存在元素的 func 属性与 fn 相同，表示已经执行过这个 fn ，直接返回结果
     // 通过 toString() 方法，增加对匿名函数的支持
     for (var i in hasRan) {
-      if (hasRan[i].func.toString() === fn.toString) {
+      if (hasRan[i].func.toString() === fn.toString()) {
         return hasRan[i].result
       }
     }
+
+    console.log(121313)
 
     // 这个 fn 未被执行过，则执行
     var argumentsArr = []

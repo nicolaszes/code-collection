@@ -43,7 +43,12 @@ Array.prototype.map.call(arrayLike, function (item) {
 /**
  * 类数组转数组的方法
  */
-var arrayLike = { 0: 'name', 1: 'age', 2: 'sex', length: 3 };
+var arrayLike = {
+  0: 'name',
+  1: 'age',
+  2: 'sex',
+  length: 3
+};
 // 1. slice
 Array.prototype.slice.call(arrayLike);
 // 2. splite
@@ -67,7 +72,7 @@ foo('name', 'age', 'sex')
  * length 属性
  * Arguments对象的length属性，表示实参的长度，举个例子
  */
-function foo(b, c, d){
+function foo(b, c, d) {
   console.log("实参的长度为：" + arguments.length)
 }
 console.log("形参的长度为：" + foo.length)
@@ -83,7 +88,7 @@ foo(1)
 var data = [];
 for (var i = 0; i < 3; i++) {
   (data[i] = function () {
-    console.log(arguments.callee.i) 
+    console.log(arguments.callee.i)
   }).i = i;
 }
 
@@ -119,17 +124,17 @@ foo('name', 'age')
 /**
  * 传递参数
  */
-function foo () {
+function foo() {
   bar.apply(this, arguments)
 }
 
-function bar (a, b, c) {
+function bar(a, b, c) {
   console.log(a, b, c);
 }
 
 foo(1, 2, 3)
 
-function baz (...arguments) {
+function baz(...arguments) {
   console.log(arguments)
 }
 foo(4, 5, 6)
