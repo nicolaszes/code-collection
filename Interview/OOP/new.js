@@ -3,10 +3,10 @@
  * 写一个函数，命名为 ObjectFactory
  */
 function ObjectFactory () {
-  var obj = new Object();
+  var obj = {};
   var Constructor = [].shift.call(arguments);
 
-  obj.__proto__ = Contructor.prototype;
+  obj.__proto__ = Constructor.prototype;
   Constructor.apply(obj, arguments)
   return obj;
 }
@@ -56,7 +56,7 @@ console.log(person.age)
  * 第二版
  */
 function objectFactory () {
-  var obj = new Object();
+  var obj = {};
   var Constructor = [].shift.call(arguments);
 
   obj.__prpto__ = Constructor.prototype;
