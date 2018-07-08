@@ -52,13 +52,13 @@ console.log(new Date, i)
  * use IIFE
  */
 for (var i = 0; i < 5; i++) {
-  (function(j) {
-    setTimeout(function() {
+  (function (j) {
+    setTimeout(function () {
       console.log(new Date, j);
-    }, 1000 * j));  // 这里修改 0~4 的定时器时间
+    }, 1000 * j); // 这里修改 0~4 的定时器时间
   })(i);
 }
-setTimeout(function() { // 这里增加定时器，超时设置为 5 秒
+setTimeout(function () { // 这里增加定时器，超时设置为 5 秒
   console.log(new Date, i);
 }, 1000 * i);
 
@@ -68,18 +68,17 @@ setTimeout(function() { // 这里增加定时器，超时设置为 5 秒
 // Plan A
 const tasks = [];
 for (var i = 0; i < 5; i++) {
-   (j => tasks.push(new Promise(resolve => {
-        setTimeout(() => {
-           console.log(new Date, j)
-           resolve()
-        }, j * 1000)
-     })
-   ))(i)
+  (j => tasks.push(new Promise(resolve => {
+    setTimeout(() => {
+      console.log(new Date, j)
+      resolve()
+    }, j * 1000)
+  })))(i)
 }
 Promise.all(tasks).then(() => {
-   setTimeout(() => {
-      console.log(new Date, i)
-   }, 1000)
+  setTimeout(() => {
+    console.log(new Date, i)
+  }, 1000)
 })
 
 // Plan B beautify
@@ -104,7 +103,9 @@ Promise.all(tasks).then(() => {
 /*
  * use async / await
  */
-const sleep = time => new Promise(resolve => {setTimeout(resolve, time)});
+const sleep = time => new Promise(resolve => {
+  setTimeout(resolve, time)
+});
 
 (async () => {
   for (var i = 0; i < 5; i++) {

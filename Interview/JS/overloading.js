@@ -77,10 +77,10 @@ users.find('John', 'E', 'Resig'); // Does nothing
 class Chicken {}
 class Beef {}
 
-function (c: Chicken) : any;
-function (c: Beef) : any;
+// function (c: Chicken) : any;
+// function (c: Beef) : any;
 
-function cooking (food) : any {
+function cooking (food) {
   if (food instanceof Chicken) {
     console.log("第一步： 杀鸡取卵");
   }
