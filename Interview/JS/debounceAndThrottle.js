@@ -38,7 +38,9 @@ function debounce(fn, delay) {
 function throttle(fn, delay) {
   // 记录上次触发事件
   let previous = Date.now()
-  const throttleFunc = () => {
+  const throttleFunc = function () {
+    let ctx = this
+    let args = arguments
     let now = Date.now()
     // 本次事件触发与上一次的时间比较
     let diff = now - previous - delay
@@ -47,7 +49,7 @@ function throttle(fn, delay) {
     if (diff >= 0) {
       // 更新最近事件触发的时间
       previous = now
-      setTimeout(() => fn.apply(this, arguments), delay)
+      setTimeout(() => fn.apply(ctx, args), delay)
     }
   }
 
