@@ -81,17 +81,16 @@ var fn = curry(function(a, b, c) {
 });
 
 function curry (fn, args) {
-  var length = fn.length;
-  args = args || [];
+  args = args || []
 
   return function () {
-    var _args = args.slice(0);
+    var _args = args.slice(0)
     for (var i = 0; i < arguments.length; i++) {
-      _args.push(arguments[i]);
+      _args.push(arguments[i])
     }
 
     // 如果不满足 fn.length的参数长度，递归调用 curry
-    if (_args.length < length) {
+    if (_args.length < fn.length) {
       return curry.call(this, fn, _args)
     }
     return fn.apply(this, _args)

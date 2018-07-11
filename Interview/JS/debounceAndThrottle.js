@@ -11,10 +11,10 @@ x
  * 当一定时间内没有触发在执行这个事件
  */
 // https://segmentfault.com/a/1190000005926579
-function debounce(fn, delay) {
+const debounce = (fn, delay) => {
   let timer = null
 
-  const debounceFunc = () => {
+  const debounceFunc = (...args) => {
     // 当持续触发事件时，若发现事件触发的定时器已设置时，则清除之前的定时器
     if (timer) {
       clearTimeout(timer)
@@ -23,7 +23,7 @@ function debounce(fn, delay) {
 
     // 重新设置事件触发的定时器
     timer = setTimeout(() => {
-      fn.apply(this, arguments)
+      fn.apply(this, args)
       timer = null
     }, delay)
   }
@@ -35,12 +35,10 @@ function debounce(fn, delay) {
  * 节流，当触发事件时，保证隔一段时间触发一次事件
  * 合并一段时间内的事件，并在该时间结束时真正的去触发一次事件
  */
-function throttle(fn, delay) {
+const throttle = (fn, delay) => {
   // 记录上次触发事件
   let previous = Date.now()
-  const throttleFunc = function () {
-    let ctx = this
-    let args = arguments
+  const throttleFunc = (...args) => {
     let now = Date.now()
     // 本次事件触发与上一次的时间比较
     let diff = now - previous - delay
@@ -49,7 +47,7 @@ function throttle(fn, delay) {
     if (diff >= 0) {
       // 更新最近事件触发的时间
       previous = now
-      setTimeout(() => fn.apply(ctx, args), delay)
+      setTimeout(() => fn(...args), delay)
     }
   }
 
@@ -58,6 +56,6 @@ function throttle(fn, delay) {
   return throttleFunc
 }
 
-window.onresize = throttle(() => {
+window.resize = throttle(() => {
   console.log(123)
-}, 1000);
+}, 1000)

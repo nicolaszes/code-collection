@@ -6,10 +6,10 @@ String.prototype.trim = function () {
   var start = 0,
     end = this.length - 1,
     ws = /\s/
-  while (ws.indexOf(this.charAt(start)) > -1) {
+  while (ws.test(this.charAt(start))) {
     start++
   }
-  while (end > start && ws.indexOf(this.charAt(end)) > -1) {
+  while (end > start && ws.test(this.charAt(end))) {
     end--
   }
   return this.slice(start, end + 1)　　

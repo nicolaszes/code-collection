@@ -7,8 +7,8 @@
 function add(n) {
   let sum = [n]
 
-  function powAdd(n) {
-    sum.push(n)
+  function powAdd(m) {
+    sum.push(m)
     powAdd.value = sum.map(item => Math.pow(item, 2)).reduce((pre, next) => pre + next)
     return powAdd
   }
@@ -36,4 +36,15 @@ const add = n => {
   const f = x => add(n + x)
   f.valueOf = () => n
   return f
+}
+
+function add (n) {
+  function func (x) {
+    console.log(n, x, n + x)
+    return add(n + x)
+  }
+  func.valueOf = function () {
+    return n
+  }
+  return func
 }
