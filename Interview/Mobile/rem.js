@@ -38,6 +38,7 @@ export default win.flex = (normal, baseFontSize, fontscale) => {
  * 字体大小问题
  * px2px 处理
  */
+```
 .px2px(@name, @px){
     @{name}: round(@px / 2) * 1px;
     [data-dpr="2"] & {
@@ -61,3 +62,4 @@ export default win.flex = (normal, baseFontSize, fontscale) => {
 }
 
 .px2px(font-size, 32);
+```

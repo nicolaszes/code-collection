@@ -1,6 +1,6 @@
-function test1() {
+function test1(test1) {
   console.log('this is function --- test1')
-  return 'test1'
+  return test1
 }
 
 function test2() {
@@ -86,9 +86,9 @@ function test2() {
 /**
  * once 第二次改进
  */
-var once = function() {
-  var hasRan = []
-  return function (fn) {
+var once = (() => {
+  let hasRan = []
+  return (fn, ...args) => {
     if (typeof fn !== 'function') {
       return new Error('Function type error')
     }
@@ -101,25 +101,17 @@ var once = function() {
       }
     }
 
-    console.log(121313)
-
     // 这个 fn 未被执行过，则执行
-    var argumentsArr = []
-    for (var i in arguments) {
-      if (i === 0) continue
-      argumentsArr.push(arguments[i])
-    }
-    var result = fn.apply(this, argumentsArr)
-
+    let result = fn(...args)
     // 将这个 fn 和执行的结果 result 用一个对象存储起来，并 push 到 hasRan 数组中
     hasRan.push({
+      result,
       func: fn,
-      result: result
     })
 
     return result
   }
-}()
+})()
 
 once(test1)
 once(test1)

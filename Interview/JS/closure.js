@@ -95,7 +95,9 @@ for (i = 0; i < 5; i++) {
 }
 
 Promise.all(tasks).then(() => {
+  console.log('start')
   setTimeout(() => {
+    console.log('final')
     console.log(new Date, i)
   }, 1000)
 })
