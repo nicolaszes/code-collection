@@ -59,3 +59,24 @@ new Promise(resolve => {
 console.log(8)
 
 // 1, 8, 2, 3, 6, 7
+
+
+const p = Promise.resolve('p')
+const e = () => {
+  console.log('e')
+  throw new Error('e')
+}
+const b = (err) => {
+  console.log('b')
+  return Promise.resolve('b')
+}
+const c = () => Promise.resolve('c')
+const f = (err) => {
+  console.log('f')
+  return Promise.resolve('f')
+}
+
+p.then(e, b).then(c, f).catch(err => {
+  console.log('err')
+})
+// p, e, f --end

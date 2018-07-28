@@ -36,7 +36,7 @@ function ajax(params) {
         params.error && params.error({
           message: '超时'
         })
-      }, params.time)
+      }, time)
     }
   }
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<style type="text/css">
+		html,body,header,div,main,p,span,ul,li{ margin: 0; padding: 0; }
+		#refreshContainer li{ background-color: #eee; margin-bottom: 1px; padding: 20px 10px; }
+		.refreshText{ position: absolute; width: 100%; line-height: 50px; text-align: center; left: 0; top: 0; }
+	</style>
+</head>
+<body>
+    <form method="get" autocomplete="on">
+      First name: <input type="text" name="fname" /><br />
+      Last name: <input type="text" name="lname" /><br />
+      E-mail: <input type="email" name="email" autocomplete="off" /><br />
+      <input 
+        type="text" 
+        name="country_code" 
+        pattern="[A-z]{3}" 
+        title="Three letter country code"
+        required="required"
+      />
+      <input type="submit" />
+    </form>
+
+  <script type="text/javascript">
+    const form = document.getElementById('form')
+    // form.onsubmit = function () {
+    //   console.log('onsubmit')
+    // }
+    // form.onreset = function () {
+    //   console.log('onsubmit')
+    // }
+	</script>
+</body>
+</html>
