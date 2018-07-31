@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add Event Listener</title>
+</head>
+<body>
+  <ul>
+    <li data-name="myname">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</body>
+<script>
+  var ulNode = document.getElementsByTagName('ul')[0]
+  ulNode.addEventListener('click', function (e) {
+    /**
+     * 1.nodeName 属性：节点的名字。
+     * 如果节点是元素节点，那么返回这个元素的名字。此时，相当于tagName属性。比如<p>aaaa</p>  : 则返回 p 
+     * 如果是属性节点，nodeName将返回这个属性的名字。
+     * 如果是文本节点，nodeName将返回一个#text的字符串。
+     */
+
+    /**
+     * 2.nodeType 属性 ： 返回一个整数，代表这个节点的类型。
+     * 我们常用的3中类型：
+     * nodeType == 1  ： 元素节点
+     * nodeType == 2  ： 属性节点
+     * nodeType == 3  ： 文本节点
+     */
+
+    /**
+     * 3.nodeValue 属性 ： 返回一个字符串，这个节点的值。
+     * 如果节点是元素节点，那么返回null；（注意下）
+     * 如果是属性节点，nodeValue将返回这个属性的值。
+     * 如果是文本节点，nodeValue将返回这个文本节点的内容。
+     */
+    if (e.target && e.target.nodeName.toUpperCase() == 'LI') {
+      const { nodeName, nodeType, nodeValue, innerHTML } = e.target
+      console.log('elementNode:', nodeName, nodeType, nodeValue, innerHTML)
+    }
+
+    if (e.target.getAttributeNode('data-name')) {
+      const { nodeName, nodeType, nodeValue, innerHTML } = e.target.getAttributeNode('data-name')
+      console.log('attributeNode:', nodeName, nodeType, nodeValue, innerHTML)
+    }
+
+    if (e.target.firstChild) {
+      const { nodeName, nodeType, nodeValue, innerHTML } = e.target.firstChild
+      console.log('textNode:', nodeName, nodeType, nodeValue, innerHTML)
+    }
+  }, false)
+</script>
+</html>

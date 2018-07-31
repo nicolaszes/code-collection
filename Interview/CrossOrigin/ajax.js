@@ -54,10 +54,10 @@ function ajax(params) {
     // 监听事件，只要 readyState 的值变化，就会调用 readystatechange 事件 
     xhr.onreadystatechange = function () {
       //  readyState属性表示请求/响应过程的当前活动阶段，4为完成，已经接收到全部响应数据
-      if (xhr.readyState == 4) {
+      if (xhr.readyState === 4) {
         var status = xhr.status
         //  status：响应的HTTP状态码，以2开头的都是成功
-        if (status >= 200 && status < 300 && status === 304) {
+        if ((status >= 200 && status < 300) || status === 304) {
           var response = ''
           // 判断接受数据的内容类型  
           var type = xhr.getResponseHeader('Content-Type')

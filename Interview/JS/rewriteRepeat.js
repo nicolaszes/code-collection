@@ -11,11 +11,12 @@ var repeat = function (target, n) {
 }
 
 // edition 3
-var repeat = (function (target, n) {
-  var join = Array.prototype.join, obj = {}
+var repeat = (function () {
+  var join = Array.prototype.join, 
+  obj = {};
   return function (target, n) {
     obj.length = n + 1
-    return Array.prototype.join.call(obj, target)
+    return join.call(obj, target)
   }
 })()
 

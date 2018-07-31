@@ -30,9 +30,7 @@ function zyEs6AssignPolyfill() {
             continue
           }
 
-          var keysArray = Object.keys(Object(nextSource))
-          for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
-            var nextKey = keysArray[nextIndex]
+          for (var nextKey in Object(nextSource)) {
             var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey)
             if (desc !== undefined && desc.enumerable) {
               to[nextKey] = nextSource[nextKey]

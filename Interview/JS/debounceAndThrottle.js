@@ -23,7 +23,7 @@ const debounce = (fn, delay) => {
 
     // 重新设置事件触发的定时器
     timer = setTimeout(() => {
-      fn.apply(this, args)
+      fn(...args)
       timer = null
     }, delay)
   }
