@@ -19,11 +19,10 @@
       return obj
     },
     set: function (newValue) {
-      document.getElementById('txt').value = newValue
       document.getElementById('show-txt').innerHTML = newValue
     }
   })
-  document.addEventListener('keyup', function (e) {
+  document.getElementById('txt').addEventListener('keyup', function (e) {
     obj.txt = e.target.value
   })
 </script>

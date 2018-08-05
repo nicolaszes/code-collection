@@ -5,41 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fly</title>
-  <style media="screen">
-    #main,#left,#right{
-      height: 200px;
-      float: left;
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
     }
-    #main-wrap{
+    .fly--main, .fly--left, .fly--right {
+      float: left;
+      min-height: 100px;
+    }
+    .fly__wrap {
       margin: 0 100px;
     }
-    #main{
+    .fly--main {
       width: 100%;
-      background: pink;
+      background-color: skyblue;
     }
-    #left{
-      background: blue;
-      width: 100px;
-      margin-left: -100%;
+    .fly--left {
       position: relative;
+      margin-left: -100%;
       left: 100px;
-    }
-    #right{
       width: 100px;
-      margin-right: -100px;
-      background: green;
+      background-color: aquamarine;
+    }
+    .fly--right {
+      width: 100px;
+      background-color: aquamarine;
     }
   </style>
 </head>
 <body>
-  <!-- 缺点：多了一个 DOM节点 -->
-  <section class="layout ued">
+  <section class="layout grail">
     <h1>双飞翼布局</h1>
-    <div id="content">
-      <div id="main-wrap"><div id="main"></div></div>
-      <div id="left"></div>
-      <div id="right"></div>
+    <div class="fly">
+      <div class="fly__wrap">
+        <div class="fly--main">公元1279年南宋亡国，蒙元入主中原。信仰长生天的蒙元朝廷一开始摸不清白莲教的虚实，竟然允许其公开传播。这个时候的白莲教已经在思想和组织上达到了完全成熟的状态，在贯穿整个南宋朝的国战中，转为军户的教徒们又得到了充分的实战锻炼，其内部由茅子元制定的师徒传承制又足以确保这些珍贵的组织和军事知识能够代代传习。</div>
+      </div>
+      <div class="fly--left"></div>
+      <div class="fly--right"></div>
     </div>
-  </section>
+    </section>
 </body>
 </html>

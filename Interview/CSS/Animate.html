@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .animate-container {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .animate-container .animate {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: skyblue;
+    animation: mymove .6s ease-in-out .3s 10 alternate;
+  }
+
+  @keyframes mymove {
+    from {
+      top: 0;
+      left: 0;
+      transform: scale(1) rotate(0);
+    }
+    50% {
+      top: 10vh;
+    }
+    to {
+      top: calc(100vh - 100px);
+      left: calc(100vw - 100px);
+      transform: scale(2) rotate(360deg);
+    }
+  }
+</style>
+<style>
+  .js-animate {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+  }
+</style>
+
+<body>
+  <div class="animate-container">
+    <!-- <div class="animate"></div> -->
+    <div class="js-animate" id="js-animate"></div>
+  </div>
+  <script>
+    //兼容性处理
+    window.requestAnimFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+          window.setTimeout(callback, 1000 / 60)
+        }
+    })()
+
+    var e = document.getElementById('js-animate')
+    var flag = true
+    var left = 0
+
+    function render() {
+      if (left === 0) {
+        flag = true
+      } else {
+        left == 200 ? flag = false : ''
+      }
+      // left == 0 
+      //   ? flag = true 
+      //   : left == 200 ? flag = false : ''
+      flag 
+        ? e.style.left = `${left++}px`
+        : e.style.left = `${left--}px`
+      flag 
+        ? e.style.top = `${1 / 2 * left++}px`
+        : e.style.top = `${1 / 2 * left--}px`
+    }
+
+    (function animloop() {
+      render()
+      requestAnimFrame(animloop)
+    })()
+  </script>
+</body>
+
+</html>
