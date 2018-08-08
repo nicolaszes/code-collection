@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>offSet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      /* offset 是相对 position */
+      /* position: relative;  */
+      overflow-y: scroll;
+      height: 300px;
+      margin: 100px;
+    }
+    .bound {
+      padding: 100px;
+      height: 1000px;
+      background-color: skyblue;
+    }
+    .offset {
+      height: 100px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="bound"></div>
+  </div>
+  <script>
+    const bound = document.getElementsByClassName('bound')[0]
+    const wrapper = document.getElementsByClassName('wrapper')[0]
+
+    console.log(bound.getBoundingClientRect())
+    console.log(bound.offsetLeft)
+  </script>
+</body>
+</html>

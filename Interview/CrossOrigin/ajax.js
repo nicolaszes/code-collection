@@ -5,7 +5,10 @@ function ajax(params) {
   // 判断是ajax请求还是jsonp请求
   var json = params.jsonp ? jsonp(params) : json(params)
 
-  // jsonp请求   
+  /**
+   * jsonp请求
+   * 动态添加一个<script>标签，而script标签的src属性是没有跨域的限制的
+   */
   function jsonp(params) {
     // 设置传递给后台的回调参数名
     var callbackName = params.jsonp
