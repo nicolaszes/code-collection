@@ -7,7 +7,7 @@
  * getUserId 返回一个 promise,
  * 可以通过它的 then方法注册一个在 promise异步操作成功时执行的回调
  */
-function getUserId () {
+function getUserId() {
   return new Promise(resolve => {
     http.get(url, function (result) {
       resolve(result.id)
@@ -27,16 +27,16 @@ getUserId().then(res => {
  * 参数 value，代表异步操作返回的结果，当异步操作执行成功后，用户回调用 resolve方法，
  * 这是真正执行操作的是将 callbacks队列中的回调一一执行
  */
-function Promise2 (fn) {
+function Promise2(fn) {
   var value = null,
-      callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
+    callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
 
   // 注册 then之后的回调函数
   this.then = function (onFulfilled) {
     callbacks.push(onFulfilled)
   }
 
-  function resolve (value) {
+  function resolve(value) {
     callbacks.forEach(function (callback) {
       callback(value)
     })
@@ -58,10 +58,10 @@ this.then = function (onFulfilled) {
  * 如果 then方法注册回调之前，resolve函数就执行了
  * 例如 promise内部的函数是同步函数
  */
-function resolve (value) {
+function resolve(value) {
   // 通过 setTimeout机制，将 resolve中执行回调的逻辑， 放到 JS任务队列末尾
   // 以保证 resolve执行时，then方法的回调函数已经注册完成
-  setTimeout (function () {
+  setTimeout(function () {
     callbacks.forEach(function (callback) {
       callback(value)
     })
@@ -72,10 +72,10 @@ function resolve (value) {
  * 加入状态: pending, fulfilled, rejected
  * resolve 执行时会将状态设置为 fulfilled，此后调用 then添加的新回调，都会立即执行
  */
-function Promise2 (fn) {
+function Promise2(fn) {
   var state = 'pending'
   value = null,
-  callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
+    callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
 
   // 注册 then之后的回调函数
   this.then = function (onFulfilled) {
@@ -88,7 +88,7 @@ function Promise2 (fn) {
     return this
   }
 
-  function resolve (newValue) {
+  function resolve(newValue) {
     value = newValue
     state = 'fulfilled'
     callbacks.forEach(function (callback) {
@@ -108,7 +108,7 @@ function Promise2 (fn) {
  *
  */
 this.then = function (onFulfilled) {
-  return new Promise2( function (resolve) {
+  return new Promise2(function (resolve) {
     handle({
       onFulfilled: onFulfilled || null,
       resolve: resolve,
@@ -116,7 +116,7 @@ this.then = function (onFulfilled) {
   })
 }
 
-function handle (callback) {
+function handle(callback) {
   if (state === 'pending') {
     callbacks.push(callback)
     return
@@ -132,7 +132,7 @@ function handle (callback) {
   callback.resolve(ret)
 }
 
-function resolve (newValue) {
+function resolve(newValue) {
   if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
     var then = newValue.then
     if (typeof newValue === 'function') {
@@ -143,7 +143,7 @@ function resolve (newValue) {
 
   state = 'fulfilled'
   value = newValue
-  setTimeout (function () {
+  setTimeout(function () {
     callbacks.forEach(function (callback) {
       callback(value)
     })
@@ -155,7 +155,7 @@ function resolve (newValue) {
  * rejected 和 error
  */
 this.then = function (onFulfilled, onRejected) {
-  return new Promise2 (function (resolve, reject) {
+  return new Promise2(function (resolve, reject) {
     handle({
       onFulfilled: onFulfilled,
       onRejected: onRejected,
@@ -165,7 +165,7 @@ this.then = function (onFulfilled, onRejected) {
   })
 }
 
-function handle (callback) {
+function handle(callback) {
   if (state === 'pending') {
     callbacks.push(callback)
     return
@@ -183,7 +183,7 @@ function handle (callback) {
   callback.resolve(ret)
 }
 
-function resolve (newValue) {
+function resolve(newValue) {
   if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
     var then = newValue.then
     if (typeof newValue === 'function') {
@@ -197,14 +197,14 @@ function resolve (newValue) {
   execute()
 }
 
-function reject (reason) {
+function reject(reason) {
   state = 'rejected'
   value = reason
   execute()
 }
 
-function execute () {
-  setTimeout (function () {
+function execute() {
+  setTimeout(function () {
     callbacks.forEach(function (callback) {
       callback(value)
     })
@@ -221,7 +221,7 @@ fn(resolve, reject)
  *
  * 如果在异步操作中，多次执行 resolve或者 reject会重复处理后续回调，可以通过内置一个标志位解决
  */
-function handle (callback) {
+function handle(callback) {
   if (state === 'pending') {
     callbacks.push(callback)
     return

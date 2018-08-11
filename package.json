@@ -1,0 +1,27 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "some code piece that i collect",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "prettier": "prettier config --write \"src/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolaszs/Practice.git"
+  },
+  "keywords": [
+    "code",
+    "collection"
+  ],
+  "author": "nicolas zes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolaszs/Practice/issues"
+  },
+  "homepage": "https://github.com/nicolaszs/Practice#readme",
+  "dependencies": {
+    "prettier": "^1.14.2"
+  }
+}

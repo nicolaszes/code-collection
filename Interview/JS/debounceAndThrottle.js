@@ -18,13 +18,11 @@ const debounce = (fn, delay) => {
     // 当持续触发事件时，若发现事件触发的定时器已设置时，则清除之前的定时器
     if (timer) {
       clearTimeout(timer)
-      timer = null
     }
 
     // 重新设置事件触发的定时器
     timer = setTimeout(() => {
       fn(...args)
-      timer = null
     }, delay)
   }
 
