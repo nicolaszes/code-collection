@@ -13,24 +13,24 @@
  * 代理对象自身没有存储该属性，它只是简单的将值转发给 target对象
  * proxy.name === target.name
  */
-let target = {}
-let proxy = new Proxy(target, {})
+let target = {};
+let proxy = new Proxy(target, {});
 
-proxy.name = 'proxy'
-console.log(proxy.name)
-console.log(target.name)
+proxy.name = "proxy";
+console.log(proxy.name);
+console.log(target.name);
 
-target.name = 'target'
-console.log(proxy.name)
-console.log(target.name)
+target.name = "target";
+console.log(proxy.name);
+console.log(target.name);
 
 /**
  *
  */
-let target = { 
-  name: 'target', 
-  value: 42,
-}
+let target = {
+  name: "target",
+  value: 42
+};
 let proxy = new Proxy(target, {
   /**
    * 使用 set陷阱函数验证属性值
@@ -45,12 +45,12 @@ let proxy = new Proxy(target, {
     // 忽略已有属性，避免影响他们
     if (!trapTarget.hasOwnProperty(key)) {
       if (isNaN(value)) {
-        throw new TypeError('Property must be a number.')
+        throw new TypeError("Property must be a number.");
       }
     }
 
     // 添加属性
-    return Reflect.set(trapTarget, key, value, receiver)
+    return Reflect.set(trapTarget, key, value, receiver);
   },
   /**
    * 使用 get陷阱函数进行对象外形验证
@@ -60,10 +60,10 @@ let proxy = new Proxy(target, {
    */
   get(trapTarget, key, receiver) {
     if (!(key in receiver)) {
-      throw new TypeError("Property " + key + " doesn't exist.")
+      throw new TypeError("Property " + key + " doesn't exist.");
     }
 
-    return Reflect.get(trapTarget, key, receiver)
+    return Reflect.get(trapTarget, key, receiver);
   },
   /**
    * 使用 has陷阱函数隐藏属性
@@ -72,10 +72,10 @@ let proxy = new Proxy(target, {
    */
   has(trapTarget, key) {
     // 隐藏 key === 'value'的属性
-    if (key === 'value') {
-      return false
+    if (key === "value") {
+      return false;
     }
-    return Reflect.has(trapTarget, key)
+    return Reflect.has(trapTarget, key);
   },
   /**
    * 使用 deleteProperty陷阱函数避免属性被删除
@@ -85,10 +85,10 @@ let proxy = new Proxy(target, {
    * @param {*} key 
    */
   deleteProperty(trapTarget, key) {
-    if (key === 'value') {
-      return false
+    if (key === "value") {
+      return false;
     }
-    return Reflect.deleteProperty(trapTarget, key)
+    return Reflect.deleteProperty(trapTarget, key);
   },
   /**
    * 代理陷阱内却必须使用 Reflect 对象上的方法
@@ -102,23 +102,23 @@ let proxy = new Proxy(target, {
    */
   getPrototypeOf(trapTarget) {
     // return null
-    return Reflect.getPrototypeOf(trapTarget)
+    return Reflect.getPrototypeOf(trapTarget);
   },
   setPrototypeOf(trapTarget) {
     // return false
-    return Reflect.setPrototypeOf(trapTarget, proto)
+    return Reflect.setPrototypeOf(trapTarget, proto);
   },
-  
+
   /**
    * 对象可扩展的陷阱函数
    * @param {*} trapTarget 
    */
-  isExtensible (trapTarget) {
-    return Reflect.isExtensible(trapTarget)
+  isExtensible(trapTarget) {
+    return Reflect.isExtensible(trapTarget);
   },
-  preventExtensions (trapTarget) {
+  preventExtensions(trapTarget) {
     // return false
-    return Reflect.preventExtensions(trapTarget)
+    return Reflect.preventExtensions(trapTarget);
   },
   /**
    * defineProperty
@@ -126,12 +126,12 @@ let proxy = new Proxy(target, {
    * @param {*} key 
    * @param {*} descriptor 
    */
-  defineProperty (trapTarget, key, descriptor) {
+  defineProperty(trapTarget, key, descriptor) {
     // 阻止 Object.defineProperty，当 key === 'symbol'
-    if (typeof key === 'symbol') {
-      return false
+    if (typeof key === "symbol") {
+      return false;
     }
-    return Reflect.defineProperty(trapTarget, key, descriptor)
+    return Reflect.defineProperty(trapTarget, key, descriptor);
   },
   /**
    * getOwnPropertyDescriptor
@@ -141,23 +141,23 @@ let proxy = new Proxy(target, {
    * @param {*} trapTarget 
    * @param {*} key 
    */
-  getOwnPropertyDescriptor (trapTarget, key) {
+  getOwnPropertyDescriptor(trapTarget, key) {
     return {
-      name: 'proxy'
-    }
-    return Reflect.getOwnPropertyDescriptor(trapTarget, key)
+      name: "proxy"
+    };
+    return Reflect.getOwnPropertyDescriptor(trapTarget, key);
   },
   /**
    * ownKeys 返回一个数组或者一个类数组对象，不合要求的返回值会导致错误
    * @param {*} trapTarget 
    */
-  ownKeys (trapTarget) {
+  ownKeys(trapTarget) {
     return Reflect.ownKeys(trapTarget).filter(key => {
-      return typeof key !== 'string' || key[0] !== '_'
-    })
-  },
-})
+      return typeof key !== "string" || key[0] !== "_";
+    });
+  }
+});
 
 // 添加一个新属性
-proxy.count = 1
-console.log(proxy.count)
+proxy.count = 1;
+console.log(proxy.count);

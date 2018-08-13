@@ -20,38 +20,39 @@
  */
 
 function parseUrl(url) {
-  var result = {}
+  var result = {};
   var keys = [
-    'href',
-    'origin',
-    'protocol',
-    'host',
-    'hostname',
-    'port',
-    'pathname',
-    'search',
-    'hash'
-  ]
-  var regexp = /(([^:]+:)\/\/(([^:\/\?#]+)(:\d+)?))(\/[^?#]*)?(\?[^#]*)?(#.*)?/
+    "href",
+    "origin",
+    "protocol",
+    "host",
+    "hostname",
+    "port",
+    "pathname",
+    "search",
+    "hash"
+  ];
+  var regexp = /(([^:]+:)\/\/(([^:\/\?#]+)(:\d+)?))(\/[^?#]*)?(\?[^#]*)?(#.*)?/;
 
-  var match = regexp.exec(url)
-  console.info('match=', match)
+  var match = regexp.exec(url);
+  console.info("match=", match);
 
   if (match) {
     for (var i = keys.length - 1; i >= 0; --i) {
-      result[keys[i]] = match[i] ? match[i] : ''
+      result[keys[i]] = match[i] ? match[i] : "";
     }
   }
-  console.info('result=', result)
-  return result
+  console.info("result=", result);
+  return result;
 }
 
-parseUrl("http://test.com:8080?name=1&password=2#page1")
+parseUrl("http://test.com:8080?name=1&password=2#page1");
 
 /**
  * 作者：饭妖精
  * 链接：https://juejin.im/post/5aab72fd518825188038af9b
  */
 
-let numberREG = /(?<=\b(?<!\.)\d*)\B(?=(\d{3})+(?=\b))/g
-(1234567.1234567).toString().replace(numberREG, ',')
+let numberREG = /(?<=\b(?<!\.)\d*)\B(?=(\d{3})+(?=\b))/g(1234567.1234567)
+  .toString()
+  .replace(numberREG, ",");

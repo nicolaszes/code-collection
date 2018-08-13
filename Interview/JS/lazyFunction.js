@@ -8,31 +8,30 @@
  * 污染了全局变量，每次调用都需要进行一次判断
  */
 var t;
-function foo () {
+function foo() {
   if (t) return t;
   t = new Date();
-  return t
+  return t;
 }
 
 /*
  * 闭包
  * 每次调用都会判断一次
  */
-var foo = (function () {
+var foo = (function() {
   var t;
-  return function () {
+  return function() {
     if (t) return t;
     t = new Date();
-    return t
-  }
-})()
-
+    return t;
+  };
+})();
 
 /*
  * 函数对象
  * 每次调用都会判断一次
  */
-function foo () {
+function foo() {
   if (foo.t) return foo.t;
   foo.t = new Date();
   return foo.t;
@@ -41,38 +40,35 @@ function foo () {
 /*
  * 惰性函数
  */
-var foo = function () {
+var foo = function() {
   var t = new Date();
-  foo = function () {
+  foo = function() {
     return t;
-  }
-  return foo()
-}
-
+  };
+  return foo();
+};
 
 /*
  * 应用
  */
 // 简化写法
-  function addEvent (type, el, fn) {
-    if (window.addEventListener) {
-      el.addEventListener(type, fn, false);
-    }
-    else if(window.attachEvent){
-      el.attachEvent('on' + type, fn);
-    }
+function addEvent(type, el, fn) {
+  if (window.addEventListener) {
+    el.addEventListener(type, fn, false);
+  } else if (window.attachEvent) {
+    el.attachEvent("on" + type, fn);
   }
+}
 
 // 利用惰性函数，我们可以这样做：
-function addEvent (type, el, fn) {
+function addEvent(type, el, fn) {
   if (window.addEventListener) {
-    addEvent = function (type, el, fn) {
+    addEvent = function(type, el, fn) {
       el.addEventListener(type, fn, false);
-    }
-  }
-  else if(window.attachEvent){
-    addEvent = function (type, el, fn) {
-    el.attachEvent('on' + type, fn);
-    }
+    };
+  } else if (window.attachEvent) {
+    addEvent = function(type, el, fn) {
+      el.attachEvent("on" + type, fn);
+    };
   }
 }

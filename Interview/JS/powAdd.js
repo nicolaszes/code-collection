@@ -5,21 +5,25 @@
  */
 
 function add(n) {
-  let sum = [n]
+  let sum = [n];
 
   function powAdd(m) {
-    sum.push(m)
-    powAdd.value = sum.map(item => Math.pow(item, 2)).reduce((pre, next) => pre + next)
-    return powAdd
+    sum.push(m);
+    powAdd.value = sum
+      .map(item => Math.pow(item, 2))
+      .reduce((pre, next) => pre + next);
+    return powAdd;
   }
 
-  powAdd.value = sum.map(item => Math.pow(item, 2)).reduce((pre, next) => pre + next)
-  return powAdd
+  powAdd.value = sum
+    .map(item => Math.pow(item, 2))
+    .reduce((pre, next) => pre + next);
+  return powAdd;
 }
 
-add(1).value
-add(1)(2).value
-add(1)(2)(3).value
+add(1).value;
+add(1)(2).value;
+add(1)(2)(3).value;
 
 /**
  * add(1)(2)(3); // 6
@@ -33,18 +37,18 @@ add(1)(2)(3).value
  * addTwo(3)(5); // 10
  */
 const add = n => {
-  const f = x => add(n + x)
-  f.valueOf = () => n
-  return f
-}
+  const f = x => add(n + x);
+  f.valueOf = () => n;
+  return f;
+};
 
-function add (n) {
-  function func (x) {
-    console.log(n, x, n + x)
-    return add(n + x)
+function add(n) {
+  function func(x) {
+    console.log(n, x, n + x);
+    return add(n + x);
   }
-  func.valueOf = function () {
-    return n
-  }
-  return func
+  func.valueOf = function() {
+    return n;
+  };
+  return func;
 }

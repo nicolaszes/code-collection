@@ -9,7 +9,9 @@ function matchSelector(ele, selector) {
   }
   // if use class
   if (selector.charAt(0) === ".") {
-    return (" " + ele.className + " ").indexOf(" " + selector.slice(1) + " ") != -1;
+    return (
+      (" " + ele.className + " ").indexOf(" " + selector.slice(1) + " ") != -1
+    );
   }
   // if use tagName
   return ele.tagName.toLowerCase() === selector.toLowerCase();
@@ -35,6 +37,6 @@ function delegateEvent(interfaceEle, selector, type, fn) {
 
 //调用
 var odiv = document.getElementById("oDiv");
-delegateEvent(odiv, "a", "click", function () {
+delegateEvent(odiv, "a", "click", function() {
   alert("1");
-})
+});

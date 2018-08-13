@@ -17,72 +17,74 @@ function zyEs6AssignPolyfill() {
       enumerable: false,
       configurable: true,
       writable: true,
-      value: function (target) {
-        "use strict"
+      value: function(target) {
+        "use strict";
         if (target === undefined || target === null) {
-          throw new TypeError("Cannot convert first argument to object")
+          throw new TypeError("Cannot convert first argument to object");
         }
 
-        var to = Object(target)
+        var to = Object(target);
         for (var i = 1; i < arguments.length; i++) {
-          var nextSource = arguments[i]
+          var nextSource = arguments[i];
           if (nextSource === undefined || nextSource === null) {
-            continue
+            continue;
           }
 
           for (var nextKey in Object(nextSource)) {
-            var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey)
+            var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
             if (desc !== undefined && desc.enumerable) {
-              to[nextKey] = nextSource[nextKey]
+              to[nextKey] = nextSource[nextKey];
             }
           }
         }
-        return to
+        return to;
       }
-    })
+    });
   }
 }
 
-let _extends = Object.assign || function (target) {
-  for (let i = 1; i < arguments.length; i++) {
-    let source = arguments[i]
-    for (let key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key]
+let _extends =
+  Object.assign ||
+  function(target) {
+    for (let i = 1; i < arguments.length; i++) {
+      let source = arguments[i];
+      for (let key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
       }
     }
-  }
-  return target
-}
+    return target;
+  };
 
 function deepExtend() {
-  var obj1 = arguments[0]
-  var obj2 = arguments[1]
+  var obj1 = arguments[0];
+  var obj2 = arguments[1];
   //存放结果对象
-  var resObj = {}
-  if (typeof (obj1) != 'object' || typeof (obj2) != 'object') {
-    throw Error('must be an object')
+  var resObj = {};
+  if (typeof obj1 != "object" || typeof obj2 != "object") {
+    throw Error("must be an object");
   }
   //遍历obj1的所有属性
   for (var i in obj1) {
     //如果对象2里面有对象1的这个属性则继承过来,否则resObj放obj1[i]
     if (obj2.hasOwnProperty(i)) {
-      if (typeof (obj1[i]) == 'object') {
+      if (typeof obj1[i] == "object") {
         //如果obj1[i]是一个对象，那么递归调用这个方法，并把resObj[i]的属性设置为结果
-        resObj[i] = deepExtend(obj1[i], obj2[i])
+        resObj[i] = deepExtend(obj1[i], obj2[i]);
       } else {
-        resObj[i] = obj2[i]
+        resObj[i] = obj2[i];
       }
     } else {
-      resObj[i] = obj1[i]
+      resObj[i] = obj1[i];
     }
   }
 
   for (var j in obj2) {
     //上一步已经把obj1和obj2共有的属性全替换为obj2的属性，所以这里只需把obj1里不具有的obj2的属性复制即可
     if (!obj1.hasOwnProperty(j)) {
-      resObj[j] = obj2[j]
+      resObj[j] = obj2[j];
     }
   }
-  return resObj
+  return resObj;
 }

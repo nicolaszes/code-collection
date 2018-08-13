@@ -4,10 +4,10 @@
 Object.defineProperty(CustomHTMLElement.prototype, "html", {
   enumerable: false,
   configurable: true,
-  get: function () {
+  get: function() {
     return this.element.innerHTML;
   },
-  set: function (value) {
+  set: function(value) {
     this.element.innerHTML = value;
   }
-})
+});

@@ -3,13 +3,13 @@
  * 若干个指定的参数值的前提下调用某个函数或方法
  */
 var foo = {
-  value: 1,
-}
+  value: 1
+};
 
 function bar() {
-  console.log(this.value)
+  console.log(this.value);
 }
-bar.call(foo)
+bar.call(foo);
 
 /*
  * step one
@@ -19,41 +19,41 @@ bar.call(foo)
  */
 var foo = {
   value: 1,
-  bar: function () {
-    console.log(this.value)
+  bar: function() {
+    console.log(this.value);
   }
-}
-foo.bar()
+};
+foo.bar();
 
-Function.prototype.call2 = function (context) {
+Function.prototype.call2 = function(context) {
   // 获取调用 call的函数
   context.fn = this;
   context.fn();
-  delete context.fn
-}
+  delete context.fn;
+};
 // 测试一下
 var foo = {
-  value: 1,
-}
+  value: 1
+};
 
 function bar() {
-  console.log(this.value)
+  console.log(this.value);
 }
-bar.call2(foo)
+bar.call2(foo);
 
 /*
  * step two
  */
-Function.prototype.call2 = function (context) {
+Function.prototype.call2 = function(context) {
   context.fn = this;
   var args = [];
   for (var i = 0; i < arguments.length; i++) {
-    args.push('arguments[' + i + ']');
+    args.push("arguments[" + i + "]");
   }
-  console.log(args)
-  eval('context.fn(' + args + ')');
-  delete context.fn
-}
+  console.log(args);
+  eval("context.fn(" + args + ")");
+  delete context.fn;
+};
 
 // 测试一下
 var foo = {
@@ -61,36 +61,36 @@ var foo = {
 };
 
 function bar(name, age) {
-  console.log(name)
-  console.log(age)
+  console.log(name);
+  console.log(age);
   console.log(this.value);
 }
 
-bar.call2(foo, 'kevin', 18);
+bar.call2(foo, "kevin", 18);
 
 /*
  * step two
  */
-Function.prototype.call2 = function (context) {
+Function.prototype.call2 = function(context) {
   var context = context || window;
   context.fn = this;
 
   var args = [];
   for (var i = 0; i < arguments.length; i++) {
-    args.push('arguments[' + i + ']');
+    args.push("arguments[" + i + "]");
   }
 
-  var result = eval('context.fn(' + args + ')');
+  var result = eval("context.fn(" + args + ")");
   delete context.fn;
   return result;
-}
+};
 
 // 测试一下
 var value = 2;
 
 var obj = {
   value: 1
-}
+};
 
 function bar(name, age) {
   console.log(this.value);
@@ -98,16 +98,16 @@ function bar(name, age) {
     value: this.value,
     name: name,
     age: age
-  }
+  };
 }
 
 bar.call(null); // 2
-console.log(bar.call2(obj, 'kevin', 18));
+console.log(bar.call2(obj, "kevin", 18));
 
 /*
  * apply的模拟实现
  */
-Function.prototype.apply = function (context, arr) {
+Function.prototype.apply = function(context, arr) {
   var context = object(context) || window;
   context.fn = this;
 
@@ -117,11 +117,11 @@ Function.prototype.apply = function (context, arr) {
   } else {
     var args = [];
     for (var i = 0; i < arr.length; i++) {
-      args.push('arr[' + i + ']');
+      args.push("arr[" + i + "]");
     }
-    result = eval('context.fn(' + args + ')');
+    result = eval("context.fn(" + args + ")");
   }
 
   delete context.fn;
   return result;
-}
+};

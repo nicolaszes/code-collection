@@ -23,6 +23,7 @@
     height: 100px;
     background-color: skyblue;
     animation: mymove .6s ease-in-out .3s 10 alternate;
+    animation: mymove .6s steps(4) .3s 10 alternate;
   }
 
   @keyframes mymove {
@@ -52,7 +53,7 @@
 
 <body>
   <div class="animate-container">
-    <!-- <div class="animate"></div> -->
+    <div class="animate"></div>
     <div class="js-animate" id="js-animate"></div>
   </div>
   <script>

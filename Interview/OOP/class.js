@@ -29,7 +29,8 @@ let PersonClass = (function() {
       if (typeof new.target !== 'undefined') {
         throw new Error('不可使用关键字 new调用构造函数')
       }
-      console.log(this.name)
+      // console.log(this.name)
+      return this.name
     },
     enumerable: false,
     writable: true,
