@@ -1,3 +1,7 @@
+/**
+ * Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+ * 软件实体（类，模块，方法等等）应当对扩展开放，对修改关闭，即软件实体应当在不修改的前提下扩展。
+ */
 function questionCreator(spec, my) {
   var that = {};
 

@@ -111,10 +111,11 @@ var event = {
     if ( !fn ){    // 如果没有传入具体的回调函数，表示需要取消key对应消息的所有订阅
       fns && ( fns.length = 0 );
     } else {
-    for ( var l = fns.length - 1; l >=0; l-- ){    // 反向遍历订阅的回调函数列表
-      var _fn = fns[ l ];
-      if ( _fn === fn ){
-        fns.splice( l, 1 );    // 删除订阅者的回调函数
+      for ( var l = fns.length - 1; l >=0; l-- ){    // 反向遍历订阅的回调函数列表
+        var _fn = fns[ l ];
+        if ( _fn === fn ){
+          fns.splice( l, 1 );    // 删除订阅者的回调函数
+        }
       }
     }
   }
