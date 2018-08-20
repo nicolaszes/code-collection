@@ -108,3 +108,6 @@ Function.prototype.bind2 = function(context) {
   fBound.prototype = new fNOP();
   return fBound;
 };
+
+const A = (a, b) => a + b
+const B = (a, b, c) => a + b + c

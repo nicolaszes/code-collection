@@ -1,0 +1,37 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/grid/grid",
+        "pages/mine/mine",
+        "pages/makeOrder/makeOrder",
+        
+        "pages/addNewPhone/addNewPhone",
+        "pages/grid/appointment/appointment",
+        "pages/shopListPage/shopListPage",
+        "pages/shopDetail/shopDetail",
+        "pages/grid/listDisplay/listDisplay",
+        "pages/grid/search/search",
+        "pages/grid/complete/complete",
+        "pages/searchShop/searchShop",
+        "pages/productDetail/productDetail",
+        "pages/payComplete/payComplete",
+        "pages/mine/myAppointment/myAppointment",
+        "pages/mine/myFavorite/myFavorite",
+        "pages/grid/gridDetail/gridDetail",
+        "pages/userCenter/userCenter",
+        "pages/showImages/showImages",
+        "pages/financial/financial",
+        "pages/financial/financialDetail/financialDetail",
+        "pages/userCenter/bindPhone/bindPhone",
+        "pages/grid/gridDetail/activityList/activityList",
+        "pages/grid/gridDetail/financialProduct/financialProduct",
+        "pages/grid/gridDetail/activityDetail/activityDetail",
+        "pages/productImage/productImage"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#0dac89",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "white"
+    }
+}

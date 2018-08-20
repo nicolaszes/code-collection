@@ -1,0 +1,25 @@
+{
+  "name": "watchWxMiniApp",
+  "version": "1.0.0",
+  "description": "##  一些小重点",
+  "main": "app.configTmpl.js",
+  "dependencies": {
+    "art-template": "^4.12.1",
+    "copy-dir": "^0.3.0",
+    "lodash": "^4.17.4",
+    "q": "^1.5.0",
+    "shell": "^0.3.2"
+  },
+  "devDependencies": {
+    "chokidar": "^1.7.0",
+    "colors": "^1.1.2",
+    "shelljs": "^0.7.8"
+  },
+  "scripts": {
+    "start": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
