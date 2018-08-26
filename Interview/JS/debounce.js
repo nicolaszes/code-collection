@@ -28,31 +28,36 @@ const debounce = (fn, delay) => {
   return debounceFunc;
 };
 
-/**
- * 节流，当触发事件时，保证隔一段时间触发一次事件
- * 合并一段时间内的事件，并在该时间结束时真正的去触发一次事件
- */
-const throttle = (fn, delay) => {
-  // 记录上次触发事件
-  let previous = Date.now();
-  const throttleFunc = (...args) => {
-    let now = Date.now();
-    // 本次事件触发与上一次的时间比较
-    let diff = now - previous - delay;
 
-    // 如果间隔时间超过设定时间，即再次设置事件触发的定时器
-    if (diff >= 0) {
-      // 更新最近事件触发的时间
-      previous = now;
-      setTimeout(() => fn(...args), delay);
-    }
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+_.debounce = function (func, wait, immediate) {
+  var timeout, result;
+
+  var later = function (context, args) {
+    timeout = null;
+    if (args) result = func.apply(context, args);
   };
 
-  throttleFunc.run = () => console.log("run");
+  var debounced = restArguments(function (args) {
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      var callNow = !timeout;
+      timeout = setTimeout(later, wait);
+      if (callNow) result = func.apply(this, args);
+    } else {
+      timeout = _.delay(later, wait, this, args);
+    }
 
-  return throttleFunc;
+    return result;
+  });
+
+  debounced.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+
+  return debounced;
 };
-
-window.resize = throttle(() => {
-  console.log(123);
-}, 1000);

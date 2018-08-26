@@ -1,0 +1,19 @@
+<!-- 埋点阶段(create script element) -->
+<!-- 
+    在页面的下端，往往插入一小段js代码，即我们的“埋点”，
+    如上所示，“埋点”中的全局数组，用于收集该页面中需要被回传的用户行为，
+    比如：域名、ip、url、搜索的内容、常按的按钮名称…… 
+-->
+<script type="text/javascript">
+    var _maq = _maq || [];
+    // 多维数组
+    _maq.push(['_setAccount', 'uuid']);
+    (function () {
+        var ma = document.createElement('script');
+        ma.type = 'text/javascript';
+        ma.async = true;
+        ma.src = "http://localhost:8091/data/js/ma.js";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ma, s);
+    })();
+</script>
