@@ -1,0 +1,21 @@
+{
+  "name": "next-demo",
+  "version": "1.0.0",
+  "description": "next demo",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build",
+    "dev": "NODE_ENV=dev node server.js",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "author": "nicolas_zes",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "next": "^6.1.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  }
+}
