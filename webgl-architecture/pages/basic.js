@@ -1,13 +1,13 @@
 import * as THREE from 'three'
 import * as React from 'react'
-import * as dat from 'dat.gui'
+// import * as dat from 'dat.gui'
 
 import Stats from '../utils/stats'
 import './index.less'
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom)
+// document.body.appendChild(stats.dom)
 
 // create a scene, that will hold all our elements such as object, cameras and lights
 const scene = new THREE.Scene()
@@ -80,18 +80,19 @@ soptLight.position.set(-40, 60, -10)
 soptLight.castShadow = true
 scene.add(soptLight)
 
-document.body.appendChild(renderer.domElement);
+// document.body.appendChild(renderer.domElement);
 // renderer.render(scene, camera);
 
 let step = 0
 
-const controls = new function () {
+function Controls () {
   this.rotationSpeed = 0.02
   this.bouncingSpeed = 0.03
 }
-const gui = new dat.GUI()
-gui.add(controls, 'rotationSpeed', 0, 0.5)
-gui.add(controls, 'bouncingSpeed', 0, 0.5)
+const controls = new Controls()
+// const gui = new dat.GUI()
+// gui.add(controls, 'rotationSpeed', 0, 0.5)
+// gui.add(controls, 'bouncingSpeed', 0, 0.5)
 
 renderScene()
 

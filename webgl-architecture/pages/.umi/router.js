@@ -19,6 +19,11 @@ let routes = [
     "component": require('../basic.js').default
   },
   {
+    "path": "/components",
+    "exact": true,
+    "component": require('../components.js').default
+  },
+  {
     "path": "/",
     "exact": true,
     "component": require('../index.js').default
