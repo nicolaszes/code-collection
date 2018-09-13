@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<style type="text/css">
+		html,body,header,div,main,p,span,ul,li{ margin: 0; padding: 0; }
+		#refreshContainer li{ background-color: #eee; margin-bottom: 1px; padding: 20px 10px; }
+		.refreshText{ position: absolute; width: 100%; line-height: 50px; text-align: center; left: 0; top: 0; }
+	</style>
+</head>
+<body>
+  <div id="video-container">
+    <video id="video" width="375" height="210">
+      <source src="https://1256993030.vod2.myqcloud.com/d520582dvodtransgzp1256993030/7732bd367447398157015849771/v.f30.mp4">
+      <p>
+        Your browser doesn't support HTML5 video.
+        <a href="videos/mikethefrog.mp4">Download</a> the video instead.
+      </p>
+    </video>
+    <div id="video-controls">
+      <button type="button" id="play-pause">Play</button>
+      <input type="range" id="seek-bar" value="0">
+      <button type="button" id="mute">Mute</button>
+      <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="1">
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      // Video
+      var video = document.getElementById("video");
+
+      // Buttons
+      var playButton = document.getElementById("play-pause");
+      var muteButton = document.getElementById("mute");
+
+      // Sliders
+      var seekBar = document.getElementById("seek-bar");
+      var volumeBar = document.getElementById("volume-bar");
+
+      // Event listener for the play/pause button
+      playButton.addEventListener("click", function() {
+        if (video.paused == true) {
+          // Play the video
+          video.play();
+
+          // Update the button text to 'Pause'
+          playButton.innerHTML = "Pause";
+        } else {
+          // Pause the video
+          video.pause();
+
+          // Update the button text to 'Play'
+          playButton.innerHTML = "Play";
+        }
+      });
+
+      // Event listener for the mute button
+      muteButton.addEventListener("click", function() {
+        if (video.muted == false) {
+          // Mute the video
+          video.muted = true;
+
+          // Update the button text
+          muteButton.innerHTML = "Unmute";
+        } else {
+          // Unmute the video
+          video.muted = false;
+
+          // Update the button text
+          muteButton.innerHTML = "Mute";
+        }
+      });
+
+      // Event listener for the seek bar
+      seekBar.addEventListener("change", function() {
+        // Calculate the new time
+        var time = video.duration * (seekBar.value / 100);
+
+        // Update the video time
+        video.currentTime = time;
+      });
+
+      // Event listener for the volume bar
+      volumeBar.addEventListener("change", function() {
+        // Update the video volume
+        video.volume = volumeBar.value;
+      });
+    }
+  </script>
+</body>
+</html>

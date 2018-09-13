@@ -3,7 +3,8 @@
 # dependencies
 node_modules
 
-mysql.js
+SQL
+yarn.lock
 
 # testing
 /coverage
