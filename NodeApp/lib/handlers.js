@@ -507,7 +507,6 @@ handlers._checks.get = function(data,callback){
         // Get the token that sent the request
         var token = typeof(data.headers.token) == 'string' ? data.headers.token : false;
         // Verify that the given token is valid and belongs to the user who created the check
-        console.log("This is check data",checkData);
         handlers._tokens.verifyToken(token,checkData.userPhone,function(tokenIsValid){
           if(tokenIsValid){
             // Return check data
