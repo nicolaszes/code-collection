@@ -5,12 +5,39 @@
 
 // Dependencies
 var http = require('http');
+var https = require('https');
 var url = require('url');
 var StringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
+var fs = require('fs');
 
- // Configure the server to respond to all requests with a string
-var server = http.createServer(function(req,res){
+
+ // Instantiate the HTTP server
+var httpServer = http.createServer(function(req,res){
+  unifiedServer(req,res);
+});
+
+// Start the HTTP server
+httpServer.listen(config.httpPort,function(){
+  console.log('The HTTP server is running on port '+config.httpPort);
+});
+
+// Instantiate the HTTPS server
+var httpsServerOptions = {
+  'key': fs.readFileSync('./https/key.pem'),
+  'cert': fs.readFileSync('./https/cert.pem')
+};
+var httpsServer = https.createServer(httpsServerOptions,function(req,res){
+  unifiedServer(req,res);
+});
+
+// Start the HTTPS server
+httpsServer.listen(config.httpsPort,function(){
+ console.log('The HTTPS server is running on port '+config.httpsPort);
+});
+
+// All the server logic for both the http and https server
+var unifiedServer = function(req,res){
 
   // Parse the url
   var parsedUrl = url.parse(req.url, true);
@@ -70,12 +97,7 @@ var server = http.createServer(function(req,res){
       });
 
   });
-});
-
-// Start the server
-server.listen(config.port,function(){
-  console.log('The server is up and running on port '+config.port+' in '+config.envName+' mode.');
-});
+};
 
 // Define all the handlers
 var handlers = {};
