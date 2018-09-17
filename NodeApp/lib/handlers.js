@@ -11,12 +11,38 @@ var config = require('./config');
 // Define all the handlers
 var handlers = {};
 
+/*
+ * HTML Handlers
+ *
+ */
+
+// Index Handler
+handlers.index = function(data,callback){
+  // Reject any request that isn't a GET
+  if(data.method == 'get'){
+    // Read in a template as a string
+    helpers.getTemplate('index',function(err,str){
+      if(!err && str){
+        callback(200,str,'html');
+      } else {
+        callback(500,undefined,'html')
+      }
+    });
+    // Return that template as HTML
+  } else {
+    callback(405,undefined,'html');
+  }
+};
+
+
+/*
+ * JSON API Handlers
+ *
+ */
+
 // Ping
 handlers.ping = function(data,callback){
-  setTimeout(function(){
     callback(200);
-  },5000);
-
 };
 
 // Not-Found
