@@ -17,17 +17,11 @@ var server = http.createServer(function(req,res){
   var path = parsedUrl.pathname;
   var trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
-  // Get the query string as an object
-  var queryStringObject = parsedUrl.query;
-
-  // Get the HTTP method
-  var method = req.method.toLowerCase();
-
   // Send the response
   res.end('Hello World!\n');
 
   // Log the request/response
-  console.log('Request received on path: '+trimmedPath+' with method: '+method+' and this query string: ',queryStringObject);
+  console.log('Request received on path: '+trimmedPath);
 });
 
 // Start the server
