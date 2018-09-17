@@ -13,7 +13,10 @@ var fs = require('fs');
 var handlers = require('./lib/handlers');
 var helpers = require('./lib/helpers');
 
- // Instantiate the HTTP server
+helpers.sendTwilioSms('15601878721', 'hello', (err) => {
+  console.log('sendTwilioSms', err)
+})
+// Instantiate the HTTP server
 var httpServer = http.createServer(function(req,res){
   unifiedServer(req,res);
 });
