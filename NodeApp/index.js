@@ -92,8 +92,7 @@ var unifiedServer = function(req,res){
         res.setHeader('Content-Type', 'application/json');
         res.writeHead(statusCode);
         res.end(payloadString);
-        console.log("Returning this response: ",statusCode,payloadString);
-
+        console.log(trimmedPath,statusCode);
       });
 
   });
@@ -102,17 +101,17 @@ var unifiedServer = function(req,res){
 // Define all the handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data,callback){
-    callback(406,{'name':'sample handler'});
+// Ping handler
+handlers.ping = function(data,callback){
+    callback(200);
 };
 
-// Not found handler
+// Not-Found handler
 handlers.notFound = function(data,callback){
   callback(404);
 };
 
 // Define the request router
 var router = {
-  'sample' : handlers.sample
+  'ping' : handlers.ping
 };
