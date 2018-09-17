@@ -13,7 +13,10 @@ var handlers = {};
 
 // Ping
 handlers.ping = function(data,callback){
+  setTimeout(function(){
     callback(200);
+  },5000);
+
 };
 
 // Not-Found
