@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "format-code": "prettier --config ./.prettierrc.js --write \"Interview/JS/*.js\""
+    "format": "prettier --config ./.prettierrc.js --write \"Interview/JS/*.js\""
   },
   "repository": {
     "type": "git",
