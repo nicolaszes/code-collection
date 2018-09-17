@@ -80,7 +80,7 @@ lib.update = function(dir,file,data,callback){
             } else {
               callback('Error writing to existing file');
             }
-          });
+          });  
         } else {
           callback('Error truncating file');
         }
