@@ -52,7 +52,15 @@ parseUrl("http://test.com:8080?name=1&password=2#page1");
  * 作者：饭妖精
  * 链接：https://juejin.im/post/5aab72fd518825188038af9b
  */
-
-let numberREG = /(?<=\b(?<!\.)\d*)\B(?=(\d{3})+(?=\b))/g(1234567.1234567)
+let numberREG = /(?<=\b(?<!\.)\d*)\B(?=(\d{3})+(?=\b))/g;
+(1234567.1234567)
   .toString()
   .replace(numberREG, ",");
+
+
+const searchReg = location.search.match(/(([^\?\=&]+)\=([^\?\=&]*))/g);
+(searchReg || []).map(item => {
+  return {
+    [item.split('=')[0]]: item.split('=')[1]
+  }
+})
