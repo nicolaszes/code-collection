@@ -1,121 +1,145 @@
-// Dependecies
-const http = require('http')
-const https = require('https')
-const url = require('url')
-const { StringDecoder } = require('string_decoder')
-const path = require('path')
-const config = require('./config')
-const fs = require('fs')
-const handlers = require('./handlers')
-const helpers = require('./helpers')
-const util = require('util')
-const debug = util.debuglog('server')
+/*
+ * Server-related tasks
+ *
+ */
 
-const server = {}
+ // Dependencies
+ var http = require('http');
+ var https = require('https');
+ var url = require('url');
+ var StringDecoder = require('string_decoder').StringDecoder;
+ var config = require('./config');
+ var fs = require('fs');
+ var handlers = require('./handlers');
+ var helpers = require('./helpers');
+ var path = require('path');
+ var util = require('util');
+ var debug = util.debuglog('server');
 
-// Instantiate the HTTP server
-server.httpServer = http.createServer((req, res) => {
-  server.unifiedServer(req, res)
-})
 
-// Instantiate the HTTPS 
+// Instantiate the server module object
+var server = {};
+
+ // Instantiate the HTTP server
+server.httpServer = http.createServer(function(req,res){
+   server.unifiedServer(req,res);
+ });
+
+ // Instantiate the HTTPS server
 server.httpsServerOptions = {
-  'key': fs.readFileSync(path.join(__dirname, '/../https/key.pem')),
-  'cert': fs.readFileSync(path.join(__dirname, '/../https/cert.pem'))
-}
-server.httpsServer = https.createServer(server.httpsServerOptions, (req, res) => {
-  server.unifiedServer(req, res)
-})
+   'key': fs.readFileSync(path.join(__dirname,'/../https/key.pem')),
+   'cert': fs.readFileSync(path.join(__dirname,'/../https/cert.pem'))
+ };
+ server.httpsServer = https.createServer(server.httpsServerOptions,function(req,res){
+   server.unifiedServer(req,res);
+ });
 
-server.unifiedServer = (req, res) => {
-  const parseUrl = url.parse(req.url, true)
-  const path = parseUrl.pathname
-  const method = req.method.toLowerCase()
-  const trimmedPath = path.replace(/^\/+|\/+$/g, '')
-  const queryStringObject = parseUrl.query
-  const headers = req.headers
+ // All the server logic for both the http and https server
+server.unifiedServer = function(req,res){
 
-  const decoder = new StringDecoder('utf-8')
-  let buffer = ''
+   // Parse the url
+   var parsedUrl = url.parse(req.url, true);
 
-  req.on('data', (data) => {
-    buffer += decoder.write(data)
-  })
-  req.on('end', () => {
-    buffer += decoder.end()
+   // Get the path
+   var path = parsedUrl.pathname;
+   var trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
-    let chosenHandler = typeof(server.router[trimmedPath]) !== 'undefined' 
-      ? server.router[trimmedPath] 
-      : handlers.notFound
+   // Get the query string as an object
+   var queryStringObject = parsedUrl.query;
 
-    // If the request is within the public directory use to the public handler instead
-    chosenHandler = trimmedPath.indexOf('public/') > -1 ? handlers.public : chosenHandler
+   // Get the HTTP method
+   var method = req.method.toLowerCase();
 
-    const data = {
-      'trimmedPath' : trimmedPath,
-      'queryStringObject' : queryStringObject,
-      'method' : method,
-      'headers' : headers,
-      'payload' : helpers.parseJsonToObject(buffer)
-    }
+   //Get the headers as an object
+   var headers = req.headers;
 
-    chosenHandler(data, (statusCode, payload, contentType) => {
-      // Determine the type of response (fallback to JSON)
-      contentType = typeof(contentType) == 'string' ? contentType : 'json';
+   // Get the payload,if any
+   var decoder = new StringDecoder('utf-8');
+   var buffer = '';
+   req.on('data', function(data) {
+       buffer += decoder.write(data);
+   });
+   req.on('end', function() {
+       buffer += decoder.end();
 
-      statusCode = typeof(statusCode) === 'number' ? statusCode : 200
+       // Check the router for a matching path for a handler. If one is not found, use the notFound handler instead.
+       var chosenHandler = typeof(server.router[trimmedPath]) !== 'undefined' ? server.router[trimmedPath] : handlers.notFound;
 
-      let payloadString = ''
-      if(contentType == 'json'){
-        res.setHeader('Content-Type', 'application/json')
-        payload = typeof(payload) == 'object'? payload : {}
-        payloadString = JSON.stringify(payload)
-      }
+       // If the request is within the public directory use to the public handler instead
+       chosenHandler = trimmedPath.indexOf('public/') > -1 ? handlers.public : chosenHandler;
 
-      if(contentType == 'html'){
-        res.setHeader('Content-Type', 'text/html')
-        payloadString = typeof(payload) == 'string'? payload : ''
-      }
+       // Construct the data object to send to the handler
+       var data = {
+         'trimmedPath' : trimmedPath,
+         'queryStringObject' : queryStringObject,
+         'method' : method,
+         'headers' : headers,
+         'payload' : helpers.parseJsonToObject(buffer)
+       };
 
-      if(contentType == 'favicon'){
-        res.setHeader('Content-Type', 'image/x-icon')
-        payloadString = typeof(payload) !== 'undefined' ? payload : ''
-      }
+       // Route the request to the handler specified in the router
+       chosenHandler(data,function(statusCode,payload,contentType){
 
-      if(contentType == 'plain'){
-        res.setHeader('Content-Type', 'text/plain')
-        payloadString = typeof(payload) !== 'undefined' ? payload : ''
-      }
+         // Determine the type of response (fallback to JSON)
+         contentType = typeof(contentType) == 'string' ? contentType : 'json';
 
-      if(contentType == 'css'){
-        res.setHeader('Content-Type', 'text/css')
-        payloadString = typeof(payload) !== 'undefined' ? payload : ''
-      }
+         // Use the status code returned from the handler, or set the default status code to 200
+         statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
 
-      if(contentType == 'png'){
-        res.setHeader('Content-Type', 'image/png')
-        payloadString = typeof(payload) !== 'undefined' ? payload : ''
-      }
+         // Return the response parts that are content-type specific
+         var payloadString = '';
+         if(contentType == 'json'){
+           res.setHeader('Content-Type', 'application/json');
+           payload = typeof(payload) == 'object'? payload : {};
+           payloadString = JSON.stringify(payload);
+         }
 
-      if(contentType == 'jpg'){
-        res.setHeader('Content-Type', 'image/jpeg')
-        payloadString = typeof(payload) !== 'undefined' ? payload : ''
-      }
+         if(contentType == 'html'){
+           res.setHeader('Content-Type', 'text/html');
+           payloadString = typeof(payload) == 'string'? payload : '';
+         }
 
-      res.writeHead(statusCode)
-      res.end(payloadString)
+         if(contentType == 'favicon'){
+           res.setHeader('Content-Type', 'image/x-icon');
+           payloadString = typeof(payload) !== 'undefined' ? payload : '';
+         }
 
-      // if the response is 200, print green otherwise print red
-      if (statusCode === 200) {
-        debug('\x1b[32m%s\x1b[0m', method.toUpperCase()+' /' + trimmedPath + ' ' + statusCode)
-      } else {
-        debug('\x1b[31m%s\x1b[0m',method.toUpperCase()+' /'+trimmedPath+' '+statusCode);
-      }
-    })
-  })
-}
+         if(contentType == 'plain'){
+           res.setHeader('Content-Type', 'text/plain');
+           payloadString = typeof(payload) !== 'undefined' ? payload : '';
+         }
 
-// Define a request router
+         if(contentType == 'css'){
+           res.setHeader('Content-Type', 'text/css');
+           payloadString = typeof(payload) !== 'undefined' ? payload : '';
+         }
+
+         if(contentType == 'png'){
+           res.setHeader('Content-Type', 'image/png');
+           payloadString = typeof(payload) !== 'undefined' ? payload : '';
+         }
+
+         if(contentType == 'jpg'){
+           res.setHeader('Content-Type', 'image/jpeg');
+           payloadString = typeof(payload) !== 'undefined' ? payload : '';
+         }
+
+         // Return the response-parts common to all content-types
+         res.writeHead(statusCode);
+         res.end(payloadString);
+
+         // If the response is 200, print green, otherwise print red
+         if(statusCode == 200){
+           debug('\x1b[32m%s\x1b[0m',method.toUpperCase()+' /'+trimmedPath+' '+statusCode);
+         } else {
+           debug('\x1b[31m%s\x1b[0m',method.toUpperCase()+' /'+trimmedPath+' '+statusCode);
+         }
+       });
+
+   });
+ };
+
+ // Define the request router
 server.router = {
   '' : handlers.index,
   'account/create' : handlers.accountCreate,
@@ -132,18 +156,21 @@ server.router = {
   'api/checks' : handlers.checks,
   'favicon.ico' : handlers.favicon,
   'public' : handlers.public
-}
+};
 
-server.init = () => {
-  // start the http server
-  server.httpServer.listen(config.httpPort, () => {
-    console.log('\x1b[36m%s\x1b[0m', 'The server is up and running on port '+config.httpPort+' in '+config.envName+' mode.')
-  })
+ // Init script
+server.init = function(){
+  // Start the HTTP server
+  server.httpServer.listen(config.httpPort,function(){
+    console.log('\x1b[36m%s\x1b[0m','The HTTP server is running on port '+config.httpPort);
+  });
 
-  server.httpsServer.listen(config.httpsPort, () => {
-    console.log('\x1b[35m%s\x1b[0m', 'The server is up and running on port '+config.httpsPort+' in '+config.envName+' mode.')
-    // console.log()
-  })
-}
+  // Start the HTTPS server
+  server.httpsServer.listen(config.httpsPort,function(){
+    console.log('\x1b[35m%s\x1b[0m','The HTTPS server is running on port '+config.httpsPort);
+  });
+};
 
-module.exports = server
+
+ // Export the module
+ module.exports = server;
