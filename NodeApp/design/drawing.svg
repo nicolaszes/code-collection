@@ -53,12 +53,12 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#217844;fill-opacity:1;stroke-width:0.26458332"
+       style="fill:#afc6e9;fill-opacity:1;stroke-width:0.26458332"
        id="rect10"
        width="281.97021"
        height="170.08928"
-       x="53.672607"
-       y="-9.1607132" />
+       x="-278.94644"
+       y="86.089287" />
     <path
        sodipodi:type="star"
        style="fill:#1a1a1a;fill-opacity:1;stroke-width:0.26458332"
@@ -78,47 +78,5 @@
        inkscape:transform-center-y="4.5150355"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
-    <rect
-       y="89.869049"
-       x="-150.43454"
-       height="170.08928"
-       width="281.97021"
-       id="rect842"
-       style="fill:#214478;fill-opacity:1;stroke-width:0.26458332" />
-    <rect
-       style="fill:#c83737;fill-opacity:1;stroke-width:0.26458332"
-       id="rect844"
-       width="281.97021"
-       height="170.08928"
-       x="66.523796"
-       y="98.940475" />
-    <rect
-       y="95.160713"
-       x="183.69641"
-       height="170.08928"
-       width="281.97021"
-       id="rect846"
-       style="fill:#d87070;fill-opacity:1;stroke-width:0.26458332" />
-    <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332"
-       id="rect848"
-       width="281.97021"
-       height="170.08928"
-       x="-264.58334"
-       y="245.59525" />
-    <rect
-       y="-40.154762"
-       x="180.67261"
-       height="170.08928"
-       width="281.97021"
-       id="rect850"
-       style="fill:#35c06d;fill-opacity:1;stroke-width:0.26458332" />
-    <rect
-       style="fill:#2e5fa8;fill-opacity:1;stroke-width:0.26458332"
-       id="rect852"
-       width="281.97021"
-       height="170.08928"
-       x="-69.547638"
-       y="89.869049" />
   </g>
 </svg>

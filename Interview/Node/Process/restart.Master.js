@@ -6,14 +6,14 @@ server.listen(1337)
 
 const workers = {}
 const createWorker = () => {
-  const worker = fork(__dirname + '/worker.js')
+  const worker = fork(__dirname + '/restart.Worker.js')
 
   // 退出时重新启动新的进程
-  worker.on('exit', () => {
-    console.log(`Worker ${worker.pid} exited`)
-    delete workers[worker.pid]
-    createWorker()
-  })
+  // worker.on('exit', () => {
+  //   console.log(`Worker ${worker.pid} exited`)
+  //   delete workers[worker.pid]
+  //   createWorker()
+  // })
 
   // 句柄转发
   worker.send('server', server)
