@@ -19,6 +19,7 @@ nodejs的线程管理
 nodejs如何require一个包
 nodejs加载原生的包与自己定义的包路径如何查找
 浏览器内存泄露，闭包内存泄露如何解决
+nodejs容灾
 
 websocket实现原理
 websocket的底层原理讲讲
