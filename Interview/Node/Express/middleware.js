@@ -38,7 +38,7 @@ function express() {
     var i = 0
 
     function next() {
-      var task = functions[i++]
+      var task = middlewares[i++]
       if (!task) {
         return
       }
@@ -48,7 +48,7 @@ function express() {
   }
 
   app.use = function (task) {
-    functions.push(task)
+    middlewares.push(task)
   }
 
   return app
