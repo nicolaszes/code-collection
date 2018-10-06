@@ -24,7 +24,6 @@ kut如何优化react的diff，有去提pr吗，为什么
 transition生命周期
 
 你对三大框架的理解是什么
-boostrap的底层原理
 redux和vuex的区别
 react和vue的区别，你开发如何选择技术栈
 vue react jquery比较，有测试过性能吗
