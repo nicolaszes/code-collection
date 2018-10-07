@@ -8,19 +8,32 @@
  * 节流，当触发事件时，保证隔一段时间触发一次事件
  * 合并一段时间内的事件，并在该时间结束时真正的去触发一次事件
  */
-const throttle = (fn, delay) => {
+const throttle = (fn, delay, type) => {
   // 记录上次触发事件
   let previous = Date.now();
+  let timeout;
+
   const throttleFunc = (...args) => {
     let now = Date.now();
     // 本次事件触发与上一次的时间比较
-    let diff = now - previous - delay;
-
     // 如果间隔时间超过设定时间，即再次设置事件触发的定时器
-    if (diff >= 0) {
-      // 更新最近事件触发的时间
-      previous = now;
-      setTimeout(() => fn(...args), delay);
+    // 其实时间戳版和定时器版的节流函数的区别就是，
+    // 时间戳版的函数触发是在时间段内开始的时候，
+    // 而定时器版的函数触发是在时间段内结束的时候。
+    if (type === 1) {
+      if (now - previous > delay) {
+        // 更新最近事件触发的时间
+        previous = now;
+        fn(...args);
+      }
+    } 
+    if(type === 2) {
+      if (!timeout) {
+        timeout = setTimeout(function() {
+          timeout = null;
+          fn(...args);
+        }, delay);
+      }
     }
   };
 
@@ -29,9 +42,7 @@ const throttle = (fn, delay) => {
   return throttleFunc;
 };
 
-window.resize = throttle(() => {
-  console.log(123);
-}, 1000);
+window.addEventListener('resize', throttle(() => { console.log(123) }, 1000))
 
 // Returns a function, that, when invoked, will only be triggered at most once
 // during a given window of time. Normally, the throttled function will run

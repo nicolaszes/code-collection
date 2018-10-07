@@ -10,7 +10,7 @@
  * 当一定时间内没有触发在执行这个事件
  */
 // https://segmentfault.com/a/1190000005926579
-const debounce = (fn, delay) => {
+const debounce = (fn, delay, immediate) => {
   let timer = null;
 
   const debounceFunc = (...args) => {
@@ -19,14 +19,32 @@ const debounce = (fn, delay) => {
       clearTimeout(timer);
     }
 
-    // 重新设置事件触发的定时器
-    timer = setTimeout(() => {
-      fn(...args);
-    }, delay);
+    // 触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数
+    if (immediate) {
+      if (!timer) {
+        fn(...args);
+      }
+      timer = setTimeout(() => {
+        timer = null;
+      }, delay);
+    } else {
+      // 重新设置事件触发的定时器
+      timer = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    }
+  }
+
+  debounceFunc.cancel = () => {
+    clearTimeout(timer);
+    timeout = null;
   };
 
   return debounceFunc;
 };
+
+// window.addEventListener('resize', debounce(() => {console.log(11111)}, 300, true))
+window.addEventListener('resize', debounce(() => {console.log(11111)}, 300, true).cancel())
 
 
 // Returns a function, that, as long as it continues to be invoked, will not
@@ -41,7 +59,7 @@ _.debounce = function (func, wait, immediate) {
     if (args) result = func.apply(context, args);
   };
 
-  var debounced = restArguments(function (args) {
+  var debounced = restArguments((args) => {
     if (timeout) clearTimeout(timeout);
     if (immediate) {
       var callNow = !timeout;
