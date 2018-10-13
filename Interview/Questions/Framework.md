@@ -26,7 +26,7 @@ transition生命周期
 你对三大框架的理解是什么
 redux和vuex的区别
 react和vue的区别，你开发如何选择技术栈
-vue react jquery比较，有测试过性能吗
+vue react jquery比较，有测试过性能吗 [js-framework-benchmark]
 jQuery原理，平时用jQuery都做过什么
 vue开发模式和jQuery模式有哪些不同，有哪些优缺点
 jQuery的源码看过没

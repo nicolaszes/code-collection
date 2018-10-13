@@ -20,7 +20,7 @@ nodejs的线程管理
 nodejs如何require一个包
 nodejs加载原生的包与自己定义的包路径如何查找
 浏览器内存泄露，闭包内存泄露如何解决
-nodejs容灾
+nodejs容灾 [forever, pm2]
 
 websocket实现原理
 websocket的底层原理讲讲
@@ -33,7 +33,7 @@ websocket协议，nodejs中有哪些实现了这个协议
 你遇到的最有难度的技术问题是什么
 
 登录原理
-token香港，浏览器缓存
+token香港
 你怎么样维持用户登录状态的
 session+cookie的登录机制
 cookie和session的区别和联系
