@@ -3,7 +3,7 @@
  * 
  * 类级别装饰器，修饰整个类，可以读取、修改类中任何属性和方法。
  */
-const classDecorator = (target: any) => {
+const classDecorator = (target) => {
   const keys = Object.getOwnPropertyNames(target.prototype)
   console.log('classA keys,', keys) // classA keys ["constructor", "sayName"]
 }
@@ -22,7 +22,7 @@ a.sayName() // classA ascoders
  * 
  * 方法级别装饰器，修饰某个方法，和类装饰器功能相同，但是能额外获取当前修饰的方法名。
  */
-const methodDecorator = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+const methodDecorator = (target, propertyKey, descriptor) => {
   return {
     get() {
       return () => {
@@ -47,12 +47,12 @@ c.sayName() // classC method override
  * 属性级别装饰器，修饰某个属性，和类装饰器功能相同，但是能额外获取当前修饰的属性名。
  * 目前标准尚未支持，通过 get set 模拟实现
  */
-const propertyDecorator = (target: any, propertyKey: string | symbol) => {
+const propertyDecorator = (target, propertyKey) => {
   Object.defineProperty(target, propertyKey, {
     get() {
       return 'github'
     },
-    set(value: any) {
+    set(value) {
       return value
     }
   })
@@ -60,7 +60,7 @@ const propertyDecorator = (target: any, propertyKey: string | symbol) => {
 
 class B {
   @propertyDecorator
-  private name = 'ascoders'
+  name = 'ascoders'
 
   sayName() {
     console.log(`classB ${this.name}`)

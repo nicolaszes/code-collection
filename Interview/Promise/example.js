@@ -109,3 +109,29 @@ new Promise(function(resolve){
   console.log('promise2')
 })
 console.log('script end')
+
+
+/**
+ * 执行顺序
+ */
+console.log(1)
+new Promise((resolve, reject) => {
+  console.log(2)
+  setTimeout(() => {
+    console.log(3)
+    resolve()
+    reject()
+  }, 10)
+
+  setTimeout(() => {
+    console.log(4)
+  })
+  console.log(9)
+}).then(() => {
+  console.log(5)
+}).then(() => {
+  console.log(6)
+}).catch(e => {
+  console.log(7)
+})
+console.log(8)
