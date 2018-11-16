@@ -30,3 +30,6 @@ upload.log
 
 src/*.css.map
 src/*.css
+
+# scrapy
+__pycache__
