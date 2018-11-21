@@ -55,7 +55,6 @@ new Promise(resolve => {
 }).then(() => {
   console.log(7)
 })
-
 console.log(8)
 
 // 1, 8, 2, 3, 6, 7
@@ -79,7 +78,7 @@ const f = (err) => {
 p.then(e, b).then(c, f).catch(err => {
   console.log('err')
 })
-// p, e, f --end
+// e, f --end
 
 
 /**
@@ -110,6 +109,7 @@ new Promise(function(resolve){
 })
 console.log('script end')
 
+// script start -> async1 start -> async2 -> promise1 -> script end -> async1 end -> promise2 -> setTimeout
 
 /**
  * 执行顺序
@@ -135,3 +135,4 @@ new Promise((resolve, reject) => {
   console.log(7)
 })
 console.log(8)
+// 1, 2, 9, 8, 4, 3, 5, 6
