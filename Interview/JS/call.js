@@ -76,7 +76,7 @@ Function.prototype.call2 = function(context) {
   context.fn = this;
 
   var args = [];
-  for (var i = 0; i < arguments.length; i++) {
+  for (var i = 1; i < arguments.length; i++) {
     args.push("arguments[" + i + "]");
   }
 
@@ -85,6 +85,24 @@ Function.prototype.call2 = function(context) {
   return result;
 };
 
+// 单元测试方法
+function ClassA(str, fn, obj, arr) { 
+  console.log(this.name); 
+  console.log(str);
+  fn();
+  console.log(obj);
+  console.log(arr);
+}
+
+var obj = { name: 'name' };
+
+ClassA.call(obj, 'string', function(){
+
+var fnStr = 'this is a string in function';
+
+console.log(fnStr) },
+
+{ color: 'red' }, [1, 2, 3]);
 // 测试一下
 var value = 2;
 
@@ -108,7 +126,7 @@ console.log(bar.call2(obj, "kevin", 18));
  * apply的模拟实现
  */
 Function.prototype.apply = function(context, arr) {
-  var context = object(context) || window;
+  var context = Object(context) || window;
   context.fn = this;
 
   var result;

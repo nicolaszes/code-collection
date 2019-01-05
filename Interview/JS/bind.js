@@ -31,6 +31,7 @@ Function.prototype.bind2 = function(context) {
   return function() {
     // 这个时候的arguments是指bind返回的函数传入的参数
     var bindArgs = Array.prototype.slice.call(arguments);
+    console.log(bindArgs)
     return self.apply(context, args.concat(bindArgs));
   };
 };

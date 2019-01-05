@@ -34,7 +34,7 @@ function run(gen) {
               // 成功就恢复异步循环，把决议的值发回生成器 handleNext
               // 如果 value是被拒绝的 Promise
               // 就把错误传回生成器进行出错处理
-              funtion handleError(err) {
+              function handleError(err) {
                 return Promise.resolve(it.throw(err))
                   .then(handleResult)
               }
@@ -47,7 +47,7 @@ function run(gen) {
 /**
  * 生成器中的 Promise并发
  */
-funtion *foo() {
+function *foo() {
   /**
    * 并非最优的
    * 两个请求是相互独立的，依次执行

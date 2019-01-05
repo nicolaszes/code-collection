@@ -36,7 +36,7 @@ function Child1 () {
   /**
    * 将父级构造函数的 this指向子构造函数的实例上去
    */
-  parent1.call(this) // apply，改变函数运行的上下文
+  Parent1.call(this) // apply，改变函数运行的上下文
   this.type = 'child1'
 }
 

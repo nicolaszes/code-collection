@@ -73,13 +73,13 @@ function resolve(value) {
  * resolve 执行时会将状态设置为 fulfilled，此后调用 then添加的新回调，都会立即执行
  */
 function Promise2(fn) {
-  var state = 'pending'
-  value = null,
-    callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
+  var state = 'pending',
+      value = null,
+      callbacks = [] // callbacks 为数组，因为可能同时有多个回调，(success => {}, error => {})
 
   // 注册 then之后的回调函数
   this.then = function (onFulfilled) {
-    if (this.state === 'pending') {
+    if (state === 'pending') {
       callbacks.push(onFulfilled)
       return this
     }

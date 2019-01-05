@@ -16,7 +16,7 @@
     receiveMessage: function (msg) {
       var bridgeName = msg.bridgeName,
           data = msg.data || {},
-          callbackId = msg.callbackId, // Native 将 callbackId 原封不动传回
+          callbackId = msg.callbackId; // Native 将 callbackId 原封不动传回
       // 具体逻辑
       // bridgeName 和 callbackId 不会同时存在
       if (callbackId) {

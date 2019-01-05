@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script>
+    let socket = io('http://localhost:8181', {
+      autoConnect: false
+    });
+    socket.open()
+    socket.on('connect', function () {
+      console.log('链接成功')
+
+      // 发射
+      socket.emit('events', {
+        name: 'ajanuw'
+      })
+
+      // 发射
+      socket.emit('events', {
+        name: 'alone'
+      })
+
+      // 发射
+      // socket.emit('identity', 0, (response) => console.log('Identity:', response));
+    });
+    
+    // 监听
+    socket.on('events', (data) => {
+      console.log(data.msg)
+      socket.close()
+    });
+
+    // socket.close()
+  </script>
+</html>
