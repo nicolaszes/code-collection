@@ -1,3 +1,41 @@
+interface Bird {
+  fly(): void
+  layEggs(): void
+}
+
+interface Fish {
+  swim(): void
+  layEggs(): void
+}
+
+function getSmallPet(): Fish | Bird {
+  // ...
+  return
+}
+
+let pet = getSmallPet()
+pet.layEggs() // okay
+// pet.swim()    // errors
+
+// 每一个成员访问都会报错
+if ((<Fish>pet).swim) {
+  (<Fish>pet).swim()
+}
+else {
+  (<Bird>pet).fly()
+}
+
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (<Fish>pet).swim !== undefined
+}
+
+// 'swim' 和 'fly' 调用都没有问题了
+if (isFish(pet)) {
+  pet.swim()
+} else {
+  pet.fly()
+}
+
 interface User {
   nickname: string
   age: number
