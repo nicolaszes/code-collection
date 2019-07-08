@@ -75,3 +75,25 @@ function updateUserAgeGender(obj: UserAgeGender) {
 updateUser({ nickname: '' })
 
 updateUserAgeGender({ age: 12 })
+
+type Alias = { num: number }
+interface Interface {
+    num: number;
+}
+declare function aliased(arg: Alias): Alias;
+declare function interfaced(arg: Interface): Interface;
+
+function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
+  return names.map(n => o[n]);
+}
+
+interface Person {
+    name: string;
+    age: number;
+}
+let person: Person = {
+    name: 'Jarid',
+    age: 35
+};
+
+let strings: string[] = pluck(person, ['name']);
