@@ -23,6 +23,6 @@
   define
 ));
 
-function (factory) {
-  module.exports = factory();
-} 
+// function (factory) {
+//   module.exports = factory();
+// } 
