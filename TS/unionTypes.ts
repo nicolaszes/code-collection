@@ -97,3 +97,20 @@ let person: Person = {
 };
 
 let strings: string[] = pluck(person, ['name']);
+
+
+type FunPropNames<T> = ({
+  [K in keyof T]: T[K] extends Function ? K : never
+}[keyof T])
+
+type ConnectModule<T> = {
+  [K in FunPropNames<T>]:
+    T[K] extends (input: Promise<infer NT>) => Promise<Action <infer NU>>
+      ?
+      input<NT> => Action<NU> 
+      :
+      T[K] extends (action: Action <infer NU>) => Action <infer NU> 
+        ? (action: NT) => (Action<NU>)
+        : never
+
+}
