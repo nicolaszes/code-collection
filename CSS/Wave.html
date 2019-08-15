@@ -10,13 +10,14 @@
 <style>
   .wave {
     position: absolute;
-    top: calc((100% - 30px)/2);
-    left: calc((100% - 30px)/2);
-    width: 30px;
-    height: 30px;
+    top: calc((100% - 1px)/2);
+    left: calc((100% - 1px)/2);
+    width: 1px;
+    height: 1px;
     border-radius: 300px;
-    background-image: url('./wave.png');
-    /* background-attachment: fixed; */
+    /* background-image: url('./wave.png'); */
+    background-color: rgba(2, 112, 233, 0.15);
+    background-attachment: fixed;
     background-position: center center;
     background-size: 100px 100px;
   }
@@ -24,28 +25,28 @@
   .wave0 {
     z-index: 2;
     background-size: auto 106%;
-    animation: w 1s forwards;
+    animation: w 3s infinite forwards;
   }
 
   .wave1 {
     z-index: 3;
     background-size: auto 102%;
-    animation: w 1s .2s forwards;
+    animation: w 3s infinite .5s forwards;
   }
 
   .wave2 {
     z-index: 4;
     background-size: auto 104%;
-    animation: w 1s .4s forwards;
+    animation: w 3s infinite 1s forwards;
   }
 
   .wave3 {
     z-index: 5;
     background-size: auto 101%;
-    animation: w 1s .5s forwards;
+    animation: w 3s 1.5s forwards;
   }
 
-  .wave4 {
+  /* .wave4 {
     z-index: 6;
     background-size: auto 102%;
     animation: w 1s .8s forwards;
@@ -55,14 +56,14 @@
     z-index: 7;
     background-size: auto 100%;
     animation: w 1s 1s forwards;
-  }
+  } */
 
   @keyframes w {
     0% {
-      top: calc((100% - 30px)/2);
-      left: calc((100% - 30px)/2);
-      width: 30px;
-      height: 30px;
+      top: calc((100% - 1px)/2);
+      left: calc((100% - 1px)/2);
+      width: 1px;
+      height: 1px;
     }
 
     100% {
