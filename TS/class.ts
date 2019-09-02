@@ -5,10 +5,16 @@
  */
 abstract class Department {
   constructor(public name: string) { }
+
   printName(): void {
     console.log('Department name: ' + this.name);
   }
+
   abstract printMeeting(): void; // 必须在派生类中实现
+
+  public callIt(s: String): void {
+    throw new Error("This method is abstract!");
+  }
 }
 
 class AccountingDepartment extends Department {
@@ -23,6 +29,8 @@ class AccountingDepartment extends Department {
   generateReports(): void {
     console.log('Generating accounting reports...');
   }
+
+  callIt () {}
 }
 
 let department: Department; // 允许创建一个对抽象类型的引用
