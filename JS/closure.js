@@ -131,3 +131,76 @@ const sleep = time =>
   await sleep(1000);
   console.log(new Date(), i);
 })();
+
+
+var bar = {
+  myName:"time.geekbang.com",
+  printName: function () {
+      console.log(myName)
+  }
+}
+function foo() {
+  let myName = " 极客时间 "
+  return bar.printName
+}
+let myName = " 极客邦 "
+let _printName = foo()
+_printName()
+bar.printName()
+
+
+/**
+ * 这道题其实是个障眼法，只需要确定好函数调用栈就可以很轻松的解答
+ * 调用了foo()后，返回的是bar.printName，后续就跟foo函数没有关系了
+ * 所以结果就是调用了两次bar.printName()，根据词法作用域，结果都是“极客邦”，也不会形成闭包。
+ * 
+ * 闭包还可以这样理解：
+ * 当函数嵌套时，内层函数引用了外层函数作用域下的变量，并且内层函数在全局作用域下可访问时，就形成了闭包。
+ */
+
+
+// 全局执行上下文：
+// 变量环境：
+// Bar=undefined
+// Foo= function
+// 词法环境：
+// myname = undefined
+// _printName = undefined
+
+// 开始执行：
+// bar ={myname: "time.geekbang.com", printName: function(){...}}
+
+// myName = " 极客邦 "
+//  _printName = foo() 调用foo函数，压执行上下文入调用栈
+
+// foo函数执行上下文：
+// 变量环境： 空
+// 词法环境： myName=undefined
+// 开始执行：
+// myName = " 极客时间 "
+// return bar.printName
+// 开始查询变量bar， 查找当前词法环境（没有）->查找当前变量环境（没有） -> 查找outer词法环境（没有）-> 查找outer语法环境（找到了）并且返回找到的值
+// pop foo的执行上下文
+
+// _printName = bar.printName
+// printName（）压bar.printName方法的执行上下文入调用栈
+
+// bar.printName函数执行上下文：
+// 变量环境： 空
+// 词法环境： 空
+// 开始执行：
+// console.log(myName)
+// 开始查询变量myName， 查找当前词法环境（没有）->查找当前变量环境（没有） -> 查找outer词法环境（找到了）
+// 打印" 极客邦 "
+// pop bar.printName的执行上下文
+
+// bar.printName() 压bar.printName方法的执行上下文入调用栈
+
+// bar.printName函数执行上下文：
+// 变量环境： 空
+// 词法环境： 空
+// 开始执行：
+// console.log(myName)
+// 开始查询变量myName， 查找当前词法环境（没有）->查找当前变量环境（没有） -> 查找outer词法环境（找到了）
+// 打印" 极客邦 "
+// pop bar.printName的执行上下文
