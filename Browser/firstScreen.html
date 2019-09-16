@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>首屏</title>
+  <script type="text/javascript">
+    window.pageStartTime = Date.now();
+  </script>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+  <!-- 首屏可见模块1 -->
+  <div class="module-1"></div>
+  <!-- 首屏可见模块2 -->
+  <div class="module-2"></div>
+  <script type="text/javascript">
+    window.firstScreen = Date.now();
+  </script>
+  <!-- 首屏不可见模块3 -->
+  <div class="module-3"></div>
+  <!-- 首屏不可见模块4 -->
+  <div class="module-4"></div>
+</body>
+<!-- 
+  首屏时间等于 firstScreen - performance.timing.navigationStart;
+ -->
+</html>
