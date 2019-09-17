@@ -7,11 +7,13 @@ const helloInLang = {
 
 export const greeting = {
   sayHello: function (lang) {
-      return helloInLang[lang];
+    return helloInLang[lang];
   }
 };
 
 // file hello.js
-import { greeting } from "./lib/greeting";
+import {
+  greeting
+} from "./lib/greeting";
 const phrase = greeting.sayHello("en");
 document.write(phrase);

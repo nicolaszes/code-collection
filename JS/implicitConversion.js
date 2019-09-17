@@ -8,7 +8,7 @@ if (a == 1 && a == 2 && a == 3) {
  */
 var a = {
   i: 1,
-  toString: function () {
+  toString () {
     return a.i++
   }
 }
