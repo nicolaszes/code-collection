@@ -7,6 +7,11 @@
  * 如果不是，说明此修改来自子组件，触发warning提示。
  */
 
+/**
+ * 浅度监听
+ * 基本数据类型，子组件修改父组件传的props会警告
+ * 如果传入的是引用数据类型，那么修改改引用数据类型的某个属性值时，对应的props也会修改，并且vue不会爆警告。
+ */
 if (process.env.NODE_ENV !== 'production') {
   var hyphenatedKey = hyphenate(key);
   if (isReservedAttribute(hyphenatedKey) ||
@@ -28,3 +33,9 @@ if (process.env.NODE_ENV !== 'production') {
     }
   });
 }
+/**
+ * 需要特别注意的是，当你从子组件修改的prop属于基础类型时会触发提示。
+ * 这种情况下，你是无法修改父组件的数据源的， 因为基础类型赋值时是值拷贝。
+ * 你直接将另一个非基础类型（Object, array）赋值到此key时也会触发提示(但实际上不会影响父组件的数据源)，
+ * 当你修改object的属性时不会触发提示，并且会修改父组件数据源的数据。
+ */
