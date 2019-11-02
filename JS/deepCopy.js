@@ -12,7 +12,9 @@ console.log(new_arr);
 /*
  * 嵌套了对象或者数组
  */
-var arr = [{ old: "old" }, 1, true, null, undefined];
+var arr = [{
+  old: "old"
+}, 1, true, null, undefined];
 var new_arr = arr.concat();
 new_arr[0].old = "new";
 console.log(arr);
@@ -22,18 +24,20 @@ console.log(new_arr);
  * 深拷贝的实现方式
  * 方法缺陷是，不能拷贝函数
  */
-var arr = ["old", 1, true, ["old1", "old2"], { old: 1 }];
+var arr = ["old", 1, true, ["old1", "old2"], {
+  old: 1
+}];
 var new_arr = JSON.parse(JSON.stringify(arr));
 new_arr[4].old = 4;
 console.log(arr);
 console.log(new_arr);
 
 var arr = [
-  function() {
+  function () {
     console.log(a);
   },
   {
-    b: function() {
+    b: function () {
       console.log(b);
     }
   }
@@ -45,7 +49,7 @@ console.log(new_arr);
 /*
  * 浅拷贝的实现
  */
-var shallowCopy = function(obj) {
+var shallowCopy = function (obj) {
   // 只拷贝对象
   if (typeof obj !== "object") return;
   // 根据 obj的类型判断是新建一个数组还是对象
@@ -62,7 +66,7 @@ var shallowCopy = function(obj) {
 /*
  * 深拷贝的实现
  */
-var deepCopy = function(obj) {
+var deepCopy = function (obj) {
   // 只拷贝对象
   if (typeof obj !== "object") return;
   // 根据 obj的类型判断是新建一个数组还是对象
@@ -73,7 +77,11 @@ var deepCopy = function(obj) {
   return newObj;
 };
 
-var arr = ["old", 1, true, ["old1", "old2"], { old: { new: 1 } }];
+var arr = ["old", 1, true, ["old1", "old2"], {
+  old: {
+    new: 1
+  }
+}];
 var new_arr = JSON.parse(JSON.stringify(arr));
 new_arr[4].old.new = 4;
 console.log(arr);
@@ -108,7 +116,7 @@ console.log(newObj)
 let a = {
   age: undefined,
   sex: Symbol('male'),
-  jobs: function() {},
+  jobs: function () {},
   name: 'yck'
 }
 let b = JSON.parse(JSON.stringify(a))
@@ -118,14 +126,17 @@ console.log(b) // {name: "yck"}
 // 如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用 MessageChannel
 function structuralClone(obj) {
   return new Promise(resolve => {
-    const {port1, port2} = new MessageChannel();
+    const {
+      port1,
+      port2
+    } = new MessageChannel();
     port2.onmessage = ev => resolve(ev.data);
     port1.postMessage(obj);
   });
 }
 
 var obj = {
-  a: 1, 
+  a: 1,
   b: {
     c: b
   }
