@@ -80,14 +80,29 @@ const mapTag = '[object Map]';
 const setTag = '[object Set]';
 const arrayTag = '[object Array]';
 const objectTag = '[object Object]';
+const argsTag = '[object Arguments]';
 
 const boolTag = '[object Boolean]';
 const dateTag = '[object Date]';
-const errorTag = '[object Error]';
 const numberTag = '[object Number]';
-const regexpTag = '[object RegExp]';
 const stringTag = '[object String]';
 const symbolTag = '[object Symbol]';
+const errorTag = '[object Error]';
+const regexpTag = '[object RegExp]';
+const funcTag = '[object Function]';
+
+const deepTag = [mapTag, setTag, arrayTag, objectTag, argsTag]
+
+// 通用 while 循环
+function forEach(array, iteratee) {
+  let index = -1;
+
+  const length = array.length;
+  while (++index < length) {
+    iteratee(array[index], index);
+  }
+  return array;
+}
 
 // 合理的判断引用类型
 function isObject(target) {
@@ -100,55 +115,124 @@ function getType(target) {
   return Object.prototype.toString.call(target);
 }
 
+
+// 初始化被克隆对象
 function getInit(target) {
   const Ctor = target.constructor;
   return new Ctor();
 }
 
-function deepCopy(target, map = new WeakMap()) {
+// 克隆 Symbol类型
+function cloneSymbol(targe) {
+  return Object(Symbol.prototype.valueOf.call(targe));
+}
+
+// 克隆正则
+function cloneReg(targe) {
+  const reFlags = /\w*$/;
+  const result = new targe.constructor(targe.source, reFlags.exec(targe));
+  result.lastIndex = targe.lastIndex;
+  return result;
+}
+
+// 克隆函数
+function cloneFunction(func) {
+  const bodyReg = /(?<={)(.|\n)+(?=})/m;
+  const paramReg = /(?<=\().+(?=\)\s+{)/;
+  const funcString = func.toString();
+
+  if (func.prototype) {
+    console.log('普通函数');
+    const param = paramReg.exec(funcString);
+    const body = bodyReg.exec(funcString);
+    if (body) {
+      console.log('匹配到函数体：', body[0]);
+      if (param) {
+        const paramArr = param[0].split(',');
+        console.log('匹配到参数：', paramArr);
+        return new Function(...paramArr, body[0]);
+      } else {
+        return new Function(body[0]);
+      }
+    } else {
+      return null;
+    }
+  } else {
+    return eval(funcString);
+  }
+}
+
+// 克隆不可遍历类型
+function cloneOtherType(targe, type) {
+  const Ctor = targe.constructor;
+  switch (type) {
+    case boolTag:
+    case numberTag:
+    case stringTag:
+    case errorTag:
+    case dateTag:
+      return new Ctor(targe);
+    case regexpTag:
+      return cloneReg(targe);
+    case symbolTag:
+      return cloneSymbol(targe);
+    case funcTag:
+      return cloneFunction(targe);
+    default:
+      return null;
+  }
+}
+
+function clone(target, map = new WeakMap()) {
+
   // 克隆原始类型
   if (!isObject(target)) {
     return target;
   }
 
   // 初始化
-  const type = getType(target)
+  const type = getType(target);
   let cloneTarget;
   if (deepTag.includes(type)) {
-    cloneTarget = getInit(target, type)
+    cloneTarget = getInit(target, type);
+  } else {
+    return cloneOtherType(target, type);
   }
 
   // 防止循环引用
   if (map.get(target)) {
-    return target;
+    return map.get(target);
   }
   map.set(target, cloneTarget);
 
   // 克隆set
   if (type === setTag) {
     target.forEach(value => {
-      cloneTarget.add(deepCopy(value));
+      cloneTarget.add(clone(value, map));
     });
-
     return cloneTarget;
   }
 
   // 克隆map
   if (type === mapTag) {
     target.forEach((value, key) => {
-      cloneTarget.set(key, deepCopy(value));
+      cloneTarget.set(key, clone(value, map));
     });
-
     return cloneTarget;
   }
 
   // 克隆对象和数组
-  const keys = isArray ? undefined : Object.keys(target);
+  const keys = type === arrayTag ? undefined : Object.keys(target);
   forEach(keys || target, (value, key) => {
     if (keys) {
       key = value;
     }
-    cloneTarget[key] = deepCopy(target[key], map);
+    cloneTarget[key] = clone(target[key], map);
   });
+
   return cloneTarget;
+}
+
+module.exports = {
+  clone
 };
