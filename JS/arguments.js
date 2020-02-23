@@ -136,3 +136,15 @@ function baz(...arguments) {
   console.log(arguments);
 }
 foo(4, 5, 6);
+
+
+function mixArgs (first, second) {
+  'use strict'
+  console.log(first === arguments[0]) // true
+  console.log(second === arguments[1]) // true
+  
+  first = 'c'
+  second = 'd'
+  console.log(first === arguments[0]) // false
+  console.log(second === arguments[1]) // false
+}

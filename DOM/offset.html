@@ -12,7 +12,7 @@
     }
     .wrapper {
       /* offset 是相对 position */
-      /* position: relative;  */
+      position: sticky;
       overflow-y: scroll;
       height: 300px;
       margin: 100px;
@@ -37,7 +37,7 @@
     const wrapper = document.getElementsByClassName('wrapper')[0]
 
     console.log(bound.getBoundingClientRect())
-    console.log(bound.offsetLeft)
+    console.log(bound.offsetTop)
   </script>
 </body>
 </html>

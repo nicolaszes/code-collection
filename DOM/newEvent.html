@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <style>
+        .button {
+            width: 200px;
+            height: 200px;
+            background-color: antiquewhite;
+            margin: 20px;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button">Button</div>
+    <script>
+        "use strict";
+        var btn = document.querySelector('.button');
+        var ev = new Event('test', {
+            bubbles: 'true',
+            cancelable: 'true'
+        });
+        btn.addEventListener('test', function (event) {
+            console.log('event', event.bubbles);
+            console.log(event.cancelable);
+            console.log(event.detail);
+        }, false);
+        btn.dispatchEvent(ev);
+    </script>
+</body>
+</html>

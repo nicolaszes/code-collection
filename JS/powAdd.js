@@ -52,3 +52,29 @@ function add(n) {
   };
   return func;
 }
+
+function add(n){
+  // Let the currying begin!
+  function next(val) {
+    next.sum += val;
+    
+    return next;
+  }
+  
+  next.sum = n
+  
+  next[Symbol.toPrimitive] = function(hint) {
+    if (hint === 'default') {
+      return next.sum;
+    }
+    if (hint == 'number') {
+      return next.sum;
+    }
+    if (hint == 'string') {
+      return String(next.sum);
+    }
+    return true;
+  }
+    
+  return next;
+}

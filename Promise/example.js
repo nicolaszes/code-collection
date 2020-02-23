@@ -155,3 +155,71 @@ new Promise((resolve, reject) => {
 })
 console.log(8)
 // 1, 2, 9, 8, 4, 3, 5, 6
+
+console.log(1)
+new Promise((resolve, reject) => {
+  console.log(2)
+  setTimeout(() => {
+    console.log(3)
+    resolve()
+    reject()
+  }, 10)
+
+  setTimeout(() => {
+    console.log(4)
+
+    new Promise((resolve, reject) => {
+      console.log(11)
+
+      setTimeout(() => {
+        console.log(12)
+
+        new Promise((resolve, reject) => {
+          console.log(13)
+          reject()
+
+          console.log(14)
+
+          setTimeout(() => {
+            console.log(15)
+          }, 20)
+        }).then(() => {
+          console.log(16)
+        }).catch(() => {
+          console.log(22)
+        }).then(() => {
+          console.log(23)
+        })
+      }, 0)
+    })
+  }, 20)
+  console.log(9)
+}).then(() => {
+  console.log(5)
+  new Promise((resolve, reject) => {
+    console.log(17)
+    resolve()
+
+    setTimeout(() => {
+      console.log(18)
+
+      new Promise((resolve, reject) => {
+        console.log(19)
+        resolve()
+
+        console.log(20)
+
+        setTimeout(() => {
+          console.log(21)
+        }, 20)
+      })
+    }, 0)
+  })
+}).then(() => {
+  console.log(6)
+}).catch(e => {
+  console.log(7)
+})
+console.log(8)
+
+// 1, 2, 9, 8, 3, 5, 17, 6, 18, 19, 20, 4, 11, 12, 13, 14, 22, 23, 21, 15

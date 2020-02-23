@@ -10,12 +10,13 @@
 			height: 200px;
 			width: 600px;
 			margin: 0 auto;
+			background-color: skyblue;
 		}			
 		.box1 a{
 			display: block;
 			height: 50%;
 			width: 50%;
-			background-color: red;
+			background-color: greenyellow;
 		}
 	</style>
 </head>
@@ -24,20 +25,20 @@
 		<a href="http://www.bing.com" target="_blank"></a>
 	</div>
 	<script>
-		// 不阻止事件冒泡和默认事件
+		// // 不阻止事件冒泡和默认事件
 		// document.getElementById('box1').onclick = () => {
 		// 	console.log("1") // 不阻止事件冒泡会打印1，页面跳转			
 		// }
 	</script>
 	
 	<script>
-		// //阻止冒泡
-		// document.getElementById('box1').children[0].onclick = (event) => {
-		// 	event.stopPropagation() // 不会打印1，但是页面会跳转			
-		// }
-		// document.getElementById('box1').onclick = () => {
-		// 	console.log("1")				
-		// }
+		//阻止冒泡
+		document.getElementById('box1').children[0].onclick = (event) => {
+			event.stopImmediatePropagation() // 不会打印1，但是页面会跳转			
+		}
+		document.getElementById('box1').onclick = () => {
+			console.log("1")				
+		}
 	</script>
 
 	<script>
@@ -51,24 +52,24 @@
 	</script>
 
 	<script>
-		document.getElementById('box1').onclick = () => {
-			console.log("1")
-		}
-		document.getElementById('box1').children[0].onclick = (event) => {
-			//阻止冒泡
-			event.stopPropagation()
-			//阻止默认事件
-			event.preventDefault() //页面不会跳转，也不会打印出1
-		}
+		// document.getElementById('box1').onclick = () => {
+		// 	console.log("1")
+		// }
+		// document.getElementById('box1').children[0].onclick = (event) => {
+		// 	//阻止冒泡
+		// 	event.stopPropagation()
+		// 	//阻止默认事件
+		// 	event.preventDefault() //页面不会跳转，也不会打印出1
+		// }
 	</script>
 
 	<script>
-		document.getElementById('box1').onclick = () => {
-			console.log("1")
-		}
-		document.getElementById('box1').children[0].onclick = (event) => {
-			return false
-		}
+		// document.getElementById('box1').onclick = () => {
+		// 	console.log("1")
+		// }
+		// document.getElementById('box1').children[0].onclick = (event) => {
+		// 	return false
+		// }
 	</script>
 </body>
 </html>

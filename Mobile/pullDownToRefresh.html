@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
 	<style type="text/css">
-		html,body,header,div,main,p,span,ul,li{ margin: 0; padding: 0; }
-		#refreshContainer li{ background-color: #eee; margin-bottom: 1px; padding: 20px 10px; }
-		.refreshText{ position: absolute; width: 100%; line-height: 50px; text-align: center; left: 0; top: 0; }
+		html,
+		body,
+		header,
+		div,
+		main,
+		p,
+		span,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+		}
+
+		#refreshContainer li {
+			background-color: #eee;
+			margin-bottom: 1px;
+			padding: 20px 10px;
+		}
+
+		.refreshText {
+			position: absolute;
+			width: 100%;
+			line-height: 50px;
+			text-align: center;
+			left: 0;
+			top: 0;
+		}
 	</style>
 </head>
+
 <body>
 	<main>
 		<p class="refreshText"></p>
@@ -33,37 +59,37 @@
 	</main>
 
 	<script type="text/javascript">
-		(function(window) {
-			var _element = document.getElementById('refreshContainer'),
-			  _refreshText = document.querySelector('.refreshText'),
-			  _startPos = 0,
-			  _transitionHeight = 0;
+		(function (window) {
+			var element = document.getElementById('refreshContainer'),
+				refreshText = document.querySelector('.refreshText'),
+				startPos = 0,
+				transitionHeight = 0;
 
-			_element.addEventListener('touchstart', function(e) {
+			element.addEventListener('touchstart', function (e) {
 				console.log('初始位置：', e.touches[0].pageY);
-				_startPos = e.touches[0].pageY;
-				_element.style.position = 'relative';
-				_element.style.transition = 'transform 0s';
+				startPos = e.touches[0].pageY;
+				element.style.position = 'relative';
+				element.style.transition = 'transform 0s';
 			}, false);
-			
-			_element.addEventListener('touchmove', function(e) {
+
+			element.addEventListener('touchmove', function (e) {
 				console.log('当前位置：', e.touches[0].pageY);
-				_transitionHeight = e.touches[0].pageY - _startPos;
-				
-				if (_transitionHeight > 0 && _transitionHeight < 60) {
-					_refreshText.innerText = '下拉刷新';
-					_element.style.transform = 'translateY('+_transitionHeight+'px)';
+				transitionHeight = e.touches[0].pageY - startPos;
 
-					if (_transitionHeight > 55) {
-					  _refreshText.innerText = '释放更新';
+				if (transitionHeight > 0 && transitionHeight < 60) {
+					refreshText.innerText = '下拉刷新';
+					element.style.transform = 'translateY(' + transitionHeight + 'px)';
+
+					if (transitionHeight > 55) {
+						refreshText.innerText = '释放更新';
 					}
-				}				
+				}
 			}, false);
 
-			_element.addEventListener('touchend', function(e) {
-				_element.style.transition = 'transform 0.5s ease 1s';
-				_element.style.transform = 'translateY(0px)';
-				_refreshText.innerText = '更新中...';
+			element.addEventListener('touchend', function (e) {
+				element.style.transition = 'transform 0.5s ease 1s';
+				element.style.transform = 'translateY(0px)';
+				refreshText.innerText = '更新中...';
 
 				// todo...
 
@@ -71,4 +97,5 @@
 		})(window);
 	</script>
 </body>
+
 </html>
