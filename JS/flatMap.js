@@ -22,7 +22,7 @@ const flattenDeep = arr.flat(Infinity)
  * 4.recursion
  */
 const flattenDeepTwo = (arr) => Array.isArray(arr) ?
-  arr.reduce((a, b) => [...a, ...flattenDeep(b)], []) : [arr]
+  arr.reduce((a, b) => [...a, ...flattenDeepTwo(b)], []) : [arr]
  
 /**
  * 5.迭代

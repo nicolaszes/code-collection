@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,33 +13,51 @@
     }
 
     .layout.grail .left-center-right {
-      padding: 0 100px;
+      padding: 10px 0;
       min-width: 304px;
+      background-color: red;
     }
+
+    /* .clearfix:before,
+    .clearfix:after {
+      display: table;
+      content: " ";
+    }
+
+    .left-center-right:after {
+      clear: both;
+    }
+
+    .clearfix {
+      *zoom: 1;
+    } */
 
     .layout.grail .left-center-right>div {
       float: left;
       min-height: 100px;
     }
+
     .layout.grail .center {
+      margin: 0 100px;
       background: skyblue;
     }
+
     .layout.grail .left {
       position: relative;
       margin-left: -100%;
-      left: -100px;
       width: 100px;
-      background-color:aquamarine;
+      background-color: aquamarine;
     }
+
     .layout.grail .right {
       position: relative;
       margin-left: -100px;
-      right: -100px;
       width: 100px;
-      background-color:aquamarine;
+      background-color: aquamarine;
     }
   </style>
 </head>
+
 <body>
   <!--
     中间栏要在放在文档流前面以优先渲染
@@ -46,7 +65,7 @@
   -->
   <section class="layout grail">
     <h1>圣杯布局</h1>
-    <article class="left-center-right">
+    <article class="left-center-right clearfix">
       <div class="center">
         1.这是三栏布局的圣杯布局解决方案；
         2.这是三栏布局的圣杯布局解决方案；
@@ -63,4 +82,5 @@
     </article>
   </section>
 </body>
+
 </html>
