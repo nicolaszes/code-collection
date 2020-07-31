@@ -24,7 +24,7 @@ let PersonClass = (function() {
   }
 
   Object.defineProperty(PersonClass2.prototype, 'sayName', {
-    value: function (name) {
+    value: function () {
       // 确保不会通过关键字 new来调用
       if (typeof new.target !== 'undefined') {
         throw new Error('不可使用关键字 new调用构造函数')

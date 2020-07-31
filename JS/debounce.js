@@ -10,9 +10,9 @@
  * 当一定时间内没有触发在执行这个事件
  */
 // https://segmentfault.com/a/1190000005926579
-const debounce = (fn, delay, immediate) => {
+var debounce = (fn, delay, immediate) => {
   let timer = null;
-  let result = null
+  let result = null;
 
   const debounceFunc = (...args) => {
     // 当持续触发事件时，若发现事件触发的定时器已设置时，则清除之前的定时器
@@ -22,15 +22,18 @@ const debounce = (fn, delay, immediate) => {
 
     // 触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数
     if (immediate) {
-      if (!timer) {
-        result = fn(...args);
-      }
+      var callNow = !timer;
       timer = setTimeout(() => {
         timer = null;
-      }, delay);
+        result = fn(...args);
+      }, delay)
+      if (callNow) {
+        result = fn(...args);
+      }
     } else {
       // 重新设置事件触发的定时器
       timer = setTimeout(() => {
+        timer = null;
         result = fn(...args);
       }, delay);
     }
@@ -45,8 +48,11 @@ const debounce = (fn, delay, immediate) => {
 
   return debounceFunc;
 };
+function add (x, y, z) {
+  console.log(x, y, z)
+}
+window.addEventListener('resize', debounce(() => add(1, 2, 3), 300, true))
 
-// window.addEventListener('resize', debounce(() => {console.log(11111)}, 300, true))
 window.addEventListener('resize', debounce(() => {console.log(11111)}, 300, true).cancel())
 
 

@@ -20,7 +20,7 @@ const methodsToPatch = [
 methodsToPatch.forEach(function (method) {
   // 获得原生函数
   const original = arrayProto[method]
-  def(arrayMethods, method, function mutator (...args) {
+  def(arrayMethods, method, function mutator(...args) {
     // 调用原生函数
     const result = original.apply(this, args)
     const ob = this.__ob__
@@ -61,7 +61,9 @@ let onWatch = (obj, setBind, getLogger) => {
   return new Proxy(obj, handler);
 };
 
-let obj = { a: 1 }
+let obj = {
+  a: 1
+}
 let value
 let p = onWatch(obj, (v) => {
   value = v

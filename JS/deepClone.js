@@ -141,25 +141,26 @@ function cloneFunction(func) {
   const paramReg = /(?<=\().+(?=\)\s+{)/;
   const funcString = func.toString();
 
-  if (func.prototype) {
-    console.log('普通函数');
-    const param = paramReg.exec(funcString);
-    const body = bodyReg.exec(funcString);
-    if (body) {
-      console.log('匹配到函数体：', body[0]);
-      if (param) {
-        const paramArr = param[0].split(',');
-        console.log('匹配到参数：', paramArr);
-        return new Function(...paramArr, body[0]);
-      } else {
-        return new Function(body[0]);
-      }
-    } else {
-      return null;
-    }
-  } else {
+  if (!func.prototype) {
+    return null
+  }
+  
+  console.log('普通函数');
+  const param = paramReg.exec(funcString);
+  const body = bodyReg.exec(funcString);
+
+  if (!body) {
     return eval(funcString);
   }
+
+  console.log('匹配到函数体：', body[0]);
+  if (!param) {
+    return new Function(body[0]);
+  }
+
+  const paramArr = param[0].split(',');
+  // console.log('匹配到参数：', paramArr);
+  return new Function(...paramArr, body[0]);
 }
 
 // 克隆不可遍历类型
@@ -194,7 +195,7 @@ function clone(target, map = new WeakMap()) {
   const type = getType(target);
   let cloneTarget;
   if (deepTag.includes(type)) {
-    cloneTarget = getInit(target, type);
+    cloneTarget = getInit(target);
   } else {
     return cloneOtherType(target, type);
   }

@@ -39,11 +39,11 @@ const throttle = (fn, delay, options) => {
       }
       previous = now;
       result = fn(...args);
-    } else if (!timer && options.trailing !== false) {
+    } else if (!timer && options.trailing) {
       timer = setTimeout(() => later(...args), remaining);
     }
 
-    console.log('result', result)
+    // console.log('result', result)
     return result
   };
 
@@ -60,7 +60,7 @@ const throttle = (fn, delay, options) => {
 
 let num = 0
 window.addEventListener('resize', throttle(() => {
-  console.log('resize')
+  console.log('resize', num)
   return num++
 }, 1000, {
   leading: true,

@@ -34,8 +34,9 @@ function ajax(params) {
     //为了得知此次请求是否成功，设置超时处理   
     if (params.time) {
       script.timer = setTimeout(function () {
-        window[callbackName] = null
         head.removeChild(script)
+        clearTimeout(script.timer)
+        window[callbackName] = null
         params.error && params.error({
           message: '超时'
         })
@@ -111,6 +112,6 @@ function ajax(params) {
 
   // 获取随机数   
   function random() {
-    return Math.floor(Math.random() * 10000 + 500)
+    return Math.floor(Math.random() * 12345678 + 500)
   }
 }

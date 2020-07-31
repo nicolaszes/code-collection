@@ -16,9 +16,12 @@ function jsonStringify(obj) {
     let v = obj[k];
     let type = typeof v;
 
+    if (type === 'function') {
+      continue
+    }
     if (type === 'undefined') {
       if (!isArr) {
-        break
+        continue
       }
       v = "null"
     }

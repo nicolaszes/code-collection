@@ -29,9 +29,9 @@ postFromTest("name=kevin");
 /*
  * curry first edition
  */
-var curry = function(fn) {
+var curry = function (fn) {
   var args = [].slice.call(arguments, 1);
-  return function() {
+  return function () {
     var newArgs = args.concat([].slice.call(arguments));
     return fn.apply(this, newArgs);
   };
@@ -55,7 +55,7 @@ addCurry(1, 2);
  */
 function sub_curry(fn) {
   var args = [].slice.call(arguments, 1);
-  return function() {
+  return function () {
     return fn.apply(this, args.concat([].slice.call(arguments)));
   };
 }
@@ -65,7 +65,7 @@ function curry(fn, length) {
   length = fn.length || length;
   var slice = Array.prototype.slice;
 
-  return function() {
+  return function () {
     if (arguments.length < length) {
       var combined = [fn].concat(slice.call(arguments));
       return curry(sub_curry.apply(this, combined), length - arguments.length);
@@ -74,14 +74,14 @@ function curry(fn, length) {
   };
 }
 
-var fn = curry(function(a, b, c) {
+var fn = curry(function (a, b, c) {
   return [a, b, c];
 });
 
 function curry(fn, args) {
   args = args || [];
 
-  return function() {
+  return function () {
     var _args = args.slice(0);
     for (var i = 0; i < arguments.length; i++) {
       _args.push(arguments[i]);
@@ -95,7 +95,7 @@ function curry(fn, args) {
   };
 }
 
-var fn = curry(function(a, b, c) {
+var fn = curry(function (a, b, c) {
   console.log([a, b, c]);
 });
 
@@ -111,9 +111,9 @@ fn("a")("b", "c"); // ['a', 'b', 'c']
  */
 let curry = fn =>
   (judge = (...args) =>
-    args.length === fn.length
-      ? fn(...args)
-      : (...ele) => judge(...args, ...ele));
+    args.length === fn.length ?
+    fn(...args) :
+    (...ele) => judge(...args, ...ele));
 let fn = curry((a, b, c, d, e) => console.log([a, b, c, d, e]));
 
 fn(1)(2)(3)(4)(5);
@@ -128,14 +128,10 @@ fn(1)(2)(3)(4, 5);
  * curry third edition
  * 占位符替换
  */
-function curry(fn, args, holes) {
-  length = fn.length;
-  args = args || [];
-  holes = holes || [];
-
-  return function() {
-    var _args = args.slice(0);
-    var _holes = holes.slice(0);
+function curry(fn, args = [], holes = []) {
+  return function () {
+    var _args = [...args];
+    var _holes = [...holes];
     var argsLen = args.length;
     var holesLen = holes.length;
     var arg;
@@ -143,37 +139,41 @@ function curry(fn, args, holes) {
 
     for (var i = 0; i < arguments.length; i++) {
       arg = arguments[i];
-      // 处理类似 fn(1, _, _, 4)(_, 3) 这种情况，index 需要指向 holes 正确的下标
-      if (arg === _ && holesLen) {
-        index++;
-        if (index > holesLen) {
-          _args.push(arg);
-          _holes.push(argsLen - 1 + index - holesLen);
-        }
-        console.log("holesLen", holesLen, index, _args);
-      } else if (arg === _) {
+
+      if (arg === _) {
         // 处理类似 fn(1)(_) 这种情况
-        console.log(arg, args);
-        _args.push(arg);
-        _holes.push(argsLen + i);
-      } else if (holesLen) {
-        // 处理类似 fn(_, 2)(1) 这种情况
-        // fn(_, 2)(_, 3)
-        if (index >= holesLen) {
+        if (!holesLen) {
           _args.push(arg);
+          _holes.push(argsLen + i);
+          console.log(_args, _holes);
         } else {
-          // fn(_, 2)(1) 用参数 1 替换占位符
-          _args.splice(_holes[index], 1, arg);
-          _holes.splice(index, 1);
+          // 处理类似 fn(1, _, _, 4)(_, 3) 这种情况，index 需要指向 holes 正确的下标
+          index++;
+          if (index > holesLen) {
+            _args.push(arg);
+            _holes.push(argsLen - 1 + index - holesLen);
+          }
+          console.log("holesLen", holesLen, index, _args, _holes);
         }
-        console.log("holesLen", holesLen, index, _args);
-      } else {
-        _args.push(arg);
+
+        continue
       }
+
+      // fn(_, 2)(1) 用参数 1 替换占位符
+      if (holesLen && (index < holesLen)) {
+        _args.splice(_holes[index], 1, arg);
+        _holes.splice(index, 1);
+        console.log("holesLen", holesLen, index, _args, _holes);
+        continue
+      }
+
+      // 处理类似以下情况
+      // fn(_, 2)(1), fn(_, 2)(_, 3), fn(1, 2, 3)
+      _args.push(arg);
     }
 
     // 当占位符存在 or _args的长度小于 fn.length
-    if (_holes.length || _args.length < length) {
+    if (_holes.length || _args.length < fn.length) {
       return curry.call(this, fn, _args, _holes);
     }
 
@@ -182,7 +182,7 @@ function curry(fn, args, holes) {
 }
 
 var _ = {};
-var fn = curry(function(a, b, c, d, e) {
+var fn = curry(function (a, b, c, d, e) {
   console.log([a, b, c, d, e]);
 });
 

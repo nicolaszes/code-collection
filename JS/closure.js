@@ -47,13 +47,13 @@ for (var i = 0; i < 5; i++) {
 console.log(new Date(), i);
 
 // plan C
-let i;
-for (i = 0; i < 5; i++) {
+let j;
+for (let i = 0; i < 5; i++) {
   setTimeout(function() {
     console.log(new Date(), i);
   }, 1000);
 }
-console.log(new Date(), i);
+console.log(new Date(), j);
 
 /*
  * Wanted the answer is => 0 => 1 => 2 => 3 => 4 => 5
