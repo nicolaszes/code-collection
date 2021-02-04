@@ -13,11 +13,11 @@
  * the answer is 5 => 5,5,5,5,5
  */
 for (var i = 0; i < 5; i++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log(new Date(), i);
   }, 1000);
 }
-// console.log(new Date, i)
+console.log(new Date, i)
 
 /*
  * expand closure
@@ -26,8 +26,8 @@ for (var i = 0; i < 5; i++) {
  */
 // plan A
 for (var i = 0; i < 5; i++) {
-  (function(j) {
-    setTimeout(function() {
+  (function (j) {
+    setTimeout(function () {
       console.log(new Date(), j);
     }, 1000);
   })(i);
@@ -36,7 +36,7 @@ console.log(new Date(), i);
 
 // plan B
 var output = i => {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log(new Date(), i);
   }, 1000);
 };
@@ -49,7 +49,7 @@ console.log(new Date(), i);
 // plan C
 let j;
 for (let i = 0; i < 5; i++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log(new Date(), i);
   }, 1000);
 }
@@ -60,13 +60,13 @@ console.log(new Date(), j);
  * use IIFE
  */
 for (var i = 0; i < 5; i++) {
-  (function(j) {
-    setTimeout(function() {
+  (function (j) {
+    setTimeout(function () {
       console.log(new Date(), j);
     }, 1000 * j); // 这里修改 0~4 的定时器时间
   })(i);
 }
-setTimeout(function() {
+setTimeout(function () {
   // 这里增加定时器，超时设置为 5 秒
   console.log(new Date(), i);
 }, 1000 * i);
@@ -134,11 +134,12 @@ const sleep = time =>
 
 
 var bar = {
-  myName:"time.geekbang.com",
+  myName: "time.geekbang.com",
   printName: function () {
-      console.log(myName)
+    console.log(myName)
   }
 }
+
 function foo() {
   let myName = " 极客时间 "
   return bar.printName
@@ -147,7 +148,6 @@ let myName = " 极客邦 "
 let _printName = foo()
 _printName()
 bar.printName()
-
 
 /**
  * 这道题其实是个障眼法，只需要确定好函数调用栈就可以很轻松的解答

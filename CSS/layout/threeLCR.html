@@ -168,12 +168,13 @@
       .layout.grid .left-right-center {
         width: 100%;
         display: grid;
-        height: 100px;
-        grid-template-rows: 100px;
+        min-height: 100px;
+        /* grid-template-rows: 100px; */
         grid-template-columns: 300px auto 300px;
       }
 
       .layout.grid .left {
+        height: 100px;
         background: red;
       }
 
@@ -182,6 +183,7 @@
       }
 
       .layout.grid .right {
+        height: 100px;
         background: blue;
       }
     </style>

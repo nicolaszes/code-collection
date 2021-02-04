@@ -1,54 +1,36 @@
-let state = [];
-let setters = [];
-let firstRun = true;
-let cursor = 0;
+// 通过数组维护变量
+let memoizedState  = [];
+let currentCursor = 0;
 
-function createSetter(cursor) {
-  return function setterWithCursor(newVal) {
-    state[cursor] = newVal;
-  };
-}
-
-// This is the pseudocode for the useState helper
-export function useState(initVal) {
-  if (firstRun) {
-    state.push(initVal);
-    setters.push(createSetter(cursor));
-    firstRun = false;
+/**
+ * 
+ * @param {*} initVal 
+ */
+const useState = (initVal) => {
+  memoizedState[currentCursor] = memoizedState[currentCursor] || initVal;
+  function setVal(newVal) {
+    memoizedState[currentCursor] = newVal;
+    render(); 
   }
-
-  const setter = setters[cursor];
-  const value = state[cursor];
-
-  cursor++;
-  return [value, setter];
+  // 返回state 然后 currentCursor+1
+  return [memoizedState[currentCursor++], setVal]; 
 }
 
-// Our component code that uses hooks
-function RenderFunctionComponent() {
-  const [firstName, setFirstName] = useState("Rudi"); // cursor: 0
-  const [lastName, setLastName] = useState("Yardley"); // cursor: 1
-
+function App() {
+  const [count, setCount] = useState(0);
   return (
     <div>
-      <Button onClick={() => setFirstName("Richard")}>Richard</Button>
-      <Button onClick={() => setFirstName("Fred")}>Fred</Button>
+      <span>{count}</span>
+      <button onClick = {() => {setCount(count + 1)}}>增加</button>
     </div>
   );
 }
 
-// This is sort of simulating Reacts rendering cycle
-function MyComponent() {
-  cursor = 0; // resetting the cursor
-  return <RenderFunctionComponent />; // render
+// 新增方法
+function render() {
+  ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+  );
 }
-
-console.log(state); // Pre-render: []
-MyComponent();
-console.log(state); // First-render: ['Rudi', 'Yardley']
-MyComponent();
-console.log(state); // Subsequent-render: ['Rudi', 'Yardley']
-
-// click the 'Fred' button
-
-console.log(state); // After-click: ['Fred', 'Yardley']
+render()

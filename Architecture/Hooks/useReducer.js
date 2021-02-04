@@ -1,13 +1,19 @@
 // 这就是 Redux
-function useReducer(reducer, initialState) {
-  const [state, setState] = useState(initialState);
+let memoizedState  = [];
+let currentCursor = 0;
 
-  function dispatch(action) {
-    const nextState = reducer(state, action);
-    setState(nextState);
+/**
+ * 
+ * @param {*} reducer 
+ * @param {*} initialState 
+ */
+function useReducer(reducer, initialState){
+  memoizedState[currentCursor] = memoizedState[currentCursor] || initialState
+  function dispatch(action){
+    memoizedState[currentCursor] = reducer(memoizedState[currentCursor], action)
+    render()
   }
-
-  return [state, dispatch];
+  return [memoizedState[currentCursor++], dispatch]
 }
 
 // 一个 Action

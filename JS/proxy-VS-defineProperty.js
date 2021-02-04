@@ -53,7 +53,7 @@ let onWatch = (obj, setBind, getLogger) => {
       getLogger(target, property)
       return Reflect.get(target, property, receiver);
     },
-    set(target, property, value, receiver) {
+    set(target, property, value) {
       setBind(value);
       return Reflect.set(target, property, value);
     }

@@ -25,7 +25,7 @@
 		<a href="http://www.bing.com" target="_blank"></a>
 	</div>
 	<script>
-		// // 不阻止事件冒泡和默认事件
+		// 不阻止事件冒泡和默认事件
 		// document.getElementById('box1').onclick = () => {
 		// 	console.log("1") // 不阻止事件冒泡会打印1，页面跳转			
 		// }
@@ -33,12 +33,12 @@
 	
 	<script>
 		//阻止冒泡
-		document.getElementById('box1').children[0].onclick = (event) => {
-			event.stopImmediatePropagation() // 不会打印1，但是页面会跳转			
-		}
-		document.getElementById('box1').onclick = () => {
-			console.log("1")				
-		}
+		// document.getElementById('box1').children[0].onclick = (event) => {
+		// 	event.stopPropagation() // 不会打印1，但是页面会跳转			
+		// }
+		// document.getElementById('box1').onclick = () => {
+		// 	console.log("1")				
+		// }
 	</script>
 
 	<script>
@@ -64,12 +64,12 @@
 	</script>
 
 	<script>
-		// document.getElementById('box1').onclick = () => {
-		// 	console.log("1")
-		// }
-		// document.getElementById('box1').children[0].onclick = (event) => {
-		// 	return false
-		// }
+		document.getElementById('box1').onclick = () => {
+			console.log("1")
+		}
+		document.getElementById('box1').children[0].onclick = (event) => {
+			return false
+		}
 	</script>
 </body>
 </html>

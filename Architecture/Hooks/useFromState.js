@@ -1,4 +1,3 @@
-
 import { useReducer } from 'react';
 import stateReducer from './stateReducer';
 import { TYPES, SELECT, CHECKBOX, RADIO } from './constants';

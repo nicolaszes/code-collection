@@ -119,19 +119,17 @@ Function.prototype.bind2 = function (content) {
   }
   
   // 若没问参数类型则从这开始写
-  console.log(content, this)
   let fn = this;
   let args = [...arguments].slice(1);
 
   let resFn = function () {
-    return fn.apply(this instanceof resFn ? this : content, args.concat(...arguments))
+    return fn.apply(
+      this instanceof resFn ? this : content,
+      args.concat(...arguments)
+    )
   }
 
-  function tmp() {}
-  tmp.prototype = this.prototype;
-  resFn.prototype = new tmp();
-
-  console.log(resFn.prototype.__proto__.constructor === this)
+  resFn.prototype = Object.create(fn.prototype);
 
   return resFn;
 }

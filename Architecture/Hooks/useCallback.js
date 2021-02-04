@@ -1,14 +1,14 @@
-let lastMemo
+let lastCallback
 let memoizedState = [];
 let currentCursor = 0;
 
-function useMemo(fn, watch) {
+function useCallback(fn, watch) {
   let hasWatchChange = memoizedState[currentCursor] ?
     !watch.every((item, index) => item === memoizedState[currentCursor][index]) :
     true
   if (hasWatchChange) {
-    lastMemo = fn()
-    memoizedState[currentCursor++] = watch
+    lastCallback = fn
+    memoizedState[currentCursor] = watch
   }
-  return lastMemo
+  return lastCallback
 }

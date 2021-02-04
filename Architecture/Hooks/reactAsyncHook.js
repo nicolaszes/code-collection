@@ -61,13 +61,9 @@ const useCurrentPromise = () => {
 
 
 export const useAsync = (asyncFunction, params = [], options) => {
-
   options = normalizeOptions(options);
-
   const AsyncState = useAsyncState(options);
-
   const isMounted = useIsMounted();
-
   const CurrentPromise = useCurrentPromise();
 
   // We only want to handle the promise result/error
@@ -95,7 +91,6 @@ export const useAsync = (asyncFunction, params = [], options) => {
   useEffect(() => {
     executeAsyncOperation();
   }, params);
-
 
   const result = {
     ...AsyncState.value,

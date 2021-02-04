@@ -30,10 +30,8 @@ namespace ObserverPattern {
     }
   }
 
-  export class Observer {
-    public notify(): void {
-      throw new Error('Abstract Method!')
-    }
+  export abstract class Observer {
+    abstract notify(): void
   }
 
   export class ConcreteObserver extends Observer {

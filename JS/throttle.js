@@ -8,15 +8,14 @@
  * 节流，当触发事件时，保证隔一段时间触发一次事件
  * 合并一段时间内的事件，并在该时间结束时真正的去触发一次事件
  */
-const throttle = (fn, delay, options) => {
+const throttle = (fn, delay, options = {}) => {
   // 记录上次触发事件
   let previous = 0;
   let timer;
   let result;
-  if (!options) options = {};
 
   var later = (...args) => {
-    previous = options.leading === false ? 0 : +new Date;
+    previous = !options.leading ? 0 : +new Date;
     timer = null;
     result = fn(...args);
   };
@@ -29,7 +28,7 @@ const throttle = (fn, delay, options) => {
   const throttleFunc = (...args) => {
     let now = +new Date;
 
-    if (!previous && options.leading === false) previous = now;
+    if (!previous && !options.leading) previous = now;
 
     let remaining = delay - (now - previous);
     if (remaining <= 0 || remaining > delay) {
@@ -50,9 +49,9 @@ const throttle = (fn, delay, options) => {
   throttleFunc.run = () => console.log("run");
 
   throttleFunc.cancel = () => {
-    clearTimeout(timeout);
+    clearTimeout(timer);
     previous = 0;
-    timeout = null;
+    timer = null;
   }
 
   return throttleFunc;

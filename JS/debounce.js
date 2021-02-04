@@ -17,7 +17,7 @@ var debounce = (fn, delay, immediate) => {
   const debounceFunc = (...args) => {
     // 当持续触发事件时，若发现事件触发的定时器已设置时，则清除之前的定时器
     if (timer) {
-      clearTimeout(timer);
+      timer = null;
     }
 
     // 触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数
